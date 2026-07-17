@@ -220,6 +220,44 @@ def _resource_csv_mas_reciente(dataset_id):
     return recursos_csv[0].get("url")
 
 
+# Codificación oficial de regiones (INE) — varios datasets de ODEPA traen el
+# código numérico de región en vez del nombre (así se vio en producción:
+# "10", "13", "15"... en vez de "Los Lagos", "Metropolitana", "Arica y
+# Parinacota"). Se traduce acá para que la tabla del sitio muestre nombres.
+REGION_CODIGO_NOMBRE = {
+    "1": "Tarapacá",
+    "2": "Antofagasta",
+    "3": "Atacama",
+    "4": "Coquimbo",
+    "5": "Valparaíso",
+    "6": "O'Higgins",
+    "7": "Maule",
+    "8": "Biobío",
+    "9": "La Araucanía",
+    "10": "Los Lagos",
+    "11": "Aysén",
+    "12": "Magallanes",
+    "13": "Metropolitana",
+    "14": "Los Ríos",
+    "15": "Arica y Parinacota",
+    "16": "Ñuble",
+}
+
+
+def _region_nombre(valor_crudo):
+    """Normaliza el valor de la columna región: si es un código numérico
+    (incluye formatos tipo "9.0" o "09"), lo traduce a nombre. Si ya viene
+    como texto, lo deja tal cual."""
+    valor = (valor_crudo or "").strip()
+    if not valor:
+        return None
+    try:
+        codigo = str(int(float(valor)))
+    except (TypeError, ValueError):
+        return valor
+    return REGION_CODIGO_NOMBRE.get(codigo, valor)
+
+
 def _parsear_precios_por_region(csv_bytes):
     """Intento genérico de leer un CSV de ODEPA y encontrar una columna de
     región y una de precio por nombre (no conocemos el esquema real, ver
@@ -241,7 +279,7 @@ def _parsear_precios_por_region(csv_bytes):
 
     precios = {}
     for fila in lector:
-        region = (fila.get(col_region) or "").strip()
+        region = _region_nombre(fila.get(col_region))
         if not region:
             continue
         try:
