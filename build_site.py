@@ -56,7 +56,7 @@ def fecha_hora_legible(iso):
 
 macro = DATA.get("macro", {})
 tasa_hip = DATA.get("tasa_hipotecaria")
-odepa = DATA.get("odepa")
+kanasta = DATA.get("kanasta_palanka", {})
 
 # ---------------------------------------------------------------------------
 # Tablas fijas usadas por las calculadoras (ver notas de fuente arriba)
@@ -111,25 +111,116 @@ for key, label in KPI_ORDEN:
     </div>"""
 
 # ---------------------------------------------------------------------------
-# ODEPA — best effort, se omite con gracia si no hay datos
+# Kanasta Palanka — canasta de referencia propia (2 adultos + 2 niños,
+# cantidades semanales estimadas, no oficiales). Precios desde ODEPA,
+# best-effort — ver notas de fuente en indices.py.
 # ---------------------------------------------------------------------------
 
-if odepa and odepa.get("recurso_url"):
-    odepa_html = f"""
-    <div class="card-box">
-      <div class="card-box-title">{odepa.get('dataset', 'Precios de alimentos')}</div>
-      <div class="card-box-text">
-        Fuente de datos de precios agropecuarios de ODEPA, actualizada al
-        {fecha_legible(odepa.get('actualizado', ''))}.
-      </div>
-      <a class="odepa-link" href="{odepa['recurso_url']}" target="_blank" rel="noopener">Ver datos completos ↗</a>
-    </div>"""
+KANASTA_PALANKA_INFO = [
+    ("Pan (Marraqueta)", 4.0, "kg"),
+    ("Papas", 4.0, "kg"),
+    ("Cebolla", 1.0, "kg"),
+    ("Tomate", 2.0, "kg"),
+    ("Palta", 1.0, "kg"),
+    ("Pollo entero", 2.0, "kg"),
+    ("Asado de vacuno", 1.5, "kg"),
+    ("Huevos", 12, "un"),
+    ("Leche fluida entera", 5.0, "L"),
+    ("Arroz", 1.0, "kg"),
+    ("Aceite vegetal", 0.5, "L"),
+    ("Legumbres (porotos)", 1.0, "kg"),
+    ("Fruta de estación", 4.0, "kg"),
+]
+
+kanasta_costo_nacional = kanasta.get("costo_nacional")
+kanasta_costo_region = kanasta.get("costo_por_region", {})
+kanasta_historial = kanasta.get("historial", [])
+kanasta_productos_con_precio = kanasta.get("productos_con_precio", 0)
+kanasta_productos_totales = kanasta.get("productos_totales", len(KANASTA_PALANKA_INFO))
+
+def _fmt_cantidad(cantidad, unidad):
+    if unidad == "un":
+        return f"{int(cantidad)} un"
+    texto = f"{cantidad:g}".replace(".", ",")
+    return f"{texto} {unidad}"
+
+kanasta_productos_html = "".join(
+    f"""
+        <tr>
+          <td>{nombre}</td>
+          <td class="num">{_fmt_cantidad(cantidad, unidad)}</td>
+        </tr>"""
+    for nombre, cantidad, unidad in KANASTA_PALANKA_INFO
+)
+
+kanasta_hoy_val = fmt(kanasta_costo_nacional, "Pesos") if kanasta_costo_nacional else "—"
+kanasta_hoy_sub = (
+    f"{kanasta_productos_con_precio}/{kanasta_productos_totales} productos con precio disponible"
+    if kanasta_costo_nacional
+    else "Aún sin datos suficientes de ODEPA"
+)
+
+if kanasta_costo_region:
+    filas_region = sorted(kanasta_costo_region.items(), key=lambda kv: kv[0])
+    kanasta_region_html = "".join(
+        f"""
+        <tr>
+          <td>{region}</td>
+          <td class="num">{fmt(info['monto'], 'Pesos')}</td>
+          <td class="date-cell">{info['productos_con_precio']}/{info['productos_totales']}</td>
+        </tr>"""
+        for region, info in filas_region
+    )
 else:
-    odepa_html = """
-    <div class="card-box placeholder">
-      <div class="card-box-title">Precios de alimentos (ODEPA)</div>
-      <div class="card-box-text">Próximamente — estamos conectando esta fuente.</div>
-    </div>"""
+    kanasta_region_html = '<tr><td colspan="3" class="empty">Sin datos por región disponibles todavía — revisa la conexión con ODEPA</td></tr>'
+
+if len(kanasta_historial) >= 2:
+    kanasta_chart_html = '<canvas id="chartKanasta"></canvas>'
+    kanasta_chart_labels = json.dumps([fecha_legible(p["fecha"]) for p in kanasta_historial])
+    kanasta_chart_valores = json.dumps([p["valor"] for p in kanasta_historial])
+    kanasta_chart_js = f"""
+    (function() {{
+      new Chart(document.getElementById('chartKanasta'), {{
+        type: 'line',
+        data: {{
+          labels: {kanasta_chart_labels},
+          datasets: [{{
+            data: {kanasta_chart_valores},
+            borderColor: '#dfa25b',
+            backgroundColor: '#dfa25b22',
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#dfa25b',
+            tension: 0.25,
+            fill: true,
+          }}]
+        }},
+        options: {{
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {{
+            legend: {{ display: false }},
+            tooltip: {{
+              backgroundColor: '#1c2838',
+              borderColor: '#34465d',
+              borderWidth: 1,
+              titleColor: '#dfa25b',
+              bodyColor: '#f4f6f8',
+              padding: 10,
+              displayColors: false,
+            }},
+          }},
+          scales: {{
+            x: {{ ticks: {{ color: '#9fb0c3', font: {{ size: 10 }}, maxRotation: 0 }}, grid: {{ display: false }} }},
+            y: {{ ticks: {{ color: '#9fb0c3', font: {{ size: 10 }} }}, grid: {{ color: '#34465d' }} }}
+          }}
+        }}
+      }});
+    }})();"""
+else:
+    kanasta_chart_html = '<div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div>'
+    kanasta_chart_js = ""
 
 # ---------------------------------------------------------------------------
 # Opciones de AFP para el <select>
@@ -246,6 +337,13 @@ HTML = f"""<!DOCTYPE html>
     background:linear-gradient(135deg, rgba(223,162,91,.10), rgba(223,162,91,0));
   }}
 
+  .table-scroll{{overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:10px;}}
+  .proyeccion-table{{width:100%; border-collapse:collapse; font-size:13px;}}
+  .proyeccion-table th, .proyeccion-table td{{padding:8px 10px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap;}}
+  .proyeccion-table th:first-child, .proyeccion-table td:first-child{{text-align:left; color:var(--muted);}}
+  .btn-secondary{{background:transparent; border:1px solid var(--amber); color:var(--amber);}}
+  .btn-secondary:hover{{background:rgba(223,162,91,.1); opacity:1;}}
+
   .card-box{{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px;}}
   .card-box.placeholder{{opacity:.6;}}
   .card-box-title{{font-size:13px; font-weight:700; color:var(--amber); margin-bottom:8px;}}
@@ -262,7 +360,46 @@ HTML = f"""<!DOCTYPE html>
     .page-title{{font-size:19px;}}
     .field-grid{{grid-template-columns:1fr;}}
   }}
+
+  .kanasta-box{{
+    display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:0;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; margin:18px 0 26px;
+  }}
+  .kanasta-col{{padding:22px 20px; display:flex; flex-direction:column;}}
+  .kanasta-col + .kanasta-col{{border-left:1px solid var(--line);}}
+  .kanasta-col-title{{
+    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:10px;
+  }}
+  .kanasta-desc .kanasta-col-text{{font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:14px;}}
+  .kanasta-productos-table{{width:100%; border-collapse:collapse; font-size:12.5px;}}
+  .kanasta-productos-table td{{padding:4px 0; border-bottom:1px solid var(--line); color:var(--text);}}
+  .kanasta-productos-table td.num{{text-align:right; color:var(--muted); white-space:nowrap;}}
+  .kanasta-hoy{{align-items:center; justify-content:center; text-align:center;}}
+  .kanasta-hoy-val{{font-size:38px; font-weight:800; color:var(--amber); line-height:1.1;}}
+  .kanasta-hoy-sub{{font-size:12px; color:var(--muted); margin-top:8px;}}
+  .kanasta-hoy-nota{{font-size:11px; color:var(--muted); margin-top:14px; text-transform:uppercase; letter-spacing:.06em;}}
+  .kanasta-grafico{{justify-content:center;}}
+  .kanasta-chart-wrap{{position:relative; height:180px; width:100%;}}
+  .kanasta-chart-empty{{
+    font-size:12.5px; color:var(--muted); text-align:center; padding:24px 8px;
+    display:flex; align-items:center; justify-content:center; height:100%;
+  }}
+  .kanasta-region-table{{width:100%; border-collapse:collapse; font-size:13px; min-width:420px;}}
+  .kanasta-region-table th{{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); border-bottom:1px solid var(--line); padding:8px 10px;
+  }}
+  .kanasta-region-table td{{padding:8px 10px; border-bottom:1px solid var(--line);}}
+  .kanasta-region-table td.num{{text-align:right;}}
+  .kanasta-region-table td.empty{{text-align:center; color:var(--muted);}}
+  @media (max-width: 720px){{
+    .kanasta-box{{grid-template-columns:1fr;}}
+    .kanasta-col + .kanasta-col{{border-left:none; border-top:1px solid var(--line);}}
+  }}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -316,6 +453,19 @@ HTML = f"""<!DOCTYPE html>
             <input type="number" id="dep-utm" value="{utm_valor if utm_valor else ''}" step="1">
           </div>
         </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="dep-salud-tipo">Salud</label>
+            <select id="dep-salud-tipo" onchange="toggleIsapre()">
+              <option value="fonasa">Fonasa (7%)</option>
+              <option value="isapre">Isapre</option>
+            </select>
+          </div>
+          <div class="field" id="dep-isapre-field" style="display:none;">
+            <label for="dep-isapre-uf">Valor plan pactado (UF)</label>
+            <input type="number" id="dep-isapre-uf" placeholder="ej. 3.5" min="0" step="0.01">
+          </div>
+        </div>
         <div class="field-check">
           <input type="checkbox" id="dep-indefinido" checked>
           <label for="dep-indefinido" style="margin:0;">Contrato indefinido (aplica seguro de cesantía del trabajador, 0,6%)</label>
@@ -327,14 +477,15 @@ HTML = f"""<!DOCTYPE html>
           <div class="resultado-nota">Líquido a recibir</div>
           <div class="resultado-grid">
             <div class="resultado-item"><div class="resultado-item-label">AFP (10% + comisión)</div><div class="resultado-item-val" id="dep-afp-val"></div></div>
-            <div class="resultado-item"><div class="resultado-item-label">Salud (7%)</div><div class="resultado-item-val" id="dep-salud-val"></div></div>
+            <div class="resultado-item"><div class="resultado-item-label" id="dep-salud-label">Salud (7%)</div><div class="resultado-item-val" id="dep-salud-val"></div></div>
             <div class="resultado-item"><div class="resultado-item-label">Seguro cesantía</div><div class="resultado-item-val" id="dep-cesantia-val"></div></div>
             <div class="resultado-item"><div class="resultado-item-label">Impuesto único</div><div class="resultado-item-val" id="dep-impuesto-val"></div></div>
           </div>
           <div class="resultado-nota">
             Cálculo referencial con topes imponibles de 90 UF (AFP y salud) y 135,2 UF (cesantía), y la tabla
-            de Impuesto Único de Segunda Categoría vigente del SII. No incluye APV, cuenta 2, ni convenios
-            de salud sobre el 7% mínimo.
+            de Impuesto Único de Segunda Categoría vigente del SII. Si eliges Isapre, el descuento de salud es
+            el mayor entre el 7% legal y el valor del plan pactado en UF (así aparece en la liquidación real).
+            No incluye APV ni cuenta 2.
           </div>
         </div>
       </div>
@@ -368,10 +519,10 @@ HTML = f"""<!DOCTYPE html>
     </div>
   </section>
 
-  <section id="arriendo-vs-compra" class="section">
-    <div class="subhead-box">Comparador</div>
-    <h1>Arriendo vs. compra</h1>
-    <div class="section-sub">Proyección a todo el plazo del crédito, con flujo mensual y patrimonio acumulado en ambos escenarios.</div>
+  <section id="inversion-inmobiliaria" class="section">
+    <div class="subhead-box">Análisis</div>
+    <h1>Inversión inmobiliaria</h1>
+    <div class="section-sub">Rentabilidad de comprar una propiedad para arrendar: cap rate, cash-on-cash, ROI y patrimonio proyectado.</div>
     <div class="tool-box">
       <div class="field-grid">
         <div class="field">
@@ -391,41 +542,55 @@ HTML = f"""<!DOCTYPE html>
           <input type="number" id="avc-plazo" placeholder="ej. 25" min="1" step="1">
         </div>
         <div class="field">
-          <label for="avc-gastos">Gastos comunes + contribuciones (CLP/mes)</label>
+          <label for="avc-gastos">Gastos operacionales mensuales (contribuciones, seguro, mantención — CLP)</label>
           <input type="number" id="avc-gastos" placeholder="ej. 120000" min="0" step="1000">
         </div>
         <div class="field">
-          <label for="avc-arriendo">Arriendo equivalente (CLP/mes)</label>
+          <label for="avc-arriendo">Arriendo mensual esperado (CLP)</label>
           <input type="number" id="avc-arriendo" placeholder="ej. 550000" min="0" step="1000">
         </div>
         <div class="field">
-          <label for="avc-reajuste">Reajuste UF anual estimado (%)</label>
-          <input type="number" id="avc-reajuste" value="3" step="0.1">
+          <label for="avc-vacancia">Vacancia estimada (% del año)</label>
+          <input type="number" id="avc-vacancia" value="5" min="0" max="100" step="1">
         </div>
         <div class="field">
-          <label for="avc-rentabilidad">Rentabilidad alternativa si inviertes en vez de comprar (% anual)</label>
-          <input type="number" id="avc-rentabilidad" value="5" step="0.1">
+          <label for="avc-reajuste">Reajuste UF / plusvalía anual estimada (%)</label>
+          <input type="number" id="avc-reajuste" value="3" step="0.1">
         </div>
         <div class="field">
           <label for="avc-uf">UF del día</label>
           <input type="number" id="avc-uf" value="{uf_valor if uf_valor else ''}" step="0.01">
         </div>
       </div>
-      <button class="btn" onclick="calcularArriendoVsCompra()">Comparar</button>
+      <button class="btn" onclick="calcularInversionInmobiliaria()">Analizar inversión</button>
 
       <div class="resultado" id="avc-resultado">
         <div class="resultado-grid">
-          <div class="resultado-item"><div class="resultado-item-label">Dividendo mensual (comprar)</div><div class="resultado-item-val" id="avc-dividendo"></div></div>
-          <div class="resultado-item"><div class="resultado-item-label">Flujo mensual total (comprar)</div><div class="resultado-item-val" id="avc-flujo-comprar"></div></div>
-          <div class="resultado-item"><div class="resultado-item-label">Flujo mensual (arrendar)</div><div class="resultado-item-val" id="avc-flujo-arrendar"></div></div>
-          <div class="resultado-item"><div class="resultado-item-label">Patrimonio al final del plazo (comprar)</div><div class="resultado-item-val" id="avc-patrimonio-comprar"></div></div>
-          <div class="resultado-item"><div class="resultado-item-label">Patrimonio al final del plazo (arrendar + invertir)</div><div class="resultado-item-val" id="avc-patrimonio-arrendar"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Dividendo mensual</div><div class="resultado-item-val" id="avc-dividendo"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Flujo de caja mensual (año 1)</div><div class="resultado-item-val" id="avc-flujo"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Cap Rate</div><div class="resultado-item-val" id="avc-caprate"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Cash-on-Cash Return</div><div class="resultado-item-val" id="avc-coc"></div></div>
         </div>
+
+        <div class="resultado-nota" style="margin-top:20px;">Patrimonio y ROI proyectado</div>
+        <div class="table-scroll">
+          <table class="proyeccion-table">
+            <thead><tr><th></th><th>5 años</th><th>10 años</th><th>20 años</th></tr></thead>
+            <tbody>
+              <tr><td>Patrimonio (equity)</td><td id="avc-pat-5"></td><td id="avc-pat-10"></td><td id="avc-pat-20"></td></tr>
+              <tr><td>ROI acumulado</td><td id="avc-roi-5"></td><td id="avc-roi-10"></td><td id="avc-roi-20"></td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="resultado-nota">
-          "Arrendar + invertir" asume que el pie y cualquier diferencia mensual a favor del arriendo se invierten
-          a la rentabilidad alternativa indicada. Cálculo referencial con supuestos simplificados — no considera
-          impuestos a la ganancia de capital, mantención mayor de la propiedad, ni variaciones futuras de tasa.
+          Cap Rate = ingreso operativo neto anual / precio de la propiedad. Cash-on-Cash = flujo de caja anual (año 1) /
+          inversión inicial (pie). ROI acumulado = (patrimonio + flujos de caja acumulados − inversión inicial) /
+          inversión inicial. Cálculo referencial con supuestos simplificados — no considera impuestos a la ganancia de
+          capital, costos de cierre, ni variaciones futuras de tasa o arriendo.
         </div>
+
+        <button class="btn btn-secondary" onclick="descargarInversionInmobiliaria()" style="margin-top:16px;">Descargar resultados</button>
       </div>
     </div>
   </section>
@@ -467,10 +632,48 @@ HTML = f"""<!DOCTYPE html>
   </section>
 
   <section id="alimentos" class="section">
-    <div class="subhead-box">Datos</div>
-    <h1>Precios de alimentos (ODEPA)</h1>
-    <div class="section-sub">Precios agropecuarios de referencia a nivel nacional.</div>
-    {odepa_html}
+    <div class="subhead-box">Kanasta Palanka</div>
+    <h1>Kanasta Palanka</h1>
+    <div class="section-sub">
+      La Kanasta Palanka es nuestra propia referencia de gasto en alimentos — no es la canasta básica
+      oficial de Chile. Estimamos lo que consumiría en una semana una familia de 2 adultos y 2 niños,
+      con {kanasta_productos_totales} productos típicos de la mesa chilena (detalle abajo). Los precios
+      vienen de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">datos abiertos de ODEPA</a>
+      (Oficina de Estudios y Políticas Agrarias) a nivel de consumidor, best effort según disponibilidad
+      del dato. El costo se expresa en base semanal, pero los precios que lo componen se actualizan a diario.
+    </div>
+
+    <div class="kanasta-box">
+      <div class="kanasta-col kanasta-desc">
+        <div class="kanasta-col-title">¿Qué es?</div>
+        <div class="kanasta-col-text">
+          Una canasta de referencia propia de Palanka: {kanasta_productos_totales} productos y las
+          cantidades semanales estimadas para una familia de 2 adultos y 2 niños en Chile.
+        </div>
+        <table class="kanasta-productos-table">
+          <tbody>{kanasta_productos_html}
+          </tbody>
+        </table>
+      </div>
+      <div class="kanasta-col kanasta-hoy">
+        <div class="kanasta-col-title">Costo hoy</div>
+        <div class="kanasta-hoy-val">{kanasta_hoy_val}</div>
+        <div class="kanasta-hoy-sub">{kanasta_hoy_sub}</div>
+        <div class="kanasta-hoy-nota">Promedio nacional semanal</div>
+      </div>
+      <div class="kanasta-col kanasta-grafico">
+        <div class="kanasta-col-title">Seguimiento</div>
+        <div class="kanasta-chart-wrap">{kanasta_chart_html}</div>
+      </div>
+    </div>
+
+    <div class="subhead-box">Detalle por región</div>
+    <div class="table-scroll">
+      <table class="kanasta-region-table">
+        <thead><tr><th>Región</th><th>Costo semanal</th><th>Productos con precio</th></tr></thead>
+        <tbody>{kanasta_region_html}</tbody>
+      </table>
+    </div>
   </section>
 
   <div class="footer">
@@ -521,12 +724,19 @@ function impuestoUnico(baseTributableClp, utm) {{
   return 0;
 }}
 
+function toggleIsapre() {{
+  const esIsapre = document.getElementById('dep-salud-tipo').value === 'isapre';
+  document.getElementById('dep-isapre-field').style.display = esIsapre ? 'block' : 'none';
+}}
+
 function calcularDependiente() {{
   const bruto = parseFloat(document.getElementById('dep-bruto').value);
   const comisionAfp = parseFloat(document.getElementById('dep-afp').value);
   const uf = parseFloat(document.getElementById('dep-uf').value);
   const utm = parseFloat(document.getElementById('dep-utm').value);
   const indefinido = document.getElementById('dep-indefinido').checked;
+  const esIsapre = document.getElementById('dep-salud-tipo').value === 'isapre';
+  const planIsapreUf = parseFloat(document.getElementById('dep-isapre-uf').value) || 0;
   const resultadoBox = document.getElementById('dep-resultado');
 
   if (!bruto || bruto <= 0 || !uf || !utm) {{
@@ -541,7 +751,15 @@ function calcularDependiente() {{
   const imponibleCesantia = Math.min(bruto, topeCesantia);
 
   const afp = imponibleAfpSalud * ((COTIZACION_AFP_PCT + comisionAfp) / 100);
-  const salud = imponibleAfpSalud * (COTIZACION_SALUD_PCT / 100);
+  const saludLegal = imponibleAfpSalud * (COTIZACION_SALUD_PCT / 100);
+  let salud = saludLegal;
+  let etiquetaSalud = 'Salud (7%, Fonasa)';
+  if (esIsapre) {{
+    const saludPlan = planIsapreUf * uf;
+    salud = Math.max(saludLegal, saludPlan);
+    etiquetaSalud = 'Salud (Isapre' + (saludPlan > saludLegal ? ', plan sobre el 7%' : '') + ')';
+  }}
+  document.getElementById('dep-salud-label').textContent = etiquetaSalud;
   const cesantia = indefinido ? imponibleCesantia * (CESANTIA_TRABAJADOR_PCT / 100) : 0;
 
   const baseTributable = bruto - afp - salud - cesantia;
@@ -571,15 +789,23 @@ function calcularBoleta() {{
   resultadoBox.classList.add('show');
 }}
 
-function calcularArriendoVsCompra() {{
+let ultimoResultadoInversion = null;
+
+function saldoInsolutoUf(montoFinanciadoUf, iMensual, n, k) {{
+  if (k >= n) return 0;
+  if (iMensual === 0) return montoFinanciadoUf * (1 - k / n);
+  return montoFinanciadoUf * (Math.pow(1 + iMensual, n) - Math.pow(1 + iMensual, k)) / (Math.pow(1 + iMensual, n) - 1);
+}}
+
+function calcularInversionInmobiliaria() {{
   const precioUf = parseFloat(document.getElementById('avc-precio').value);
   const piePct = parseFloat(document.getElementById('avc-pie').value);
   const tasaAnual = parseFloat(document.getElementById('avc-tasa').value);
   const anios = parseFloat(document.getElementById('avc-plazo').value);
   const gastos = parseFloat(document.getElementById('avc-gastos').value) || 0;
   const arriendo = parseFloat(document.getElementById('avc-arriendo').value);
+  const vacanciaPct = parseFloat(document.getElementById('avc-vacancia').value) || 0;
   const reajusteAnual = parseFloat(document.getElementById('avc-reajuste').value) / 100;
-  const rentAlt = parseFloat(document.getElementById('avc-rentabilidad').value) / 100;
   const uf = parseFloat(document.getElementById('avc-uf').value);
   const resultadoBox = document.getElementById('avc-resultado');
 
@@ -601,35 +827,93 @@ function calcularArriendoVsCompra() {{
   }}
   const dividendoClpHoy = dividendoUf * uf;
 
-  const flujoComprar = dividendoClpHoy + gastos;
-  const flujoArrendar = arriendo;
+  const vacanciaFrac = vacanciaPct / 100;
+  const arriendoEfectivoMensual = arriendo * (1 - vacanciaFrac);
+  const ingresoAnualBruto = arriendoEfectivoMensual * 12;
+  const gastosAnual = gastos * 12;
+  const noiAnual = ingresoAnualBruto - gastosAnual; // ingreso operativo neto, antes de la deuda
 
-  // Patrimonio comprando: valor de la propiedad al final (en UF, convertida a CLP proyectado)
-  // menos saldo insoluto del crédito (0, porque a los N años del plazo completo la deuda está pagada).
-  const ufProyectada = uf * Math.pow(1 + reajusteAnual, anios);
-  const patrimonioComprar = precioUf * ufProyectada; // deuda = 0 al término del plazo
+  const precioClpHoy = precioUf * uf;
+  const capRate = (noiAnual / precioClpHoy) * 100;
 
-  // Patrimonio arrendando: el pie se invierte desde el día 1, y cada mes se invierte la diferencia
-  // de flujo a favor del arriendo (si la hay), ambos a la rentabilidad alternativa.
+  const flujoMensual = arriendoEfectivoMensual - gastos - dividendoClpHoy;
+  const flujoAnual = flujoMensual * 12;
+
   const pieClpHoy = pieUf * uf;
-  const iMensualAlt = rentAlt / 12;
-  const diferenciaMensual = flujoComprar - flujoArrendar;
+  const cashOnCash = (flujoAnual / pieClpHoy) * 100;
 
-  let valorInvertido = pieClpHoy;
-  for (let mes = 0; mes < n; mes++) {{
-    valorInvertido = valorInvertido * (1 + iMensualAlt);
-    if (diferenciaMensual > 0) {{
-      valorInvertido += diferenciaMensual;
-    }}
+  function patrimonioYRoi(anioObjetivo) {{
+    const k = Math.min(anioObjetivo * 12, n);
+    const ufProyectada = uf * Math.pow(1 + reajusteAnual, anioObjetivo);
+    const saldoUf = saldoInsolutoUf(montoFinanciadoUf, iMensual, n, k);
+    const equityUf = precioUf - saldoUf;
+    const patrimonio = equityUf * ufProyectada;
+    const flujoAcumulado = flujoAnual * anioObjetivo;
+    const roi = ((patrimonio + flujoAcumulado - pieClpHoy) / pieClpHoy) * 100;
+    return {{ patrimonio, roi }};
   }}
-  const patrimonioArrendar = valorInvertido;
+
+  const r5 = patrimonioYRoi(5);
+  const r10 = patrimonioYRoi(10);
+  const r20 = patrimonioYRoi(20);
 
   document.getElementById('avc-dividendo').textContent = clp(dividendoClpHoy) + '/mes';
-  document.getElementById('avc-flujo-comprar').textContent = clp(flujoComprar) + '/mes';
-  document.getElementById('avc-flujo-arrendar').textContent = clp(flujoArrendar) + '/mes';
-  document.getElementById('avc-patrimonio-comprar').textContent = clp(patrimonioComprar);
-  document.getElementById('avc-patrimonio-arrendar').textContent = clp(patrimonioArrendar);
+  document.getElementById('avc-flujo').textContent = clp(flujoMensual) + '/mes';
+  document.getElementById('avc-caprate').textContent = capRate.toFixed(2) + '%';
+  document.getElementById('avc-coc').textContent = cashOnCash.toFixed(2) + '%';
+  document.getElementById('avc-pat-5').textContent = clp(r5.patrimonio);
+  document.getElementById('avc-pat-10').textContent = clp(r10.patrimonio);
+  document.getElementById('avc-pat-20').textContent = clp(r20.patrimonio);
+  document.getElementById('avc-roi-5').textContent = r5.roi.toFixed(1) + '%';
+  document.getElementById('avc-roi-10').textContent = r10.roi.toFixed(1) + '%';
+  document.getElementById('avc-roi-20').textContent = r20.roi.toFixed(1) + '%';
   resultadoBox.classList.add('show');
+
+  ultimoResultadoInversion = {{
+    precioUf, piePct, tasaAnual, anios, arriendo, vacanciaPct, gastos, reajustePct: reajusteAnual * 100,
+    dividendoClpHoy, flujoMensual, capRate, cashOnCash,
+    pat5: r5.patrimonio, roi5: r5.roi, pat10: r10.patrimonio, roi10: r10.roi, pat20: r20.patrimonio, roi20: r20.roi,
+  }};
+}}
+
+function descargarInversionInmobiliaria() {{
+  if (!ultimoResultadoInversion) return;
+  const r = ultimoResultadoInversion;
+  const lineas = [
+    'Análisis de Inversión Inmobiliaria — Palanka',
+    'Generado: ' + new Date().toLocaleString('es-CL'),
+    '',
+    'Datos ingresados:',
+    '  Precio propiedad: ' + r.precioUf + ' UF',
+    '  Pie: ' + r.piePct + '%',
+    '  Tasa anual crédito: ' + r.tasaAnual + '%',
+    '  Plazo crédito: ' + r.anios + ' años',
+    '  Arriendo mensual esperado: ' + clp(r.arriendo),
+    '  Vacancia estimada: ' + r.vacanciaPct + '%',
+    '  Gastos operacionales mensuales: ' + clp(r.gastos),
+    '  Reajuste UF / plusvalía anual: ' + r.reajustePct.toFixed(1) + '%',
+    '',
+    'Resultados:',
+    '  Dividendo mensual: ' + clp(r.dividendoClpHoy),
+    '  Flujo de caja mensual (año 1): ' + clp(r.flujoMensual),
+    '  Cap Rate: ' + r.capRate.toFixed(2) + '%',
+    '  Cash-on-Cash Return: ' + r.cashOnCash.toFixed(2) + '%',
+    '',
+    '  Patrimonio a 5 años: ' + clp(r.pat5) + '  |  ROI acumulado: ' + r.roi5.toFixed(1) + '%',
+    '  Patrimonio a 10 años: ' + clp(r.pat10) + '  |  ROI acumulado: ' + r.roi10.toFixed(1) + '%',
+    '  Patrimonio a 20 años: ' + clp(r.pat20) + '  |  ROI acumulado: ' + r.roi20.toFixed(1) + '%',
+    '',
+    'Cálculo referencial, no constituye asesoría financiera. Fuente: tablero.palanka.lat',
+  ];
+  const blob = new Blob([lineas.join('\\n')], {{ type: 'text/plain;charset=utf-8' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'analisis-inversion-inmobiliaria.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }}
 
 function calcularDCA() {{
@@ -659,6 +943,8 @@ function calcularDCA() {{
   document.getElementById('dca-ganancia').textContent = clp(ganancia);
   resultadoBox.classList.add('show');
 }}
+
+{kanasta_chart_js}
 </script>
 
 </body>
