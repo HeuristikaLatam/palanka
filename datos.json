@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-17T14:15:04.934050+00:00",
+  "generado": "2026-07-17T14:57:28.536152+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -32,10 +32,142 @@
     "valor": 4.26,
     "fecha": "2026-07-15"
   },
-  "odepa": {
-    "dataset": "Precios al Consumidor",
-    "recurso_url": "https://datos.odepa.gob.cl/dataset/d4646b7f-0d2e-4567-b6fa-932b1a6bb3f3/resource/9f885df4-afeb-4b75-8bab-9334f79db00f/download/precio_consumidor_2026.csv",
-    "recurso_nombre": "Detalle de Precios Consumidor año 2026",
-    "actualizado": "2026-07-17T13:45:12.420220"
+  "kanasta_palanka": {
+    "productos": [
+      {
+        "clave": "pan",
+        "nombre": "Pan (Marraqueta)",
+        "cantidad": 4.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "papas",
+        "nombre": "Papas",
+        "cantidad": 4.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "cebolla",
+        "nombre": "Cebolla",
+        "cantidad": 1.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "tomate",
+        "nombre": "Tomate",
+        "cantidad": 2.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "palta",
+        "nombre": "Palta",
+        "cantidad": 1.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "pollo",
+        "nombre": "Pollo entero",
+        "cantidad": 2.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "vacuno",
+        "nombre": "Asado de vacuno",
+        "cantidad": 1.5,
+        "unidad": "kg"
+      },
+      {
+        "clave": "huevos",
+        "nombre": "Huevos",
+        "cantidad": 12,
+        "unidad": "un"
+      },
+      {
+        "clave": "leche",
+        "nombre": "Leche fluida entera",
+        "cantidad": 5.0,
+        "unidad": "L"
+      },
+      {
+        "clave": "arroz",
+        "nombre": "Arroz",
+        "cantidad": 1.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "aceite",
+        "nombre": "Aceite vegetal",
+        "cantidad": 0.5,
+        "unidad": "L"
+      },
+      {
+        "clave": "legumbres",
+        "nombre": "Legumbres (porotos)",
+        "cantidad": 1.0,
+        "unidad": "kg"
+      },
+      {
+        "clave": "fruta",
+        "nombre": "Fruta de estación",
+        "cantidad": 4.0,
+        "unidad": "kg"
+      }
+    ],
+    "costo_por_region": {
+      "13": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "9": {
+        "monto": 747000,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "10": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "7": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "4": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "16": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "5": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "15": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "8": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      }
+    },
+    "costo_nacional": 159667,
+    "productos_con_precio": 9,
+    "productos_totales": 13,
+    "historial": [
+      {
+        "fecha": "2026-07-17",
+        "valor": 159667
+      }
+    ]
   }
 }
