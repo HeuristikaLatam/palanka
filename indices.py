@@ -280,12 +280,50 @@ def get_kanasta_palanka_precios():
     return resultado
 
 
+def _mediana(valores):
+    ordenados = sorted(valores)
+    n = len(ordenados)
+    mitad = n // 2
+    if n % 2 == 0:
+        return (ordenados[mitad - 1] + ordenados[mitad]) / 2
+    return ordenados[mitad]
+
+
+def _filtrar_outliers_precio(precios_region):
+    """Los CSV de ODEPA a veces traen un valor mal cargado para una región
+    (typo, unidad distinta, etc.) que dispara el promedio nacional. Filtro
+    simple y robusto: si un precio se aleja demasiado de la mediana entre
+    regiones (fuera de [0.4x, 2.5x]), se descarta para el cálculo del
+    promedio nacional y del costo de esa región — mejor omitir un dato
+    sospechoso que inventar un número, pero tampoco queremos que ensucie
+    el promedio de todos los demás."""
+    if not precios_region or len(precios_region) < 3:
+        return dict(precios_region or {})
+    mediana = _mediana(list(precios_region.values()))
+    if mediana <= 0:
+        return dict(precios_region)
+    filtrados = {
+        region: precio
+        for region, precio in precios_region.items()
+        if 0.4 * mediana <= precio <= 2.5 * mediana
+    }
+    return filtrados or dict(precios_region)
+
+
 def calcular_costos_kanasta(precios_por_producto):
     """A partir de clave_producto -> {region: precio_unitario} | None,
     calcula el costo semanal por región y el promedio nacional (promedio
-    de los precios unitarios disponibles entre regiones, por producto)."""
+    de los precios unitarios disponibles entre regiones, por producto).
+    Antes de promediar, filtra outliers evidentes por producto (ver
+    _filtrar_outliers_precio) para que una región con un dato mal cargado
+    no dispare el promedio nacional ni el costo de esa región."""
+    precios_filtrados = {
+        clave: _filtrar_outliers_precio(precios)
+        for clave, precios in precios_por_producto.items()
+    }
+
     regiones = set()
-    for precios in precios_por_producto.values():
+    for precios in precios_filtrados.values():
         if precios:
             regiones.update(precios.keys())
 
@@ -294,7 +332,7 @@ def calcular_costos_kanasta(precios_por_producto):
         total = 0.0
         productos_con_precio = 0
         for clave, _nombre, cantidad, _unidad in KANASTA_PALANKA:
-            precios = precios_por_producto.get(clave)
+            precios = precios_filtrados.get(clave)
             precio_region = precios.get(region) if precios else None
             if precio_region is not None:
                 total += precio_region * cantidad
@@ -309,7 +347,7 @@ def calcular_costos_kanasta(precios_por_producto):
     total_nacional = 0.0
     productos_con_precio_nacional = 0
     for clave, _nombre, cantidad, _unidad in KANASTA_PALANKA:
-        precios = precios_por_producto.get(clave)
+        precios = precios_filtrados.get(clave)
         if precios:
             promedio_unitario = sum(precios.values()) / len(precios)
             total_nacional += promedio_unitario * cantidad
