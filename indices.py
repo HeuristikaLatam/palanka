@@ -498,10 +498,11 @@ INTERNET_WIFI_MES = 17000
 CELULAR_PLAN_MES = 10500
 CELULAR_CANTIDAD_PLANES = 3
 
-# --- Transporte público (semanal, se mensualiza) ----------------------------
+# --- Transporte público (semanal) -------------------------------------------
 # Tarifa oficial Red Movilidad / Metro Región Metropolitana, vigente desde
 # el 22-feb-2026. Supuesto: la madre vuelve en transporte público de lunes
-# a viernes, 10 pasajes a la semana.
+# a viernes, 10 pasajes a la semana. Es parte de la Kanasta Semanal (junto a
+# alimentos, bencina y supermercado otros), no un componente aparte del mes.
 TRANSPORTE_PUBLICO_TARIFA = 795
 TRANSPORTE_PUBLICO_PASAJES_SEMANA = 10
 
@@ -523,8 +524,8 @@ def calcular_internet_celular_mes():
     return INTERNET_WIFI_MES + (CELULAR_PLAN_MES * CELULAR_CANTIDAD_PLANES)
 
 
-def calcular_transporte_publico_mes():
-    return round(TRANSPORTE_PUBLICO_TARIFA * TRANSPORTE_PUBLICO_PASAJES_SEMANA * SEMANAS_POR_MES)
+def calcular_transporte_publico_semanal():
+    return round(TRANSPORTE_PUBLICO_TARIFA * TRANSPORTE_PUBLICO_PASAJES_SEMANA)
 
 
 def main():
@@ -550,16 +551,18 @@ def main():
 
     costo_bencina = calcular_bencina_semanal()
     costo_otros = calcular_supermercado_otros_semanal()
+    costo_transporte = calcular_transporte_publico_semanal()
     costo_semanal_total = (
-        costo_alimentos + costo_bencina + costo_otros if costo_alimentos is not None else None
+        costo_alimentos + costo_bencina + costo_otros + costo_transporte
+        if costo_alimentos is not None
+        else None
     )
     historial_semanal = actualizar_historial_kanasta(historial_semanal, costo_semanal_total)
 
     cuentas_basicas_mes = calcular_cuentas_basicas_mes()
     internet_celular_mes = calcular_internet_celular_mes()
-    transporte_publico_mes = calcular_transporte_publico_mes()
     costo_mensual_total = (
-        round(costo_semanal_total * SEMANAS_POR_MES) + cuentas_basicas_mes + internet_celular_mes + transporte_publico_mes
+        round(costo_semanal_total * SEMANAS_POR_MES) + cuentas_basicas_mes + internet_celular_mes
         if costo_semanal_total is not None
         else None
     )
@@ -611,7 +614,7 @@ def main():
         "transporte_publico": {
             "tarifa": TRANSPORTE_PUBLICO_TARIFA,
             "pasajes_semana": TRANSPORTE_PUBLICO_PASAJES_SEMANA,
-            "costo_mes": transporte_publico_mes,
+            "costo_semana": costo_transporte,
         },
         "mensual": {
             "costo_total": costo_mensual_total,
