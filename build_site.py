@@ -144,20 +144,14 @@ def _fmt_cantidad(cantidad, unidad):
     texto = f"{cantidad:g}".replace(".", ",")
     return f"{texto} {unidad}"
 
-kanasta_productos_filas = "".join(
+kanasta_productos_chips = "".join(
     f"""
-        <tr>
-          <td>{nombre}</td>
-          <td class="num">{_fmt_cantidad(cantidad, unidad)}</td>
-        </tr>"""
+      <div class="kanasta-producto-chip"><span class="nombre">{nombre}</span><span class="cantidad">{_fmt_cantidad(cantidad, unidad)}</span></div>"""
     for nombre, cantidad, unidad in KANASTA_PALANKA_INFO
 )
 kanasta_productos_html = f"""
-      <table class="kanasta-productos-table">
-        <thead><tr><th>Producto</th><th class="num">Cantidad semanal</th></tr></thead>
-        <tbody>{kanasta_productos_filas}
-        </tbody>
-      </table>"""
+      <div class="kanasta-productos-grid">{kanasta_productos_chips}
+      </div>"""
 
 kanasta_hoy_val = fmt(kanasta_costo_nacional, "Pesos") if kanasta_costo_nacional else "—"
 kanasta_hoy_sub = (
@@ -372,14 +366,25 @@ HTML = f"""<!DOCTYPE html>
     .field-grid{{grid-template-columns:1fr;}}
   }}
 
-  .kanasta-productos-table{{width:100%; border-collapse:collapse; font-size:12.5px; margin:14px 0 4px;}}
-  .kanasta-productos-table th{{
-    text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--muted); border-bottom:1px solid var(--line); padding:6px 4px;
+  .kanasta-productos-grid{{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; margin:14px 0 4px;
   }}
-  .kanasta-productos-table th.num, .kanasta-productos-table td.num{{text-align:right;}}
-  .kanasta-productos-table td{{padding:5px 4px; border-bottom:1px solid var(--line); color:var(--text);}}
-  .kanasta-productos-table td.num{{color:var(--muted); white-space:nowrap;}}
+  .kanasta-producto-chip{{
+    background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:8px 12px;
+    font-size:12px; display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }}
+  .kanasta-producto-chip .nombre{{color:var(--text);}}
+  .kanasta-producto-chip .cantidad{{color:var(--amber); font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:600;}}
+
+  .ejemplos-table{{width:100%; border-collapse:collapse; font-size:12.5px; margin:16px 0 6px;}}
+  .ejemplos-table th{{
+    text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); border-bottom:1px solid var(--line); padding:7px 8px;
+  }}
+  .ejemplos-table td{{padding:8px; border-bottom:1px solid var(--line); color:var(--text); vertical-align:top;}}
+  .ejemplos-table td.riesgo-bajo{{color:#8fd19e;}}
+  .ejemplos-table td.riesgo-medio{{color:var(--amber);}}
+  .ejemplos-table td.riesgo-alto{{color:#e2735f;}}
 
   .kanasta-box{{
     display:grid; grid-template-columns:1fr 1.4fr; gap:0;
@@ -624,6 +629,36 @@ HTML = f"""<!DOCTYPE html>
       cuotas cuando el precio está bajo y menos cuando está alto, lo que suaviza tu costo promedio de compra
       en el tiempo y evita el intento (casi siempre fallido) de acertar el momento perfecto para invertir.
       Es la lógica detrás de los aportes automáticos a fondos mutuos, APV o ahorro programado.
+      <br><br>
+      <strong>Algunos ejemplos reales en Chile</strong> (la rentabilidad pasada no garantiza la futura, y
+      salvo el depósito a plazo, ninguno de estos instrumentos asegura tu capital):
+    </div>
+    <div class="table-scroll">
+      <table class="ejemplos-table">
+        <thead><tr><th>Instrumento</th><th>Riesgo</th><th>Rentabilidad de referencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Depósito a plazo (30 días, pesos)</td>
+            <td class="riesgo-bajo">Bajo</td>
+            <td>Tasas de mercado en torno a 0,25%–0,40% mensual (jul-2026) — equivalente a ~3%–5% anual. Capital asegurado hasta el monto de la garantía estatal, si aplica.</td>
+          </tr>
+          <tr>
+            <td>Fondos mutuos balanceados</td>
+            <td class="riesgo-medio">Medio</td>
+            <td>Muy variable año a año: cerraron 2025 con +9,9%, pero en 2022 rentaron -2,8%. Mezclan renta fija y variable.</td>
+          </tr>
+          <tr>
+            <td>Fondos mutuos accionarios / acciones (IPSA)</td>
+            <td class="riesgo-alto">Alto</td>
+            <td>Alta volatilidad: los fondos accionarios cerraron 2025 con +31,8%, pero el IPSA también ha tenido décadas casi planas o negativas (ej. -0,71% anual promedio entre 2011–2020).</td>
+          </tr>
+          <tr>
+            <td>Multifondos AFP / APV (A a E)</td>
+            <td>Según fondo</td>
+            <td>El fondo A es el más riesgoso (más renta variable) y el E el más conservador — usa el simulador de APV arriba para proyectar tu caso.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="tool-box">
       <div class="field-grid">
@@ -666,6 +701,18 @@ HTML = f"""<!DOCTYPE html>
       <strong>Régimen A</strong>: el Estado bonifica el 15% de tu ahorro anual, con tope de 6 UTM al año.
       <strong>Régimen B</strong>: tus aportes rebajan tu base imponible (menos impuesto a la renta), con
       tope de 600 UF al año (50 UF al mes si el descuento es por planilla).
+      <br><br>
+      <strong>¿Por qué existen dos regímenes?</strong> Buscan que el incentivo del Estado al ahorro
+      previsional voluntario funcione para distintos niveles de ingreso. Si tu tasa marginal de impuesto es
+      baja (tramos inferiores de la tabla de Impuesto Único, o no pagas impuesto), normalmente te conviene
+      más el <strong>Régimen A</strong>: la bonificación fija del 15% suele superar lo que ahorrarías
+      rebajando una base imponible ya baja. Si tu tasa marginal es más alta (tramos superiores), el
+      <strong>Régimen B</strong> suele convenir más, porque el ahorro tributario crece junto con tu tasa.
+      <strong>¿Quién puede usarlo?</strong> Cualquier trabajador afiliado al sistema de pensiones —
+      dependiente o independiente (boleta de honorarios) — puede abrir una cuenta de APV en una AFP, un
+      banco, una administradora de fondos mutuos o una compañía de seguros autorizada; no depende del tipo
+      de contrato. Puedes combinar ambos regímenes en distintas cuentas si quieres optimizar según tu
+      situación tributaria.
     </div>
     <div class="tool-box">
       <div class="field-grid">
