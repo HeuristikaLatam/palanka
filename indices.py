@@ -414,20 +414,117 @@ def calcular_costos_kanasta(precios_por_producto):
     return costo_por_region, costo_nacional, productos_con_precio_nacional
 
 
-def actualizar_historial_kanasta(historial, costo_nacional_hoy):
+def actualizar_historial_kanasta(historial, valor_hoy):
     """Un punto por día — si corre 2 veces el mismo día, reemplaza el
     punto en vez de duplicarlo (mismo patrón que el índice de costo de
     vida de indicadores.heuristika.pro). Si hoy no se pudo calcular un
-    costo nacional (ODEPA no respondió o no hay datos suficientes), no se
-    agrega ningún punto — mejor un hueco que un cero inventado."""
-    if costo_nacional_hoy is None:
+    valor (falta algún componente en vivo), no se agrega ningún punto —
+    mejor un hueco que un cero inventado. Genérica: sirve tanto para el
+    historial semanal como el mensual."""
+    if valor_hoy is None:
         return historial
     hoy = datetime.now().strftime("%Y-%m-%d")
     if historial and historial[-1]["fecha"] == hoy:
-        historial[-1]["valor"] = costo_nacional_hoy
+        historial[-1]["valor"] = valor_hoy
     else:
-        historial.append({"fecha": hoy, "valor": costo_nacional_hoy})
+        historial.append({"fecha": hoy, "valor": valor_hoy})
     return historial[-90:]
+
+
+# ---------------------------------------------------------------------------
+# Kanasta Semanal y Kanasta Mensual — ampliación de Kanasta Palanka más allá
+# de los alimentos, definida con Felipe el 2026-07-17/18. Familia de
+# referencia: 2 adultos + 2 niños. Quedan fuera arriendo/dividendo y
+# colegio, por decisión explícita.
+#
+# Kanasta Semanal = alimentos (ODEPA, en vivo) + bencina + supermercado otros
+# Kanasta Mensual = (Kanasta Semanal x 4,33 semanas/mes) + cuentas básicas
+#                    + internet/celulares + transporte público
+#
+# Todo lo que no es "alimentos" es un valor de referencia FIJO (no viene de
+# una API), igual que las comisiones AFP — hay que revisarlo cada cierto
+# tiempo, no se actualiza solo. Cada bloque documenta su fuente y fecha.
+# ---------------------------------------------------------------------------
+
+SEMANAS_POR_MES = 4.33
+
+# --- Bencina ---------------------------------------------------------------
+# 16.000 km/año (punto medio del rango familiar 14.000-18.000 km/año) /
+# 52 semanas = ~308 km/semana, / 12,9 km/l (rendimiento mixto real de un
+# auto promedio) = ~24 litros/semana.
+BENCINA_LITROS_SEMANA = 24.0
+
+# palanka.lat no tiene configuradas las credenciales CNE_EMAIL/CNE_PASSWORD
+# (a diferencia de indicadores.heuristika.pro, que sí lee el precio real de
+# la bencina 93 desde la CNE). Mientras no se agregue esa integración acá,
+# este es un precio de referencia fijo de mercado — revisar cada cierto
+# tiempo en https://bencinaenlinea.cl o similar.
+BENCINA_PRECIO_REFERENCIA = 1175.0  # $/litro, referencia jul-2026
+
+# --- Supermercado otros (aseo del hogar) ------------------------------------
+# (clave, nombre, precio_promedio_4_cadenas, duracion_semanas)
+# Precios cotizados por Felipe el 2026-07-18 en Líder/Jumbo/Unimarc/Santa
+# Isabel, promediados. duracion_semanas es un supuesto propio (cuánto le
+# dura el producto a la familia de referencia), no un dato observado.
+SUPERMERCADO_OTROS = [
+    ("papel_higienico", "Papel higiénico Confort Elite (4 rollos)", 3833, 1),
+    ("detergente", "Detergente Omo polvo (2,7 kg)", 8958, 2),
+    ("lavaloza", "Lavaloza (750 ml)", 2440, 3),
+    ("cloro", "Cloro Clorinda gel (1 L)", 2055, 3),
+    ("jabon", "Jabón líquido Ballerina", 1778, 3),
+    ("pasta_dientes", "Pasta de dientes Colgate Triple Acción", 2435, 1),
+    ("shampoo", "Shampoo Familand", 2240, 2),
+    ("bolsas_basura", "Bolsas de basura Virutex negra (10 un)", 1278, 2),
+]
+
+# --- Cuentas básicas (mensual) ---------------------------------------------
+# Luz: 225 kWh/mes (consumo estimado desde electrodomésticos: refrigerador,
+# lavadora, secadora, TV x2, microondas, 6 ampolletas, más margen para
+# hervidor y otros menores). Tarifa BT1, Concepción/CGE, Tramo 4
+# (221-230 kWh), simulada en cuentadelaluz.cl el 2026-07-18: cargo fijo
+# $1.064 + $258/kWh = $59.219.
+CUENTA_LUZ_MES = 59219
+# Agua: 20 m3/mes x $1.400/m3 (dato de mercado aportado por Felipe).
+CUENTA_AGUA_MES = 28000
+# Gas: 22,5 kg/mes (promedio anualizado entre ~15 kg en verano y ~30 kg en
+# invierno) = 1,5 cilindros de 15 kg x $24.500 promedio (rango $23.000-
+# $26.000 cotizado por Felipe).
+CUENTA_GAS_MES = 36750
+
+# --- Internet y celulares (mensual) -----------------------------------------
+# Estimación de mercado (no cotizada contra un proveedor específico): plan
+# wifi hogar estándar + 3 planes celular estándar (2 adultos + 1 hijo).
+INTERNET_WIFI_MES = 17000
+CELULAR_PLAN_MES = 10500
+CELULAR_CANTIDAD_PLANES = 3
+
+# --- Transporte público (semanal, se mensualiza) ----------------------------
+# Tarifa oficial Red Movilidad / Metro Región Metropolitana, vigente desde
+# el 22-feb-2026. Supuesto: la madre vuelve en transporte público de lunes
+# a viernes, 10 pasajes a la semana.
+TRANSPORTE_PUBLICO_TARIFA = 795
+TRANSPORTE_PUBLICO_PASAJES_SEMANA = 10
+
+
+def calcular_bencina_semanal(precio_litro=None):
+    precio = precio_litro if precio_litro is not None else BENCINA_PRECIO_REFERENCIA
+    return round(BENCINA_LITROS_SEMANA * precio)
+
+
+def calcular_supermercado_otros_semanal():
+    return round(sum(precio / duracion for _clave, _nombre, precio, duracion in SUPERMERCADO_OTROS))
+
+
+def calcular_cuentas_basicas_mes():
+    return CUENTA_LUZ_MES + CUENTA_AGUA_MES + CUENTA_GAS_MES
+
+
+def calcular_internet_celular_mes():
+    return INTERNET_WIFI_MES + (CELULAR_PLAN_MES * CELULAR_CANTIDAD_PLANES)
+
+
+def calcular_transporte_publico_mes():
+    return round(TRANSPORTE_PUBLICO_TARIFA * TRANSPORTE_PUBLICO_PASAJES_SEMANA * SEMANAS_POR_MES)
 
 
 def main():
@@ -439,14 +536,34 @@ def main():
         except Exception as e:
             print(f"aviso: no se pudo leer {ARCHIVO_DATOS} previo ({e}), se parte de cero.")
 
-    historial_kanasta = datos_previos.get("kanasta_palanka", {}).get("historial", [])
+    kanasta_previa = datos_previos.get("kanasta_palanka", {})
+    historial_semanal = kanasta_previa.get("semanal", {}).get("historial")
+    if historial_semanal is None:
+        historial_semanal = kanasta_previa.get("historial", [])  # datos.json de antes de la ampliación
+    historial_mensual = kanasta_previa.get("mensual", {}).get("historial", [])
 
     macro = get_mindicador_actual()
     tasa_hipotecaria = get_tasa_hipotecaria_promedio()
 
     precios_kanasta = get_kanasta_palanka_precios()
-    costo_por_region, costo_nacional, productos_con_precio = calcular_costos_kanasta(precios_kanasta)
-    historial_kanasta = actualizar_historial_kanasta(historial_kanasta, costo_nacional)
+    costo_por_region, costo_alimentos, productos_con_precio = calcular_costos_kanasta(precios_kanasta)
+
+    costo_bencina = calcular_bencina_semanal()
+    costo_otros = calcular_supermercado_otros_semanal()
+    costo_semanal_total = (
+        costo_alimentos + costo_bencina + costo_otros if costo_alimentos is not None else None
+    )
+    historial_semanal = actualizar_historial_kanasta(historial_semanal, costo_semanal_total)
+
+    cuentas_basicas_mes = calcular_cuentas_basicas_mes()
+    internet_celular_mes = calcular_internet_celular_mes()
+    transporte_publico_mes = calcular_transporte_publico_mes()
+    costo_mensual_total = (
+        round(costo_semanal_total * SEMANAS_POR_MES) + cuentas_basicas_mes + internet_celular_mes + transporte_publico_mes
+        if costo_semanal_total is not None
+        else None
+    )
+    historial_mensual = actualizar_historial_kanasta(historial_mensual, costo_mensual_total)
 
     kanasta_palanka = {
         "productos": [
@@ -454,10 +571,52 @@ def main():
             for clave, nombre, cantidad, unidad in KANASTA_PALANKA
         ],
         "costo_por_region": costo_por_region,
-        "costo_nacional": costo_nacional,
+        "costo_alimentos": costo_alimentos,
         "productos_con_precio": productos_con_precio,
         "productos_totales": len(KANASTA_PALANKA),
-        "historial": historial_kanasta,
+        "bencina": {
+            "litros_semana": BENCINA_LITROS_SEMANA,
+            "precio_referencia": BENCINA_PRECIO_REFERENCIA,
+            "costo_semana": costo_bencina,
+        },
+        "supermercado_otros": {
+            "items": [
+                {
+                    "clave": clave,
+                    "nombre": nombre,
+                    "precio_promedio": precio,
+                    "duracion_semanas": duracion,
+                    "costo_semana": round(precio / duracion),
+                }
+                for clave, nombre, precio, duracion in SUPERMERCADO_OTROS
+            ],
+            "costo_semana": costo_otros,
+        },
+        "semanal": {
+            "costo_total": costo_semanal_total,
+            "historial": historial_semanal,
+        },
+        "cuentas_basicas": {
+            "luz_mes": CUENTA_LUZ_MES,
+            "agua_mes": CUENTA_AGUA_MES,
+            "gas_mes": CUENTA_GAS_MES,
+            "total_mes": cuentas_basicas_mes,
+        },
+        "internet_celular": {
+            "wifi_mes": INTERNET_WIFI_MES,
+            "celular_mes": CELULAR_PLAN_MES,
+            "cantidad_planes": CELULAR_CANTIDAD_PLANES,
+            "total_mes": internet_celular_mes,
+        },
+        "transporte_publico": {
+            "tarifa": TRANSPORTE_PUBLICO_TARIFA,
+            "pasajes_semana": TRANSPORTE_PUBLICO_PASAJES_SEMANA,
+            "costo_mes": transporte_publico_mes,
+        },
+        "mensual": {
+            "costo_total": costo_mensual_total,
+            "historial": historial_mensual,
+        },
     }
 
     salida = {
