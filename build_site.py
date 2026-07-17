@@ -132,17 +132,33 @@ KANASTA_PALANKA_INFO = [
     ("Fruta de estación", 4.0, "kg"),
 ]
 
-kanasta_costo_nacional = kanasta.get("costo_nacional")
+kanasta_costo_alimentos = kanasta.get("costo_alimentos")
 kanasta_costo_region = kanasta.get("costo_por_region", {})
-kanasta_historial = kanasta.get("historial", [])
 kanasta_productos_con_precio = kanasta.get("productos_con_precio", 0)
 kanasta_productos_totales = kanasta.get("productos_totales", len(KANASTA_PALANKA_INFO))
+
+kanasta_bencina = kanasta.get("bencina", {})
+kanasta_otros = kanasta.get("supermercado_otros", {})
+kanasta_otros_items = kanasta_otros.get("items", [])
+kanasta_cuentas = kanasta.get("cuentas_basicas", {})
+kanasta_internet = kanasta.get("internet_celular", {})
+kanasta_transporte = kanasta.get("transporte_publico", {})
+
+kanasta_semanal = kanasta.get("semanal", {})
+kanasta_semanal_total = kanasta_semanal.get("costo_total")
+kanasta_semanal_historial = kanasta_semanal.get("historial", [])
+
+kanasta_mensual = kanasta.get("mensual", {})
+kanasta_mensual_total = kanasta_mensual.get("costo_total")
+kanasta_mensual_historial = kanasta_mensual.get("historial", [])
+
 
 def _fmt_cantidad(cantidad, unidad):
     if unidad == "un":
         return f"{int(cantidad)} un"
     texto = f"{cantidad:g}".replace(".", ",")
     return f"{texto} {unidad}"
+
 
 kanasta_productos_chips = "".join(
     f"""
@@ -153,10 +169,27 @@ kanasta_productos_html = f"""
       <div class="kanasta-productos-grid">{kanasta_productos_chips}
       </div>"""
 
-kanasta_hoy_val = fmt(kanasta_costo_nacional, "Pesos") if kanasta_costo_nacional else "—"
-kanasta_hoy_sub = (
-    f"{kanasta_productos_con_precio}/{kanasta_productos_totales} productos con precio disponible"
-    if kanasta_costo_nacional
+kanasta_otros_chips = "".join(
+    f"""
+      <div class="kanasta-producto-chip"><span class="nombre">{item['nombre']}</span><span class="cantidad">{fmt(item['costo_semana'], 'Pesos')}/sem</span></div>"""
+    for item in kanasta_otros_items
+) or '<div class="kanasta-chart-empty">Sin datos de supermercado otros.</div>'
+kanasta_otros_html = f"""
+      <div class="kanasta-productos-grid">{kanasta_otros_chips}
+      </div>"""
+
+kanasta_semanal_val = fmt(kanasta_semanal_total, "Pesos") if kanasta_semanal_total else "—"
+kanasta_semanal_sub = (
+    f"Alimentos {fmt(kanasta_costo_alimentos, 'Pesos')} + bencina {fmt(kanasta_bencina.get('costo_semana', 0), 'Pesos')} + "
+    f"aseo {fmt(kanasta_otros.get('costo_semana', 0), 'Pesos')}"
+    if kanasta_semanal_total
+    else "Aún sin datos suficientes de ODEPA"
+)
+
+kanasta_mensual_val = fmt(kanasta_mensual_total, "Pesos") if kanasta_mensual_total else "—"
+kanasta_mensual_sub = (
+    "Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares + transporte público"
+    if kanasta_mensual_total
     else "Aún sin datos suficientes de ODEPA"
 )
 
@@ -174,18 +207,20 @@ if kanasta_costo_region:
 else:
     kanasta_region_html = '<tr><td colspan="3" class="empty">Sin datos por región disponibles todavía — revisa la conexión con ODEPA</td></tr>'
 
-if len(kanasta_historial) >= 2:
-    kanasta_chart_html = '<canvas id="chartKanasta"></canvas>'
-    kanasta_chart_labels = json.dumps([fecha_legible(p["fecha"]) for p in kanasta_historial])
-    kanasta_chart_valores = json.dumps([p["valor"] for p in kanasta_historial])
-    kanasta_chart_js = f"""
+
+def _kanasta_chart_js(canvas_id, historial):
+    if len(historial) >= 2:
+        html = f'<canvas id="{canvas_id}"></canvas>'
+        labels = json.dumps([fecha_legible(p["fecha"]) for p in historial])
+        valores = json.dumps([p["valor"] for p in historial])
+        js = f"""
     (function() {{
-      new Chart(document.getElementById('chartKanasta'), {{
+      new Chart(document.getElementById('{canvas_id}'), {{
         type: 'line',
         data: {{
-          labels: {kanasta_chart_labels},
+          labels: {labels},
           datasets: [{{
-            data: {kanasta_chart_valores},
+            data: {valores},
             borderColor: '#dfa25b',
             backgroundColor: '#dfa25b22',
             borderWidth: 2,
@@ -218,9 +253,25 @@ if len(kanasta_historial) >= 2:
         }}
       }});
     }})();"""
+        return html, js
+    html = '<div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div>'
+    return html, ""
+
+
+kanasta_semanal_chart_html, kanasta_semanal_chart_js = _kanasta_chart_js("chartKanastaSemanal", kanasta_semanal_historial)
+kanasta_mensual_chart_html, kanasta_mensual_chart_js = _kanasta_chart_js("chartKanastaMensual", kanasta_mensual_historial)
+kanasta_chart_js = kanasta_semanal_chart_js + "\n" + kanasta_mensual_chart_js
+
+# Tabla de desglose por categoría de la Kanasta Mensual
+if kanasta_mensual_total:
+    kanasta_semanal_mensualizado = round((kanasta_semanal_total or 0) * 4.33)
+    kanasta_categorias_html = f"""
+        <tr><td>Kanasta Semanal (alimentos + bencina + aseo) x 4,33</td><td>{fmt(kanasta_semanal_mensualizado, 'Pesos')}</td></tr>
+        <tr><td>Cuentas básicas (luz + agua + gas)</td><td>{fmt(kanasta_cuentas.get('total_mes', 0), 'Pesos')}</td></tr>
+        <tr><td>Internet y celulares</td><td>{fmt(kanasta_internet.get('total_mes', 0), 'Pesos')}</td></tr>
+        <tr><td>Transporte público</td><td>{fmt(kanasta_transporte.get('costo_mes', 0), 'Pesos')}</td></tr>"""
 else:
-    kanasta_chart_html = '<div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div>'
-    kanasta_chart_js = ""
+    kanasta_categorias_html = '<tr><td colspan="2" class="empty">Sin datos suficientes todavía</td></tr>'
 
 # ---------------------------------------------------------------------------
 # Opciones de AFP para el <select>
@@ -774,37 +825,71 @@ HTML = f"""<!DOCTYPE html>
     </div>
   </section>
 
-  <section id="alimentos" class="section">
+  <section id="kanasta-semanal" class="section">
     <div class="subhead-box">Kanasta Palanka</div>
-    <h1>Kanasta Palanka</h1>
+    <h1>Kanasta Semanal</h1>
     <div class="section-sub">
-      La Kanasta Palanka es nuestra propia referencia de gasto en alimentos — no es la canasta básica
-      oficial de Chile. Estimamos lo que consumiría en una semana una familia de 2 adultos y 2 niños,
-      con {kanasta_productos_totales} productos típicos de la mesa chilena (detalle abajo). Los precios
-      vienen de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">datos abiertos de ODEPA</a>
-      (Oficina de Estudios y Políticas Agrarias) a nivel de consumidor, best effort según disponibilidad
-      del dato. El costo se expresa en base semanal, pero los precios que lo componen se actualizan a diario.
+      Nuestra propia referencia de gasto semanal — no es la canasta básica oficial de Chile. Estimamos lo
+      que gasta en una semana una familia de 2 adultos y 2 niños en tres cosas: alimentos ({kanasta_productos_totales}
+      productos, precios de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">ODEPA</a>
+      en vivo), bencina ({kanasta_bencina.get('litros_semana', 24):.0f} litros/semana a un precio de referencia
+      fijo, ya que este sitio no tiene acceso en vivo al precio de la CNE) y productos de aseo del hogar
+      (precios promediados en 4 cadenas de supermercado, actualizados a mano). El costo se expresa en base
+      semanal; los precios de alimentos se actualizan a diario, el resto se revisa periódicamente.
       {kanasta_productos_html}
+      {kanasta_otros_html}
     </div>
 
     <div class="kanasta-box">
       <div class="kanasta-col kanasta-hoy">
         <div class="kanasta-col-title">Costo hoy</div>
-        <div class="kanasta-hoy-val">{kanasta_hoy_val}</div>
-        <div class="kanasta-hoy-sub">{kanasta_hoy_sub}</div>
-        <div class="kanasta-hoy-nota">Promedio nacional semanal</div>
+        <div class="kanasta-hoy-val">{kanasta_semanal_val}</div>
+        <div class="kanasta-hoy-sub">{kanasta_semanal_sub}</div>
+        <div class="kanasta-hoy-nota">Total semanal</div>
       </div>
       <div class="kanasta-col kanasta-grafico">
         <div class="kanasta-col-title">Seguimiento</div>
-        <div class="kanasta-chart-wrap">{kanasta_chart_html}</div>
+        <div class="kanasta-chart-wrap">{kanasta_semanal_chart_html}</div>
       </div>
     </div>
 
-    <div class="subhead-box">Detalle por región</div>
+    <div class="subhead-box">Detalle por región (solo alimentos)</div>
     <div class="table-scroll">
       <table class="kanasta-region-table">
         <thead><tr><th>Región</th><th>Costo semanal</th><th>Productos con precio</th></tr></thead>
         <tbody>{kanasta_region_html}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="kanasta-mensual" class="section">
+    <div class="subhead-box">Kanasta Palanka</div>
+    <h1>Kanasta Mensual</h1>
+    <div class="section-sub">
+      Cuánto necesita al mes la misma familia de referencia (2 adultos + 2 niños) para cubrir lo básico,
+      sin contar arriendo/dividendo ni colegio. Es la Kanasta Semanal llevada a base mensual (x 4,33 semanas),
+      más cuentas básicas (luz, agua y gas), internet y celulares, y transporte público — todos estos
+      últimos son valores de referencia fijos, actualizados a mano, no en vivo.
+    </div>
+
+    <div class="kanasta-box">
+      <div class="kanasta-col kanasta-hoy">
+        <div class="kanasta-col-title">Costo hoy</div>
+        <div class="kanasta-hoy-val">{kanasta_mensual_val}</div>
+        <div class="kanasta-hoy-sub">{kanasta_mensual_sub}</div>
+        <div class="kanasta-hoy-nota">Total mensual</div>
+      </div>
+      <div class="kanasta-col kanasta-grafico">
+        <div class="kanasta-col-title">Seguimiento</div>
+        <div class="kanasta-chart-wrap">{kanasta_mensual_chart_html}</div>
+      </div>
+    </div>
+
+    <div class="subhead-box">Desglose por categoría</div>
+    <div class="table-scroll">
+      <table class="kanasta-region-table">
+        <thead><tr><th>Categoría</th><th>Monto mensual</th></tr></thead>
+        <tbody>{kanasta_categorias_html}</tbody>
       </table>
     </div>
   </section>
