@@ -42,7 +42,29 @@ TIPOS_HIPOTECARIO = {
 }
 
 ODEPA_BASE = "https://datos.odepa.gob.cl/api/3/action"
-ODEPA_TERMINOS_BUSQUEDA = ["precios consumidor canasta", "precios al consumidor"]
+
+# ---------------------------------------------------------------------------
+# Kanasta Palanka — canasta de referencia propia (no la canasta básica
+# oficial del INE), pensada para una familia de 2 adultos + 2 niños.
+# Cantidades semanales: estimación referencial nuestra, confirmada por
+# Felipe el 2026-07-17 — no provienen de una encuesta oficial.
+# (clave, nombre, cantidad_semanal, unidad)
+# ---------------------------------------------------------------------------
+KANASTA_PALANKA = [
+    ("pan", "Pan (Marraqueta)", 4.0, "kg"),
+    ("papas", "Papas", 4.0, "kg"),
+    ("cebolla", "Cebolla", 1.0, "kg"),
+    ("tomate", "Tomate", 2.0, "kg"),
+    ("palta", "Palta", 1.0, "kg"),
+    ("pollo", "Pollo entero", 2.0, "kg"),
+    ("vacuno", "Asado de vacuno", 1.5, "kg"),
+    ("huevos", "Huevos", 12, "un"),
+    ("leche", "Leche fluida entera", 5.0, "L"),
+    ("arroz", "Arroz", 1.0, "kg"),
+    ("aceite", "Aceite vegetal", 0.5, "L"),
+    ("legumbres", "Legumbres (porotos)", 1.0, "kg"),
+    ("fruta", "Fruta de estación", 4.0, "kg"),
+]
 
 
 def http_get(url, timeout=25, reintentos=4):
@@ -166,66 +188,189 @@ def get_tasa_hipotecaria_promedio():
 # datos.odepa.gob.cl (CKAN) — precios de alimentos
 # ---------------------------------------------------------------------------
 
-def get_datos_odepa():
-    """Intenta resolver dinámicamente un dataset de precios al consumidor
-    en el portal CKAN de ODEPA y traer su recurso CSV más reciente.
+# ---------------------------------------------------------------------------
+# Kanasta Palanka — precios por producto y región, best-effort.
+#
+# Esto es deliberadamente defensivo: la API de ODEPA no respondió durante
+# las pruebas de este script (posible bloqueo de red desde ese entorno, o
+# que efectivamente no esté disponible), así que TODO lo de acá abajo está
+# protegido con try/except — si algo falla, retorna None y build_site.py
+# omite/deja en blanco lo correspondiente en vez de inventar un precio.
+# Antes de confiar en esta sección, correr una vez con conexión real y
+# revisar qué trae — probablemente haya que ajustar cómo se buscan los
+# datasets y qué columnas se leen en _parsear_precios_por_region.
+# ---------------------------------------------------------------------------
 
-    Esto es best-effort a propósito: la API de ODEPA no respondió durante
-    las pruebas de este script (posible bloqueo de red o cambio de
-    disponibilidad), así que TODO este bloque está protegido — si algo
-    falla, se retorna None y build_site.py omite la sección con gracia.
-    Antes de confiar en esta sección, correr una vez con conexión real y
-    revisar qué trae.
-    """
-    try:
-        dataset_id = None
-        for termino in ODEPA_TERMINOS_BUSQUEDA:
-            url = f"{ODEPA_BASE}/package_search?q={urllib.parse.quote(termino)}"
-            data = http_get_json(url, reintentos=2)
-            resultados = data.get("result", {}).get("results", [])
-            if resultados:
-                dataset_id = resultados[0].get("id") or resultados[0].get("name")
-                break
-        if not dataset_id:
-            print("  aviso ODEPA: no se encontró ningún dataset de precios al consumidor.")
-            return None
-
-        url_pkg = f"{ODEPA_BASE}/package_show?id={dataset_id}"
-        pkg = http_get_json(url_pkg, reintentos=2)
-        recursos = pkg.get("result", {}).get("resources", [])
-        recursos_csv = [
-            r for r in recursos
-            if str(r.get("format", "")).lower() in ("csv", "xlsx")
-        ]
-        if not recursos_csv:
-            print("  aviso ODEPA: el dataset no tiene recursos CSV/XLSX.")
-            return None
-
-        # nos quedamos con el más reciente según su fecha de creación/modificación
-        recursos_csv.sort(key=lambda r: r.get("last_modified") or r.get("created") or "", reverse=True)
-        recurso = recursos_csv[0]
-
-        return {
-            "dataset": pkg.get("result", {}).get("title", dataset_id),
-            "recurso_url": recurso.get("url"),
-            "recurso_nombre": recurso.get("name"),
-            "actualizado": recurso.get("last_modified") or recurso.get("created"),
-        }
-    except Exception as e:
-        print(f"  aviso ODEPA: no se pudo resolver el dataset ({e}). Se omite la sección.")
+def _buscar_dataset_odepa(termino):
+    url = f"{ODEPA_BASE}/package_search?q={urllib.parse.quote(termino)}"
+    data = http_get_json(url, reintentos=2)
+    resultados = data.get("result", {}).get("results", [])
+    if not resultados:
         return None
+    return resultados[0].get("id") or resultados[0].get("name")
+
+
+def _resource_csv_mas_reciente(dataset_id):
+    pkg = http_get_json(f"{ODEPA_BASE}/package_show?id={dataset_id}", reintentos=2)
+    recursos = pkg.get("result", {}).get("resources", [])
+    recursos_csv = [r for r in recursos if str(r.get("format", "")).lower() == "csv"]
+    if not recursos_csv:
+        return None
+    recursos_csv.sort(key=lambda r: r.get("last_modified") or r.get("created") or "", reverse=True)
+    return recursos_csv[0].get("url")
+
+
+def _parsear_precios_por_region(csv_bytes):
+    """Intento genérico de leer un CSV de ODEPA y encontrar una columna de
+    región y una de precio por nombre (no conocemos el esquema real, ver
+    nota arriba). Si no encuentra columnas reconocibles, retorna {}."""
+    import csv
+    import io
+
+    texto = csv_bytes.decode("utf-8", errors="ignore")
+    lector = csv.DictReader(io.StringIO(texto))
+    if not lector.fieldnames:
+        return {}
+
+    col_region = next(
+        (c for c in lector.fieldnames if "region" in c.lower() or "región" in c.lower()), None
+    )
+    col_precio = next((c for c in lector.fieldnames if "precio" in c.lower()), None)
+    if not col_region or not col_precio:
+        return {}
+
+    precios = {}
+    for fila in lector:
+        region = (fila.get(col_region) or "").strip()
+        if not region:
+            continue
+        try:
+            precio = float(str(fila.get(col_precio)).replace(".", "").replace(",", "."))
+        except (TypeError, ValueError):
+            continue
+        precios[region] = precio  # última fila leída para esa región gana (asume orden cronológico)
+    return precios
+
+
+def get_kanasta_palanka_precios():
+    """Best-effort: intenta traer el precio al consumidor por región de
+    cada producto de la Kanasta Palanka. Devuelve un dict
+    clave_producto -> {region: precio_unitario} | None.
+
+    Igual que get_datos_odepa(), esto no se pudo probar contra la API real
+    desde este entorno — revisar una vez desplegado y ajustar el parseo de
+    columnas en _parsear_precios_por_region si hace falta."""
+    resultado = {}
+    for clave, nombre, _cantidad, _unidad in KANASTA_PALANKA:
+        try:
+            dataset_id = _buscar_dataset_odepa(f"precio consumidor {nombre}")
+            if not dataset_id:
+                resultado[clave] = None
+                continue
+            url_csv = _resource_csv_mas_reciente(dataset_id)
+            if not url_csv:
+                resultado[clave] = None
+                continue
+            crudo = http_get(url_csv, reintentos=2)
+            precios_region = _parsear_precios_por_region(crudo)
+            resultado[clave] = precios_region or None
+        except Exception as e:
+            print(f"  aviso Kanasta Palanka ({nombre}): {e}")
+            resultado[clave] = None
+    return resultado
+
+
+def calcular_costos_kanasta(precios_por_producto):
+    """A partir de clave_producto -> {region: precio_unitario} | None,
+    calcula el costo semanal por región y el promedio nacional (promedio
+    de los precios unitarios disponibles entre regiones, por producto)."""
+    regiones = set()
+    for precios in precios_por_producto.values():
+        if precios:
+            regiones.update(precios.keys())
+
+    costo_por_region = {}
+    for region in regiones:
+        total = 0.0
+        productos_con_precio = 0
+        for clave, _nombre, cantidad, _unidad in KANASTA_PALANKA:
+            precios = precios_por_producto.get(clave)
+            precio_region = precios.get(region) if precios else None
+            if precio_region is not None:
+                total += precio_region * cantidad
+                productos_con_precio += 1
+        if productos_con_precio > 0:
+            costo_por_region[region] = {
+                "monto": round(total),
+                "productos_con_precio": productos_con_precio,
+                "productos_totales": len(KANASTA_PALANKA),
+            }
+
+    total_nacional = 0.0
+    productos_con_precio_nacional = 0
+    for clave, _nombre, cantidad, _unidad in KANASTA_PALANKA:
+        precios = precios_por_producto.get(clave)
+        if precios:
+            promedio_unitario = sum(precios.values()) / len(precios)
+            total_nacional += promedio_unitario * cantidad
+            productos_con_precio_nacional += 1
+
+    costo_nacional = round(total_nacional) if productos_con_precio_nacional > 0 else None
+
+    return costo_por_region, costo_nacional, productos_con_precio_nacional
+
+
+def actualizar_historial_kanasta(historial, costo_nacional_hoy):
+    """Un punto por día — si corre 2 veces el mismo día, reemplaza el
+    punto en vez de duplicarlo (mismo patrón que el índice de costo de
+    vida de indicadores.heuristika.pro). Si hoy no se pudo calcular un
+    costo nacional (ODEPA no respondió o no hay datos suficientes), no se
+    agrega ningún punto — mejor un hueco que un cero inventado."""
+    if costo_nacional_hoy is None:
+        return historial
+    hoy = datetime.now().strftime("%Y-%m-%d")
+    if historial and historial[-1]["fecha"] == hoy:
+        historial[-1]["valor"] = costo_nacional_hoy
+    else:
+        historial.append({"fecha": hoy, "valor": costo_nacional_hoy})
+    return historial[-90:]
 
 
 def main():
+    datos_previos = {}
+    if os.path.exists(ARCHIVO_DATOS):
+        try:
+            with open(ARCHIVO_DATOS, "r", encoding="utf-8") as f:
+                datos_previos = json.load(f)
+        except Exception as e:
+            print(f"aviso: no se pudo leer {ARCHIVO_DATOS} previo ({e}), se parte de cero.")
+
+    historial_kanasta = datos_previos.get("kanasta_palanka", {}).get("historial", [])
+
     macro = get_mindicador_actual()
     tasa_hipotecaria = get_tasa_hipotecaria_promedio()
-    odepa = get_datos_odepa()
+
+    precios_kanasta = get_kanasta_palanka_precios()
+    costo_por_region, costo_nacional, productos_con_precio = calcular_costos_kanasta(precios_kanasta)
+    historial_kanasta = actualizar_historial_kanasta(historial_kanasta, costo_nacional)
+
+    kanasta_palanka = {
+        "productos": [
+            {"clave": clave, "nombre": nombre, "cantidad": cantidad, "unidad": unidad}
+            for clave, nombre, cantidad, unidad in KANASTA_PALANKA
+        ],
+        "costo_por_region": costo_por_region,
+        "costo_nacional": costo_nacional,
+        "productos_con_precio": productos_con_precio,
+        "productos_totales": len(KANASTA_PALANKA),
+        "historial": historial_kanasta,
+    }
 
     salida = {
         "generado": datetime.now(timezone.utc).isoformat(),
         "macro": macro,
         "tasa_hipotecaria": tasa_hipotecaria,
-        "odepa": odepa,
+        "kanasta_palanka": kanasta_palanka,
     }
 
     with open(ARCHIVO_DATOS, "w", encoding="utf-8") as f:
