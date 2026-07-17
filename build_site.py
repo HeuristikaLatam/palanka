@@ -144,7 +144,7 @@ def _fmt_cantidad(cantidad, unidad):
     texto = f"{cantidad:g}".replace(".", ",")
     return f"{texto} {unidad}"
 
-kanasta_productos_html = "".join(
+kanasta_productos_filas = "".join(
     f"""
         <tr>
           <td>{nombre}</td>
@@ -152,6 +152,12 @@ kanasta_productos_html = "".join(
         </tr>"""
     for nombre, cantidad, unidad in KANASTA_PALANKA_INFO
 )
+kanasta_productos_html = f"""
+      <table class="kanasta-productos-table">
+        <thead><tr><th>Producto</th><th class="num">Cantidad semanal</th></tr></thead>
+        <tbody>{kanasta_productos_filas}
+        </tbody>
+      </table>"""
 
 kanasta_hoy_val = fmt(kanasta_costo_nacional, "Pesos") if kanasta_costo_nacional else "—"
 kanasta_hoy_sub = (
@@ -166,8 +172,8 @@ if kanasta_costo_region:
         f"""
         <tr>
           <td>{region}</td>
-          <td class="num">{fmt(info['monto'], 'Pesos')}</td>
-          <td class="date-cell">{info['productos_con_precio']}/{info['productos_totales']}</td>
+          <td>{fmt(info['monto'], 'Pesos')}</td>
+          <td>{info['productos_con_precio']}/{info['productos_totales']}</td>
         </tr>"""
         for region, info in filas_region
     )
@@ -336,6 +342,11 @@ HTML = f"""<!DOCTYPE html>
     font-size:11px; color:var(--text); line-height:1.6;
     background:linear-gradient(135deg, rgba(223,162,91,.10), rgba(223,162,91,0));
   }}
+  .validacion-box{{
+    display:none; border:1px solid #e2735f; border-radius:8px; padding:11px 15px; margin-top:14px;
+    font-size:12px; color:#ffcfc5; line-height:1.5;
+    background:linear-gradient(135deg, rgba(226,115,95,.14), rgba(226,115,95,0));
+  }}
 
   .table-scroll{{overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:10px;}}
   .proyeccion-table{{width:100%; border-collapse:collapse; font-size:13px;}}
@@ -361,39 +372,43 @@ HTML = f"""<!DOCTYPE html>
     .field-grid{{grid-template-columns:1fr;}}
   }}
 
+  .kanasta-productos-table{{width:100%; border-collapse:collapse; font-size:12.5px; margin:14px 0 4px;}}
+  .kanasta-productos-table th{{
+    text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); border-bottom:1px solid var(--line); padding:6px 4px;
+  }}
+  .kanasta-productos-table th.num, .kanasta-productos-table td.num{{text-align:right;}}
+  .kanasta-productos-table td{{padding:5px 4px; border-bottom:1px solid var(--line); color:var(--text);}}
+  .kanasta-productos-table td.num{{color:var(--muted); white-space:nowrap;}}
+
   .kanasta-box{{
-    display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:0;
+    display:grid; grid-template-columns:1fr 1.4fr; gap:0;
     background:var(--card); border:1px solid var(--line); border-radius:14px;
     overflow:hidden; margin:18px 0 26px;
   }}
-  .kanasta-col{{padding:22px 20px; display:flex; flex-direction:column;}}
+  .kanasta-col{{padding:26px 24px; display:flex; flex-direction:column;}}
   .kanasta-col + .kanasta-col{{border-left:1px solid var(--line);}}
   .kanasta-col-title{{
     font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
     color:var(--amber); margin-bottom:10px;
   }}
-  .kanasta-desc .kanasta-col-text{{font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:14px;}}
-  .kanasta-productos-table{{width:100%; border-collapse:collapse; font-size:12.5px;}}
-  .kanasta-productos-table td{{padding:4px 0; border-bottom:1px solid var(--line); color:var(--text);}}
-  .kanasta-productos-table td.num{{text-align:right; color:var(--muted); white-space:nowrap;}}
   .kanasta-hoy{{align-items:center; justify-content:center; text-align:center;}}
-  .kanasta-hoy-val{{font-size:38px; font-weight:800; color:var(--amber); line-height:1.1;}}
+  .kanasta-hoy-val{{font-size:42px; font-weight:800; color:var(--amber); line-height:1.1;}}
   .kanasta-hoy-sub{{font-size:12px; color:var(--muted); margin-top:8px;}}
   .kanasta-hoy-nota{{font-size:11px; color:var(--muted); margin-top:14px; text-transform:uppercase; letter-spacing:.06em;}}
   .kanasta-grafico{{justify-content:center;}}
-  .kanasta-chart-wrap{{position:relative; height:180px; width:100%;}}
+  .kanasta-chart-wrap{{position:relative; height:200px; width:100%;}}
   .kanasta-chart-empty{{
     font-size:12.5px; color:var(--muted); text-align:center; padding:24px 8px;
     display:flex; align-items:center; justify-content:center; height:100%;
   }}
   .kanasta-region-table{{width:100%; border-collapse:collapse; font-size:13px; min-width:420px;}}
   .kanasta-region-table th{{
-    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    text-align:center; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
     color:var(--muted); border-bottom:1px solid var(--line); padding:8px 10px;
   }}
-  .kanasta-region-table td{{padding:8px 10px; border-bottom:1px solid var(--line);}}
-  .kanasta-region-table td.num{{text-align:right;}}
-  .kanasta-region-table td.empty{{text-align:center; color:var(--muted);}}
+  .kanasta-region-table td{{padding:8px 10px; border-bottom:1px solid var(--line); text-align:center;}}
+  .kanasta-region-table td.empty{{color:var(--muted);}}
   @media (max-width: 720px){{
     .kanasta-box{{grid-template-columns:1fr;}}
     .kanasta-col + .kanasta-col{{border-left:none; border-top:1px solid var(--line);}}
@@ -471,6 +486,7 @@ HTML = f"""<!DOCTYPE html>
           <label for="dep-indefinido" style="margin:0;">Contrato indefinido (aplica seguro de cesantía del trabajador, 0,6%)</label>
         </div>
         <button class="btn" onclick="calcularDependiente()">Calcular líquido</button>
+        <div class="validacion-box" id="dep-validacion"></div>
 
         <div class="resultado" id="dep-resultado">
           <div class="resultado-destacado" id="dep-liquido"></div>
@@ -498,6 +514,7 @@ HTML = f"""<!DOCTYPE html>
           </div>
         </div>
         <button class="btn" onclick="calcularBoleta()">Calcular retención</button>
+        <div class="validacion-box" id="bol-validacion"></div>
 
         <div class="resultado" id="bol-resultado">
           <div class="resultado-destacado" id="bol-liquido"></div>
@@ -563,6 +580,7 @@ HTML = f"""<!DOCTYPE html>
         </div>
       </div>
       <button class="btn" onclick="calcularInversionInmobiliaria()">Analizar inversión</button>
+      <div class="validacion-box" id="avc-validacion"></div>
 
       <div class="resultado" id="avc-resultado">
         <div class="resultado-grid">
@@ -598,7 +616,15 @@ HTML = f"""<!DOCTYPE html>
   <section id="inversion" class="section">
     <div class="subhead-box">Simulador</div>
     <h1>Aportes periódicos (DCA)</h1>
-    <div class="section-sub">Cuánto podrías acumular aportando un monto fijo cada mes.</div>
+    <div class="section-sub">
+      Cuánto podrías acumular aportando un monto fijo cada mes. <strong>DCA</strong> (Dollar-Cost Averaging,
+      o "promedio de costo en dólares", aunque en Chile se aplica igual en pesos o UF) es la estrategia de
+      invertir un monto fijo de forma regular — por ejemplo, cada mes — sin importar si el precio del
+      instrumento subió o bajó ese período. Al comprar siempre el mismo monto, terminas comprando más
+      cuotas cuando el precio está bajo y menos cuando está alto, lo que suaviza tu costo promedio de compra
+      en el tiempo y evita el intento (casi siempre fallido) de acertar el momento perfecto para invertir.
+      Es la lógica detrás de los aportes automáticos a fondos mutuos, APV o ahorro programado.
+    </div>
     <div class="tool-box">
       <div class="field-grid">
         <div class="field">
@@ -615,6 +641,7 @@ HTML = f"""<!DOCTYPE html>
         </div>
       </div>
       <button class="btn" onclick="calcularDCA()">Proyectar</button>
+      <div class="validacion-box" id="dca-validacion"></div>
 
       <div class="resultado" id="dca-resultado">
         <div class="resultado-destacado" id="dca-final"></div>
@@ -631,6 +658,75 @@ HTML = f"""<!DOCTYPE html>
     </div>
   </section>
 
+  <section id="apv" class="section">
+    <div class="subhead-box">Simulador</div>
+    <h1>Ahorro Previsional Voluntario (APV)</h1>
+    <div class="section-sub">
+      Proyecta cuánto podrías acumular en tu cuenta de APV según el régimen tributario que elijas.
+      <strong>Régimen A</strong>: el Estado bonifica el 15% de tu ahorro anual, con tope de 6 UTM al año.
+      <strong>Régimen B</strong>: tus aportes rebajan tu base imponible (menos impuesto a la renta), con
+      tope de 600 UF al año (50 UF al mes si el descuento es por planilla).
+    </div>
+    <div class="tool-box">
+      <div class="field-grid">
+        <div class="field">
+          <label for="apv-monto">Aporte mensual (CLP)</label>
+          <input type="number" id="apv-monto" placeholder="ej. 100000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label for="apv-regimen">Régimen</label>
+          <select id="apv-regimen" onchange="toggleApvMarginal()">
+            <option value="A">Régimen A (bonificación 15%)</option>
+            <option value="B">Régimen B (rebaja base imponible)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="apv-edad">Edad actual</label>
+          <input type="number" id="apv-edad" placeholder="ej. 35" min="18" max="80" step="1">
+        </div>
+        <div class="field">
+          <label for="apv-jubilacion">Edad de jubilación estimada</label>
+          <input type="number" id="apv-jubilacion" value="65" min="19" max="90" step="1">
+        </div>
+        <div class="field">
+          <label for="apv-retorno">Retorno anual esperado (%)</label>
+          <input type="number" id="apv-retorno" placeholder="ej. 5" step="0.1">
+        </div>
+        <div class="field">
+          <label for="apv-uf">UF del día</label>
+          <input type="number" id="apv-uf" value="{uf_valor if uf_valor else ''}" step="0.01">
+        </div>
+        <div class="field">
+          <label for="apv-utm">UTM del mes</label>
+          <input type="number" id="apv-utm" value="{utm_valor if utm_valor else ''}" step="1">
+        </div>
+        <div class="field" id="apv-marginal-field" style="display:none;">
+          <label for="apv-marginal">Tasa marginal de impuesto estimada (%)</label>
+          <input type="number" id="apv-marginal" placeholder="ej. 13.5" min="0" max="40" step="0.1">
+        </div>
+      </div>
+      <button class="btn" onclick="calcularAPV()">Proyectar APV</button>
+      <div class="validacion-box" id="apv-validacion"></div>
+
+      <div class="resultado" id="apv-resultado">
+        <div class="resultado-destacado" id="apv-total"></div>
+        <div class="resultado-nota">Total estimado al momento de jubilar</div>
+        <div class="resultado-grid">
+          <div class="resultado-item"><div class="resultado-item-label">Total aportado</div><div class="resultado-item-val" id="apv-aportado"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Ganancia por rentabilidad</div><div class="resultado-item-val" id="apv-ganancia"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label" id="apv-bono-label">Bonificación estatal acumulada</div><div class="resultado-item-val" id="apv-bono-val"></div></div>
+        </div>
+        <div class="resultado-nota" id="apv-nota-regimen"></div>
+        <div class="resultado-nota">
+          Simulación educativa con interés compuesto y rentabilidad constante — no reemplaza una proyección de
+          pensión oficial ni considera comisiones de la administradora, inflación, cambios de tasa, ni la
+          modalidad de pensión (retiro programado, renta vitalicia, etc). Topes verificados en
+          Superintendencia de Pensiones y SII, julio 2026.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="alimentos" class="section">
     <div class="subhead-box">Kanasta Palanka</div>
     <h1>Kanasta Palanka</h1>
@@ -641,20 +737,10 @@ HTML = f"""<!DOCTYPE html>
       vienen de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">datos abiertos de ODEPA</a>
       (Oficina de Estudios y Políticas Agrarias) a nivel de consumidor, best effort según disponibilidad
       del dato. El costo se expresa en base semanal, pero los precios que lo componen se actualizan a diario.
+      {kanasta_productos_html}
     </div>
 
     <div class="kanasta-box">
-      <div class="kanasta-col kanasta-desc">
-        <div class="kanasta-col-title">¿Qué es?</div>
-        <div class="kanasta-col-text">
-          Una canasta de referencia propia de Palanka: {kanasta_productos_totales} productos y las
-          cantidades semanales estimadas para una familia de 2 adultos y 2 niños en Chile.
-        </div>
-        <table class="kanasta-productos-table">
-          <tbody>{kanasta_productos_html}
-          </tbody>
-        </table>
-      </div>
       <div class="kanasta-col kanasta-hoy">
         <div class="kanasta-col-title">Costo hoy</div>
         <div class="kanasta-hoy-val">{kanasta_hoy_val}</div>
@@ -702,6 +788,18 @@ function clp(n) {{
   return '$' + Math.round(n).toLocaleString('es-CL');
 }}
 
+function mostrarValidacion(id, faltantes) {{
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = 'Te falta un dato: completa ' + faltantes.join(', ') + ' antes de calcular.';
+  el.style.display = 'block';
+}}
+
+function ocultarValidacion(id) {{
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'none';
+}}
+
 function cambiarTab(tab) {{
   document.querySelectorAll('.tab-btn').forEach(function(b) {{
     b.classList.toggle('active', b.dataset.tab === tab);
@@ -736,13 +834,21 @@ function calcularDependiente() {{
   const utm = parseFloat(document.getElementById('dep-utm').value);
   const indefinido = document.getElementById('dep-indefinido').checked;
   const esIsapre = document.getElementById('dep-salud-tipo').value === 'isapre';
-  const planIsapreUf = parseFloat(document.getElementById('dep-isapre-uf').value) || 0;
+  const planIsapreUf = parseFloat(document.getElementById('dep-isapre-uf').value);
   const resultadoBox = document.getElementById('dep-resultado');
 
-  if (!bruto || bruto <= 0 || !uf || !utm) {{
+  const faltantes = [];
+  if (!bruto || bruto <= 0) faltantes.push('el sueldo bruto mensual');
+  if (!uf) faltantes.push('la UF del día');
+  if (!utm) faltantes.push('la UTM del mes');
+  if (esIsapre && (isNaN(planIsapreUf) || planIsapreUf <= 0)) faltantes.push('el valor del plan Isapre pactado');
+
+  if (faltantes.length > 0) {{
+    mostrarValidacion('dep-validacion', faltantes);
     resultadoBox.classList.remove('show');
     return;
   }}
+  ocultarValidacion('dep-validacion');
 
   const topeImponible = TOPE_IMPONIBLE_UF * uf;
   const topeCesantia = TOPE_CESANTIA_UF * uf;
@@ -779,9 +885,11 @@ function calcularBoleta() {{
   const bruto = parseFloat(document.getElementById('bol-bruto').value);
   const resultadoBox = document.getElementById('bol-resultado');
   if (!bruto || bruto <= 0) {{
+    mostrarValidacion('bol-validacion', ['el monto bruto de la boleta']);
     resultadoBox.classList.remove('show');
     return;
   }}
+  ocultarValidacion('bol-validacion');
   const retencion = bruto * (RETENCION_BOLETA_PCT / 100);
   const liquido = bruto - retencion;
   document.getElementById('bol-liquido').textContent = clp(liquido);
@@ -809,10 +917,20 @@ function calcularInversionInmobiliaria() {{
   const uf = parseFloat(document.getElementById('avc-uf').value);
   const resultadoBox = document.getElementById('avc-resultado');
 
-  if (!precioUf || !piePct || !tasaAnual || !anios || !arriendo || !uf) {{
+  const faltantes = [];
+  if (!precioUf || precioUf <= 0) faltantes.push('el precio de la propiedad');
+  if (!piePct || piePct <= 0) faltantes.push('el pie (%)');
+  if (!tasaAnual) faltantes.push('la tasa anual del crédito');
+  if (!anios || anios <= 0) faltantes.push('el plazo del crédito');
+  if (!arriendo || arriendo <= 0) faltantes.push('el arriendo mensual esperado');
+  if (!uf) faltantes.push('la UF del día');
+
+  if (faltantes.length > 0) {{
+    mostrarValidacion('avc-validacion', faltantes);
     resultadoBox.classList.remove('show');
     return;
   }}
+  ocultarValidacion('avc-validacion');
 
   const pieUf = precioUf * (piePct / 100);
   const montoFinanciadoUf = precioUf - pieUf;
@@ -922,10 +1040,16 @@ function calcularDCA() {{
   const anios = parseFloat(document.getElementById('dca-anios').value);
   const resultadoBox = document.getElementById('dca-resultado');
 
-  if (!aporte || aporte <= 0 || !anios || anios <= 0) {{
+  const faltantes = [];
+  if (!aporte || aporte <= 0) faltantes.push('el aporte mensual');
+  if (!anios || anios <= 0) faltantes.push('los años');
+
+  if (faltantes.length > 0) {{
+    mostrarValidacion('dca-validacion', faltantes);
     resultadoBox.classList.remove('show');
     return;
   }}
+  ocultarValidacion('dca-validacion');
 
   const n = anios * 12;
   const iMensual = (tasaAnual || 0) / 100 / 12;
@@ -941,6 +1065,85 @@ function calcularDCA() {{
   document.getElementById('dca-final').textContent = clp(valorFinal);
   document.getElementById('dca-aportado').textContent = clp(totalAportado);
   document.getElementById('dca-ganancia').textContent = clp(ganancia);
+  resultadoBox.classList.add('show');
+}}
+
+function toggleApvMarginal() {{
+  const esB = document.getElementById('apv-regimen').value === 'B';
+  document.getElementById('apv-marginal-field').style.display = esB ? 'block' : 'none';
+}}
+
+function calcularAPV() {{
+  const monto = parseFloat(document.getElementById('apv-monto').value);
+  const regimen = document.getElementById('apv-regimen').value;
+  const edad = parseFloat(document.getElementById('apv-edad').value);
+  const jubilacion = parseFloat(document.getElementById('apv-jubilacion').value);
+  const retorno = parseFloat(document.getElementById('apv-retorno').value);
+  const uf = parseFloat(document.getElementById('apv-uf').value);
+  const utm = parseFloat(document.getElementById('apv-utm').value);
+  const marginal = parseFloat(document.getElementById('apv-marginal').value);
+  const resultadoBox = document.getElementById('apv-resultado');
+
+  const faltantes = [];
+  if (!monto || monto <= 0) faltantes.push('el aporte mensual');
+  if (!edad || edad <= 0) faltantes.push('tu edad actual');
+  if (!jubilacion || jubilacion <= edad) faltantes.push('una edad de jubilación mayor a tu edad actual');
+  if (!uf) faltantes.push('la UF del día');
+  if (!utm) faltantes.push('la UTM del mes');
+  if (regimen === 'B' && (isNaN(marginal) || marginal < 0)) faltantes.push('la tasa marginal de impuesto estimada');
+
+  if (faltantes.length > 0) {{
+    mostrarValidacion('apv-validacion', faltantes);
+    resultadoBox.classList.remove('show');
+    return;
+  }}
+  ocultarValidacion('apv-validacion');
+
+  const anios = jubilacion - edad;
+  const n = anios * 12;
+  const iMensual = (retorno || 0) / 100 / 12;
+  let totalAportes;
+  if (iMensual === 0) {{
+    totalAportes = monto * n;
+  }} else {{
+    totalAportes = monto * ((Math.pow(1 + iMensual, n) - 1) / iMensual);
+  }}
+  const totalAportado = monto * n;
+  const aporteAnual = monto * 12;
+
+  let bonoProyectado = 0;
+  let notaRegimen = '';
+
+  if (regimen === 'A') {{
+    const topeBonoAnual = 6 * utm;
+    const bonoAnual = Math.min(aporteAnual * 0.15, topeBonoAnual);
+    const iAnual = Math.pow(1 + iMensual, 12) - 1;
+    bonoProyectado = iAnual === 0 ? bonoAnual * anios : bonoAnual * ((Math.pow(1 + iAnual, anios) - 1) / iAnual);
+    document.getElementById('apv-bono-label').textContent = 'Bonificación estatal acumulada (proyectada)';
+    document.getElementById('apv-bono-val').textContent = clp(bonoProyectado);
+    const aporteMensualParaTope = (topeBonoAnual / 0.15) / 12;
+    notaRegimen = 'Régimen A: el Estado bonifica el 15% de tu aporte anual, con tope de 6 UTM al año (' +
+      clp(topeBonoAnual) + ' hoy). Para llegar al tope máximo necesitas aportar aproximadamente ' +
+      clp(aporteMensualParaTope) + ' al mes.';
+  }} else {{
+    const topeAnualClp = 600 * uf;
+    const aporteAnualTopado = Math.min(aporteAnual, topeAnualClp);
+    const ahorroTributarioAnual = aporteAnualTopado * (marginal / 100);
+    bonoProyectado = ahorroTributarioAnual * anios;
+    document.getElementById('apv-bono-label').textContent = 'Ahorro tributario acumulado (estimado, no invertido)';
+    document.getElementById('apv-bono-val').textContent = clp(bonoProyectado);
+    notaRegimen = 'Régimen B: tus aportes rebajan tu base imponible hasta un tope de 600 UF al año (' +
+      clp(topeAnualClp) + ' hoy). El ahorro tributario estimado usa la tasa marginal que ingresaste y no ' +
+      'asume que ese ahorro se reinvierta (a diferencia del Régimen A, acá no es un depósito adicional en tu cuenta).';
+  }}
+
+  const totalFinal = regimen === 'A' ? totalAportes + bonoProyectado : totalAportes;
+  const ganancia = totalAportes - totalAportado;
+
+  document.getElementById('apv-total').textContent = clp(totalFinal);
+  document.getElementById('apv-aportado').textContent = clp(totalAportado);
+  document.getElementById('apv-ganancia').textContent = clp(ganancia);
+  document.getElementById('apv-nota-regimen').textContent = notaRegimen;
   resultadoBox.classList.add('show');
 }}
 
