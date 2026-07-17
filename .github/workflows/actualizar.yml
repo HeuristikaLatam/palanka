@@ -1,0 +1,41 @@
+name: Actualizar panel financiero
+
+on:
+  schedule:
+    # Objetivo: 5:00 AM y 5:00 PM hora de Chile continental, todos los días.
+    - cron: "0 8 * * *"   # 5:00 AM Chile (horario de verano, UTC-3)
+    - cron: "0 9 * * *"   # 5:00 AM Chile (horario de invierno, UTC-4)
+    - cron: "0 20 * * *"  # 5:00 PM Chile (horario de verano, UTC-3)
+    - cron: "0 21 * * *"  # 5:00 PM Chile (horario de invierno, UTC-4)
+  workflow_dispatch: {}  # permite correrlo manualmente desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Descargar datos
+        env:
+          CMF_API_KEY: ${{ secrets.CMF_API_KEY }}
+        run: python3 indices.py
+
+      - name: Generar sitio
+        run: python3 build_site.py
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add datos.json index.html
+          git diff --quiet --cached || git commit -m "Actualiza panel financiero $(date -u +%Y-%m-%d)"
+          git push
