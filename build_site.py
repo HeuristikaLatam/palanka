@@ -293,6 +293,45 @@ utm_valor = macro.get("utm", {}).get("valor")
 tasa_hip_valor = tasa_hip["valor"] if tasa_hip else 4.8  # referencia si no hay datos CMF
 
 # ---------------------------------------------------------------------------
+# Diagnóstico "¿Cómo están tus finanzas personales?" — 8 preguntas, formato
+# nunca/a veces/siempre (0/1/2 puntos). El área con puntaje más bajo es la
+# "más desatendida"; en caso de empate manda DIAGNOSTICO_PRIORIDAD (definida
+# con Felipe el 2026-07-18: deudas y fondo de emergencia primero, por ser
+# las más urgentes de resolver).
+# ---------------------------------------------------------------------------
+
+DIAGNOSTICO_PREGUNTAS = [
+    ("emergencia", "Fondo de emergencia", "¿Apartas algo de plata cada mes para tener un colchón de emergencia?"),
+    ("deudas", "Deudas", "¿Tus deudas (tarjetas, créditos) las pagas sin generar intereses por atraso?"),
+    ("orden", "Orden de dinero", "¿Tienes una idea clara de en qué se te va la plata cada mes?"),
+    ("inversion", "Ahorro e inversión", "¿Haces crecer tu plata con algo más que la cuenta corriente (depósitos, fondos, acciones)?"),
+    ("apv", "Jubilación / APV", "¿Has hecho algo por tu jubilación además de la cotización obligatoria?"),
+    ("seguros", "Seguros", "¿Tienes en regla tus seguros básicos (salud, vida si tienes dependientes, hogar)?"),
+    ("metas", "Metas financieras", "¿Tienes alguna meta financiera con monto y fecha (no solo \"ahorrar más\")?"),
+    ("educacion", "Educación financiera", "¿Te informas sobre finanzas personales más allá de lo que te exige el día a día?"),
+]
+
+DIAGNOSTICO_PRIORIDAD = ["deudas", "emergencia", "orden", "inversion", "apv", "seguros", "metas", "educacion"]
+
+DIAGNOSTICO_RESULTADOS = {
+    "emergencia": "Tu colchón de emergencia necesita cariño. No se trata de tener guardada una fortuna — partir con lo que puedas, cada mes, ya hace una diferencia enorme el día que algo se complica.",
+    "deudas": "Ojo con tus deudas — no es un reto, es solo una alerta amigable: los intereses por atraso son de los gastos más caros y silenciosos que existen. No hace falta resolverlo todo hoy, pero sí vale la pena anotar qué debes, a quién y a qué tasa, para no perderle la pista.",
+    "orden": "Te falta un poco de orden con la plata del día a día. No hace falta anotar cada peso — basta con tener una idea clara de en qué se te va el mes, para decidir con más tranquilidad.",
+    "inversion": "Tu plata está durmiendo. Dejarla quieta en la cuenta corriente significa que va perdiendo valor con el tiempo — no hace falta ser experto para empezar con algo simple y de a poco.",
+    "apv": "Tu jubilación te está esperando. La cotización obligatoria sola, para la mayoría, no alcanza — vale la pena mirar el simulador de APV de este panel y ver qué opciones tienes.",
+    "seguros": "Sería bueno revisar tus seguros. No es para asustarte, pero un imprevisto de salud o un accidente sin cobertura puede cambiarte los planes de un día para otro.",
+    "metas": "Te falta ponerle nombre y fecha a tus metas. \"Ahorrar más\" es difícil de lograr porque es difícil de medir — un monto y una fecha hacen todo mucho más concreto.",
+    "educacion": "Te vendría bien informarte un poco más sobre tus finanzas. No hace falta ser experto, pero entender lo básico (tasas, inflación, cómo funciona tu AFP) te da más control sobre tus decisiones.",
+}
+
+diagnostico_preguntas_js = json.dumps(
+    [{"clave": clave, "area": area, "pregunta": pregunta} for clave, area, pregunta in DIAGNOSTICO_PREGUNTAS],
+    ensure_ascii=False,
+)
+diagnostico_prioridad_js = json.dumps(DIAGNOSTICO_PRIORIDAD, ensure_ascii=False)
+diagnostico_resultados_js = json.dumps(DIAGNOSTICO_RESULTADOS, ensure_ascii=False)
+
+# ---------------------------------------------------------------------------
 # HTML
 # ---------------------------------------------------------------------------
 
@@ -480,6 +519,28 @@ HTML = f"""<!DOCTYPE html>
   .cat-pct{{font-size:11px; color:var(--muted); margin-top:2px;}}
   .cat-bar{{height:8px; border-radius:4px; background:var(--bg); overflow:hidden;}}
   .cat-bar-fill{{height:100%; border-radius:4px; background:linear-gradient(90deg, #b9793a, #dfa25b, #f0c98a);}}
+
+  .diag-progreso-wrap{{margin-bottom:22px;}}
+  .diag-progreso-bar{{height:6px; border-radius:3px; background:var(--bg); overflow:hidden;}}
+  .diag-progreso-fill{{height:100%; border-radius:3px; background:var(--amber); transition:width .3s ease;}}
+  .diag-progreso-label{{font-size:11px; color:var(--muted); margin-top:8px; text-align:center;}}
+  .diag-pregunta{{font-size:18px; font-weight:700; color:var(--text); text-align:center; margin:10px 0 24px; line-height:1.4;}}
+  .diag-opciones{{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}}
+  .diag-opcion-btn{{
+    flex:1 1 140px; background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    padding:14px 12px; font-size:13px; font-weight:600; color:var(--text); cursor:pointer;
+    font-family:inherit; transition:border-color .15s ease, color .15s ease;
+  }}
+  .diag-opcion-btn:hover{{border-color:var(--amber); color:var(--amber);}}
+  .diag-resultado-titulo{{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); text-align:center;}}
+  .diag-resultado-area{{font-size:26px; font-weight:800; color:var(--amber); text-align:center; margin:8px 0 16px;}}
+  .diag-resultado-texto{{font-size:14px; color:var(--text); line-height:1.6; text-align:center; max-width:520px; margin:0 auto 22px;}}
+  #diag-resultado-box{{display:flex; flex-direction:column; align-items:center;}}
+  #diag-resultado-box .btn{{margin-top:0;}}
+  @media (max-width: 480px){{
+    .diag-opcion-btn{{flex:1 1 100%;}}
+    #diag-resultado-box .btn-secondary{{margin-left:0 !important; margin-top:10px;}}
+  }}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
 </head>
@@ -832,6 +893,39 @@ HTML = f"""<!DOCTYPE html>
           modalidad de pensión (retiro programado, renta vitalicia, etc). Topes verificados en
           Superintendencia de Pensiones y SII, julio 2026.
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostico" class="section">
+    <div class="subhead-box">Diagnóstico</div>
+    <h1>¿Cómo están tus finanzas personales?</h1>
+    <div class="section-sub">
+      8 preguntas rápidas para ver qué parte de tus finanzas está más desatendida. Sin juzgar — es solo un
+      punto de partida.
+    </div>
+    <div class="tool-box">
+      <div id="diag-progreso-wrap" class="diag-progreso-wrap">
+        <div class="diag-progreso-bar"><div class="diag-progreso-fill" id="diag-progreso-fill"></div></div>
+        <div class="diag-progreso-label" id="diag-progreso-label">Pregunta 1 de 8</div>
+      </div>
+
+      <div id="diag-pregunta-box">
+        <div class="diag-pregunta" id="diag-pregunta-texto"></div>
+        <div class="diag-opciones">
+          <button class="diag-opcion-btn" data-valor="0" onclick="responderDiagnostico(0)">Nunca</button>
+          <button class="diag-opcion-btn" data-valor="1" onclick="responderDiagnostico(1)">A veces</button>
+          <button class="diag-opcion-btn" data-valor="2" onclick="responderDiagnostico(2)">Siempre</button>
+        </div>
+        <button class="btn-secondary btn" id="diag-atras-btn" onclick="atrasDiagnostico()" style="display:none; margin-top:14px;">Volver a la pregunta anterior</button>
+      </div>
+
+      <div id="diag-resultado-box" style="display:none;">
+        <div class="diag-resultado-titulo">Tu área más desatendida:</div>
+        <div class="diag-resultado-area" id="diag-resultado-area"></div>
+        <div class="diag-resultado-texto" id="diag-resultado-texto"></div>
+        <a class="btn" id="diag-resultado-cta" href="https://palanka.lat/librospalanka" target="_blank" rel="noopener">Ver libros de Palanka</a>
+        <button class="btn-secondary btn" onclick="reiniciarDiagnostico()" style="margin-left:10px;">Volver a hacer el test</button>
       </div>
     </div>
   </section>
@@ -1276,6 +1370,69 @@ function calcularAPV() {{
   document.getElementById('apv-nota-regimen').textContent = notaRegimen;
   resultadoBox.classList.add('show');
 }}
+
+const DIAG_PREGUNTAS = {diagnostico_preguntas_js};
+const DIAG_PRIORIDAD = {diagnostico_prioridad_js};
+const DIAG_RESULTADOS = {diagnostico_resultados_js};
+
+let diagIndice = 0;
+let diagRespuestas = [];
+
+function actualizarProgresoDiagnostico() {{
+  const pct = (diagIndice / DIAG_PREGUNTAS.length) * 100;
+  document.getElementById('diag-progreso-fill').style.width = pct + '%';
+  document.getElementById('diag-progreso-label').textContent = 'Pregunta ' + (diagIndice + 1) + ' de ' + DIAG_PREGUNTAS.length;
+}}
+
+function mostrarPreguntaDiagnostico() {{
+  document.getElementById('diag-pregunta-texto').textContent = DIAG_PREGUNTAS[diagIndice].pregunta;
+  document.getElementById('diag-atras-btn').style.display = diagIndice > 0 ? 'inline-block' : 'none';
+  actualizarProgresoDiagnostico();
+}}
+
+function responderDiagnostico(valor) {{
+  diagRespuestas[diagIndice] = valor;
+  diagIndice++;
+  if (diagIndice >= DIAG_PREGUNTAS.length) {{
+    mostrarResultadoDiagnostico();
+  }} else {{
+    mostrarPreguntaDiagnostico();
+  }}
+}}
+
+function atrasDiagnostico() {{
+  if (diagIndice === 0) return;
+  diagIndice--;
+  mostrarPreguntaDiagnostico();
+}}
+
+function mostrarResultadoDiagnostico() {{
+  const puntajes = {{}};
+  DIAG_PREGUNTAS.forEach(function(p, i) {{ puntajes[p.clave] = diagRespuestas[i]; }});
+
+  let minPuntaje = Math.min.apply(null, Object.values(puntajes));
+  let claveGanadora = DIAG_PRIORIDAD.find(function(clave) {{ return puntajes[clave] === minPuntaje; }});
+  if (!claveGanadora) claveGanadora = DIAG_PREGUNTAS[0].clave;
+
+  const areaGanadora = DIAG_PREGUNTAS.find(function(p) {{ return p.clave === claveGanadora; }});
+
+  document.getElementById('diag-pregunta-box').style.display = 'none';
+  document.getElementById('diag-progreso-wrap').style.display = 'none';
+  document.getElementById('diag-resultado-area').textContent = areaGanadora.area;
+  document.getElementById('diag-resultado-texto').textContent = DIAG_RESULTADOS[claveGanadora];
+  document.getElementById('diag-resultado-box').style.display = 'flex';
+}}
+
+function reiniciarDiagnostico() {{
+  diagIndice = 0;
+  diagRespuestas = [];
+  document.getElementById('diag-resultado-box').style.display = 'none';
+  document.getElementById('diag-pregunta-box').style.display = 'block';
+  document.getElementById('diag-progreso-wrap').style.display = 'block';
+  mostrarPreguntaDiagnostico();
+}}
+
+mostrarPreguntaDiagnostico();
 
 {kanasta_chart_js}
 </script>
