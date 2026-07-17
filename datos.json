@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-17T22:10:28.469004+00:00",
+  "generado": "2026-07-17T22:25:43.503751+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,7 +114,7 @@
       }
     ],
     "costo_por_region": {
-      "Biobío": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,12 +129,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -149,7 +144,12 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -225,11 +225,11 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": 129047,
+      "costo_total": 136997,
       "historial": [
         {
           "fecha": "2026-07-17",
-          "valor": 129047
+          "valor": 136997
         }
       ]
     },
@@ -248,14 +248,14 @@
     "transporte_publico": {
       "tarifa": 795,
       "pasajes_semana": 10,
-      "costo_mes": 34424
+      "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": 765667,
+      "costo_total": 765666,
       "historial": [
         {
           "fecha": "2026-07-17",
-          "valor": 765667
+          "valor": 765666
         }
       ]
     }

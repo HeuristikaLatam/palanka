@@ -165,17 +165,23 @@
     font-size:12.5px; color:var(--muted); text-align:center; padding:24px 8px;
     display:flex; align-items:center; justify-content:center; height:100%;
   }
-  .kanasta-region-table{width:100%; border-collapse:collapse; font-size:13px; min-width:420px;}
-  .kanasta-region-table th{
-    text-align:center; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--muted); border-bottom:1px solid var(--line); padding:8px 10px;
-  }
-  .kanasta-region-table td{padding:8px 10px; border-bottom:1px solid var(--line); text-align:center;}
-  .kanasta-region-table td.empty{color:var(--muted);}
   @media (max-width: 720px){
     .kanasta-box{grid-template-columns:1fr;}
     .kanasta-col + .kanasta-col{border-left:none; border-top:1px solid var(--line);}
   }
+
+  .kanasta-categorias{display:flex; flex-direction:column; gap:14px; margin-top:14px;}
+  .cat-row{
+    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+  }
+  .cat-row-top{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:12px;}
+  .cat-label{font-size:15px; font-weight:700; color:var(--text);}
+  .cat-detalle{font-size:11.5px; color:var(--muted); margin-top:3px;}
+  .cat-amount-wrap{text-align:right; flex-shrink:0;}
+  .cat-amount{font-size:20px; font-weight:800; color:var(--amber); font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .cat-pct{font-size:11px; color:var(--muted); margin-top:2px;}
+  .cat-bar{height:8px; border-radius:4px; background:var(--bg); overflow:hidden;}
+  .cat-bar-fill{height:100%; border-radius:4px; background:linear-gradient(90deg, #b9793a, #dfa25b, #f0c98a);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
 </head>
@@ -192,7 +198,7 @@
     </div>
   </div>
   <div class="brand-tagline"><span class="dash"></span>Finanzas personales para chilenos reales<span class="dash"></span></div>
-  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 22:10.</div>
+  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 22:25.</div>
 
   <section id="resumen" class="section">
     <h1>Indicadores del día</h1>
@@ -596,62 +602,14 @@
     <div class="kanasta-box">
       <div class="kanasta-col kanasta-hoy">
         <div class="kanasta-col-title">Costo hoy</div>
-        <div class="kanasta-hoy-val">$129.047</div>
-        <div class="kanasta-hoy-sub">Alimentos $86.250 + bencina $28.200 + aseo $14.597</div>
+        <div class="kanasta-hoy-val">$136.997</div>
+        <div class="kanasta-hoy-sub">Alimentos $86.250 + bencina $28.200 + aseo $14.597 + transporte $7.950</div>
         <div class="kanasta-hoy-nota">Total semanal</div>
       </div>
       <div class="kanasta-col kanasta-grafico">
         <div class="kanasta-col-title">Seguimiento</div>
         <div class="kanasta-chart-wrap"><div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div></div>
       </div>
-    </div>
-
-    <div class="subhead-box">Detalle por región (solo alimentos)</div>
-    <div class="table-scroll">
-      <table class="kanasta-region-table">
-        <thead><tr><th>Región</th><th>Costo semanal</th><th>Productos con precio</th></tr></thead>
-        <tbody>
-        <tr>
-          <td>Arica y Parinacota</td>
-          <td>$89.700</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Biobío</td>
-          <td>$89.700</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Coquimbo</td>
-          <td>$85.500</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Los Lagos</td>
-          <td>$74.700</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Maule</td>
-          <td>$85.500</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Metropolitana</td>
-          <td>$89.700</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Valparaíso</td>
-          <td>$89.700</td>
-          <td>9/13</td>
-        </tr>
-        <tr>
-          <td>Ñuble</td>
-          <td>$85.500</td>
-          <td>9/13</td>
-        </tr></tbody>
-      </table>
     </div>
   </section>
 
@@ -661,15 +619,15 @@
     <div class="section-sub">
       Cuánto necesita al mes la misma familia de referencia (2 adultos + 2 niños) para cubrir lo básico,
       sin contar arriendo/dividendo ni colegio. Es la Kanasta Semanal llevada a base mensual (x 4,33 semanas),
-      más cuentas básicas (luz, agua y gas), internet y celulares, y transporte público — todos estos
-      últimos son valores de referencia fijos, actualizados a mano, no en vivo.
+      más cuentas básicas (luz, agua y gas) e internet y celulares — estos dos últimos son valores de
+      referencia fijos, actualizados a mano, no en vivo.
     </div>
 
     <div class="kanasta-box">
       <div class="kanasta-col kanasta-hoy">
         <div class="kanasta-col-title">Costo hoy</div>
-        <div class="kanasta-hoy-val">$765.667</div>
-        <div class="kanasta-hoy-sub">Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares + transporte público</div>
+        <div class="kanasta-hoy-val">$765.666</div>
+        <div class="kanasta-hoy-sub">Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares</div>
         <div class="kanasta-hoy-nota">Total mensual</div>
       </div>
       <div class="kanasta-col kanasta-grafico">
@@ -679,15 +637,46 @@
     </div>
 
     <div class="subhead-box">Desglose por categoría</div>
-    <div class="table-scroll">
-      <table class="kanasta-region-table">
-        <thead><tr><th>Categoría</th><th>Monto mensual</th></tr></thead>
-        <tbody>
-        <tr><td>Kanasta Semanal (alimentos + bencina + aseo) x 4,33</td><td>$558.774</td></tr>
-        <tr><td>Cuentas básicas (luz + agua + gas)</td><td>$123.969</td></tr>
-        <tr><td>Internet y celulares</td><td>$48.500</td></tr>
-        <tr><td>Transporte público</td><td>$34.424</td></tr></tbody>
-      </table>
+    <div class="kanasta-categorias">
+      <div class="cat-row">
+        <div class="cat-row-top">
+          <div>
+            <div class="cat-label">Kanasta Semanal</div>
+            <div class="cat-detalle">Alimentos + bencina + aseo del hogar + transporte público, x 4,33 semanas</div>
+          </div>
+          <div class="cat-amount-wrap">
+            <div class="cat-amount">$593.197</div>
+            <div class="cat-pct">77%</div>
+          </div>
+        </div>
+        <div class="cat-bar"><div class="cat-bar-fill" style="width:77%;"></div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-row-top">
+          <div>
+            <div class="cat-label">Cuentas básicas</div>
+            <div class="cat-detalle">Luz + agua + gas</div>
+          </div>
+          <div class="cat-amount-wrap">
+            <div class="cat-amount">$123.969</div>
+            <div class="cat-pct">16%</div>
+          </div>
+        </div>
+        <div class="cat-bar"><div class="cat-bar-fill" style="width:16%;"></div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-row-top">
+          <div>
+            <div class="cat-label">Internet y celulares</div>
+            <div class="cat-detalle">Wifi hogar + 3 planes celular</div>
+          </div>
+          <div class="cat-amount-wrap">
+            <div class="cat-amount">$48.500</div>
+            <div class="cat-pct">6%</div>
+          </div>
+        </div>
+        <div class="cat-bar"><div class="cat-bar-fill" style="width:6%;"></div></div>
+      </div>
     </div>
   </section>
 
