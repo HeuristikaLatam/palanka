@@ -1,0 +1,41 @@
+{
+  "generado": "2026-07-17T14:15:04.934050+00:00",
+  "macro": {
+    "uf": {
+      "nombre": "Unidad de fomento (UF)",
+      "unidad": "Pesos",
+      "valor": 40844.79,
+      "fecha": "2026-07-17T04:00:00.000Z"
+    },
+    "dolar": {
+      "nombre": "Dólar observado",
+      "unidad": "Pesos",
+      "valor": 924.5,
+      "fecha": "2026-07-17T04:00:00.000Z"
+    },
+    "utm": {
+      "nombre": "Unidad Tributaria Mensual (UTM)",
+      "unidad": "Pesos",
+      "valor": 71649,
+      "fecha": "2026-07-01T04:00:00.000Z"
+    },
+    "tasa_desempleo": {
+      "nombre": "Tasa de desempleo",
+      "unidad": "Porcentaje",
+      "valor": 9.44,
+      "fecha": "2026-05-01T04:00:00.000Z"
+    }
+  },
+  "tasa_hipotecaria": {
+    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
+    "unidad": "Porcentaje",
+    "valor": 4.26,
+    "fecha": "2026-07-15"
+  },
+  "odepa": {
+    "dataset": "Precios al Consumidor",
+    "recurso_url": "https://datos.odepa.gob.cl/dataset/d4646b7f-0d2e-4567-b6fa-932b1a6bb3f3/resource/9f885df4-afeb-4b75-8bab-9334f79db00f/download/precio_consumidor_2026.csv",
+    "recurso_nombre": "Detalle de Precios Consumidor año 2026",
+    "actualizado": "2026-07-17T13:45:12.420220"
+  }
+}

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Financiero · Palanka</title>
+<style>
+  :root{
+    --bg:#1c2838; --card:#243347; --line:#34465d; --text:#f4f6f8;
+    --muted:#9fb0c3; --amber:#dfa25b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding:32px 24px 60px;
+  }
+  .wrap{max-width:1000px; margin:0 auto;}
+
+  .header{position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:6px;}
+  .header-title{text-align:center;}
+  .page-title{font-size:24px; font-weight:700; letter-spacing:.01em;}
+  .page-title .flag{font-size:20px;}
+  .header-logo{position:absolute; right:0; top:0; display:flex; flex-direction:column; align-items:flex-end; gap:6px;}
+  .brand-mark{
+    width:36px; height:36px; border-radius:50%; background:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:16px; color:var(--bg);
+  }
+  .brand-name{font-size:11px; font-weight:600; letter-spacing:.08em; color:var(--muted);}
+  .brand-tagline{
+    font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+    display:flex; align-items:center; justify-content:center; gap:10px; margin:14px 0 6px;
+  }
+  .brand-tagline .dash{display:inline-block; width:22px; height:1px; background:var(--amber);}
+  .update-note{font-size:11px; color:var(--muted); line-height:1.6; margin-bottom:28px; text-align:center;}
+
+  h1{font-size:14px; font-weight:600; color:var(--muted); text-transform:uppercase;
+     letter-spacing:.08em; margin:0 0 4px;}
+  .section-sub{font-size:12px; color:var(--muted); margin:0 0 18px;}
+  .section{padding:32px 0; border-top:1px solid var(--line);}
+  .section:first-of-type{border-top:none; padding-top:0;}
+
+  .subhead-box{
+    border:1px solid var(--amber); border-radius:8px; padding:8px 14px; margin:0 0 16px;
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--amber);
+    display:inline-block;
+    background:linear-gradient(135deg, rgba(223,162,91,.12), rgba(223,162,91,0));
+  }
+
+  .kpis{display:flex; gap:12px; flex-wrap:wrap;}
+  .kpi{
+    flex:1 1 150px; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+  }
+  .kpi-label{font-size:11px; color:var(--muted); margin-bottom:6px;}
+  .kpi-val{font-size:20px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .kpi-fecha{font-size:10px; color:var(--muted); margin-top:6px;}
+
+  .tool-box{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px;}
+  .field-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:18px;}
+  .field label{display:block; font-size:11px; color:var(--muted); margin-bottom:6px;}
+  .field input, .field select{
+    width:100%; background:var(--bg); border:1px solid var(--line); border-radius:6px;
+    color:var(--text); padding:8px 10px; font-size:14px; font-family:inherit;
+  }
+  .field-check{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text); margin-bottom:14px;}
+
+  .tabs{display:flex; gap:8px; margin-bottom:18px;}
+  .tab-btn{
+    background:var(--bg); border:1px solid var(--line); border-radius:20px;
+    padding:8px 18px; font-size:12px; color:var(--muted); cursor:pointer; font-family:inherit;
+  }
+  .tab-btn.active{border-color:var(--amber); color:var(--amber); font-weight:600;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  .btn{
+    background:var(--amber); color:#1c2838; border:none; border-radius:20px;
+    padding:10px 22px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .btn:hover{opacity:.9;}
+
+  .resultado{margin-top:20px; display:none;}
+  .resultado.show{display:block;}
+  .resultado-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px;}
+  .resultado-item{background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px 14px;}
+  .resultado-item-label{font-size:10px; color:var(--muted); margin-bottom:4px;}
+  .resultado-item-val{font-size:16px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .resultado-destacado{color:var(--amber); font-size:24px; font-weight:800; margin-bottom:4px;}
+  .resultado-nota{font-size:11px; color:var(--muted); margin-top:14px; line-height:1.6;}
+  .aviso-box{
+    border:1px solid var(--amber); border-radius:8px; padding:12px 16px; margin-top:16px;
+    font-size:11px; color:var(--text); line-height:1.6;
+    background:linear-gradient(135deg, rgba(223,162,91,.10), rgba(223,162,91,0));
+  }
+
+  .card-box{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px;}
+  .card-box.placeholder{opacity:.6;}
+  .card-box-title{font-size:13px; font-weight:700; color:var(--amber); margin-bottom:8px;}
+  .card-box-text{font-size:12px; color:var(--muted); line-height:1.6;}
+  .odepa-link{display:inline-block; margin-top:12px; color:var(--amber); font-size:12px; text-decoration:none; font-weight:600;}
+
+  .footer{margin-top:36px; font-size:11px; color:var(--muted); line-height:1.6;}
+  .footer a{color:var(--amber); text-decoration:none;}
+
+  @media (max-width: 480px){
+    body{padding:20px 14px 44px;}
+    .header{flex-direction:column; align-items:center; gap:10px;}
+    .header-logo{position:static; align-items:center;}
+    .page-title{font-size:19px;}
+    .field-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-title">
+      <div class="page-title">Panel Financiero <span class="flag">🇨🇱</span></div>
+    </div>
+    <div class="header-logo">
+      <div class="brand-mark">K</div>
+      <div class="brand-name">PALANKA</div>
+    </div>
+  </div>
+  <div class="brand-tagline"><span class="dash"></span>Finanzas personales para chilenos reales<span class="dash"></span></div>
+  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 14:15.</div>
+
+  <section id="resumen" class="section">
+    <h1>Indicadores del día</h1>
+    <div class="section-sub">UF, dólar y tasa de desempleo — el contexto rápido antes de cualquier decisión.</div>
+    <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">UF</div>
+      <div class="kpi-val">$40.844,79</div>
+      <div class="kpi-fecha">17-07-2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Dólar obs.</div>
+      <div class="kpi-val">$924</div>
+      <div class="kpi-fecha">17-07-2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Desempleo</div>
+      <div class="kpi-val">9.44%</div>
+      <div class="kpi-fecha">01-05-2026</div>
+    </div></div>
+  </section>
+
+  <section id="sueldo" class="section">
+    <div class="subhead-box">Calculadora</div>
+    <h1>Sueldo bruto a líquido</h1>
+    <div class="section-sub">Elige tu situación: contrato de trabajo o boleta de honorarios.</div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="dependiente" onclick="cambiarTab('dependiente')">Contrato (dependiente)</button>
+      <button class="tab-btn" data-tab="boleta" onclick="cambiarTab('boleta')">Boleta de honorarios</button>
+    </div>
+
+    <div class="tool-box">
+      <div class="tab-panel active" id="panel-dependiente">
+        <div class="field-grid">
+          <div class="field">
+            <label for="dep-bruto">Sueldo bruto mensual (CLP)</label>
+            <input type="number" id="dep-bruto" placeholder="ej. 1200000" min="0" step="1000">
+          </div>
+          <div class="field">
+            <label for="dep-afp">AFP</label>
+            <select id="dep-afp"><option value="0.46">AFP Uno (0.46%)</option>
+<option value="0.58">AFP Modelo (0.58%)</option>
+<option value="1.16">AFP PlanVital (1.16%)</option>
+<option value="1.27">AFP Habitat (1.27%)</option>
+<option value="1.44">AFP Capital (1.44%)</option>
+<option value="1.44">AFP Cuprum (1.44%)</option>
+<option value="1.45">AFP ProVida (1.45%)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="dep-uf">UF del día</label>
+            <input type="number" id="dep-uf" value="40844.79" step="0.01">
+          </div>
+          <div class="field">
+            <label for="dep-utm">UTM del mes</label>
+            <input type="number" id="dep-utm" value="71649" step="1">
+          </div>
+        </div>
+        <div class="field-check">
+          <input type="checkbox" id="dep-indefinido" checked>
+          <label for="dep-indefinido" style="margin:0;">Contrato indefinido (aplica seguro de cesantía del trabajador, 0,6%)</label>
+        </div>
+        <button class="btn" onclick="calcularDependiente()">Calcular líquido</button>
+
+        <div class="resultado" id="dep-resultado">
+          <div class="resultado-destacado" id="dep-liquido"></div>
+          <div class="resultado-nota">Líquido a recibir</div>
+          <div class="resultado-grid">
+            <div class="resultado-item"><div class="resultado-item-label">AFP (10% + comisión)</div><div class="resultado-item-val" id="dep-afp-val"></div></div>
+            <div class="resultado-item"><div class="resultado-item-label">Salud (7%)</div><div class="resultado-item-val" id="dep-salud-val"></div></div>
+            <div class="resultado-item"><div class="resultado-item-label">Seguro cesantía</div><div class="resultado-item-val" id="dep-cesantia-val"></div></div>
+            <div class="resultado-item"><div class="resultado-item-label">Impuesto único</div><div class="resultado-item-val" id="dep-impuesto-val"></div></div>
+          </div>
+          <div class="resultado-nota">
+            Cálculo referencial con topes imponibles de 90 UF (AFP y salud) y 135,2 UF (cesantía), y la tabla
+            de Impuesto Único de Segunda Categoría vigente del SII. No incluye APV, cuenta 2, ni convenios
+            de salud sobre el 7% mínimo.
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-boleta">
+        <div class="field-grid">
+          <div class="field">
+            <label for="bol-bruto">Monto bruto de la boleta (CLP)</label>
+            <input type="number" id="bol-bruto" placeholder="ej. 800000" min="0" step="1000">
+          </div>
+        </div>
+        <button class="btn" onclick="calcularBoleta()">Calcular retención</button>
+
+        <div class="resultado" id="bol-resultado">
+          <div class="resultado-destacado" id="bol-liquido"></div>
+          <div class="resultado-nota">Líquido a recibir (después de retención)</div>
+          <div class="resultado-grid">
+            <div class="resultado-item"><div class="resultado-item-label">Retención (15,25%, 2026)</div><div class="resultado-item-val" id="bol-retencion-val"></div></div>
+          </div>
+          <div class="aviso-box">
+            Precauciones: esta retención es un <strong>anticipo de impuesto</strong>, no el impuesto final — se
+            regulariza en tu Declaración de Renta (abril del año siguiente), donde puedes recuperar parte o
+            deber más, según tus ingresos totales del año. Además, hoy una parte de lo retenido también se
+            destina a cotizaciones previsionales obligatorias para los emisores de boleta, salvo que hayas
+            ejercido alguna opción de exclusión — revisa tu caso específico en
+            <a href="https://www.mifuturo.cl" target="_blank" rel="noopener" style="color:inherit;">mifuturo.cl</a>
+            o con tu contador antes de gastar el 100% de este monto.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="arriendo-vs-compra" class="section">
+    <div class="subhead-box">Comparador</div>
+    <h1>Arriendo vs. compra</h1>
+    <div class="section-sub">Proyección a todo el plazo del crédito, con flujo mensual y patrimonio acumulado en ambos escenarios.</div>
+    <div class="tool-box">
+      <div class="field-grid">
+        <div class="field">
+          <label for="avc-precio">Precio de la propiedad (UF)</label>
+          <input type="number" id="avc-precio" placeholder="ej. 4000" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="avc-pie">Pie (%)</label>
+          <input type="number" id="avc-pie" placeholder="ej. 20" min="0" max="100" step="1">
+        </div>
+        <div class="field">
+          <label for="avc-tasa">Tasa anual crédito (%)</label>
+          <input type="number" id="avc-tasa" value="4.26" step="0.01">
+        </div>
+        <div class="field">
+          <label for="avc-plazo">Plazo del crédito (años)</label>
+          <input type="number" id="avc-plazo" placeholder="ej. 25" min="1" step="1">
+        </div>
+        <div class="field">
+          <label for="avc-gastos">Gastos comunes + contribuciones (CLP/mes)</label>
+          <input type="number" id="avc-gastos" placeholder="ej. 120000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label for="avc-arriendo">Arriendo equivalente (CLP/mes)</label>
+          <input type="number" id="avc-arriendo" placeholder="ej. 550000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label for="avc-reajuste">Reajuste UF anual estimado (%)</label>
+          <input type="number" id="avc-reajuste" value="3" step="0.1">
+        </div>
+        <div class="field">
+          <label for="avc-rentabilidad">Rentabilidad alternativa si inviertes en vez de comprar (% anual)</label>
+          <input type="number" id="avc-rentabilidad" value="5" step="0.1">
+        </div>
+        <div class="field">
+          <label for="avc-uf">UF del día</label>
+          <input type="number" id="avc-uf" value="40844.79" step="0.01">
+        </div>
+      </div>
+      <button class="btn" onclick="calcularArriendoVsCompra()">Comparar</button>
+
+      <div class="resultado" id="avc-resultado">
+        <div class="resultado-grid">
+          <div class="resultado-item"><div class="resultado-item-label">Dividendo mensual (comprar)</div><div class="resultado-item-val" id="avc-dividendo"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Flujo mensual total (comprar)</div><div class="resultado-item-val" id="avc-flujo-comprar"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Flujo mensual (arrendar)</div><div class="resultado-item-val" id="avc-flujo-arrendar"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Patrimonio al final del plazo (comprar)</div><div class="resultado-item-val" id="avc-patrimonio-comprar"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Patrimonio al final del plazo (arrendar + invertir)</div><div class="resultado-item-val" id="avc-patrimonio-arrendar"></div></div>
+        </div>
+        <div class="resultado-nota">
+          "Arrendar + invertir" asume que el pie y cualquier diferencia mensual a favor del arriendo se invierten
+          a la rentabilidad alternativa indicada. Cálculo referencial con supuestos simplificados — no considera
+          impuestos a la ganancia de capital, mantención mayor de la propiedad, ni variaciones futuras de tasa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="inversion" class="section">
+    <div class="subhead-box">Simulador</div>
+    <h1>Aportes periódicos (DCA)</h1>
+    <div class="section-sub">Cuánto podrías acumular aportando un monto fijo cada mes.</div>
+    <div class="tool-box">
+      <div class="field-grid">
+        <div class="field">
+          <label for="dca-aporte">Aporte mensual (CLP)</label>
+          <input type="number" id="dca-aporte" placeholder="ej. 150000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label for="dca-tasa">Retorno anual esperado (%)</label>
+          <input type="number" id="dca-tasa" placeholder="ej. 7" step="0.1">
+        </div>
+        <div class="field">
+          <label for="dca-anios">Años</label>
+          <input type="number" id="dca-anios" placeholder="ej. 15" min="1" step="1">
+        </div>
+      </div>
+      <button class="btn" onclick="calcularDCA()">Proyectar</button>
+
+      <div class="resultado" id="dca-resultado">
+        <div class="resultado-destacado" id="dca-final"></div>
+        <div class="resultado-nota">Monto proyectado al final del período</div>
+        <div class="resultado-grid">
+          <div class="resultado-item"><div class="resultado-item-label">Total aportado</div><div class="resultado-item-val" id="dca-aportado"></div></div>
+          <div class="resultado-item"><div class="resultado-item-label">Ganancia estimada</div><div class="resultado-item-val" id="dca-ganancia"></div></div>
+        </div>
+        <div class="resultado-nota">
+          Proyección referencial con interés compuesto y rentabilidad constante — la rentabilidad real de
+          cualquier instrumento varía mes a mes. No es una promesa ni recomendación de inversión.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="alimentos" class="section">
+    <div class="subhead-box">Datos</div>
+    <h1>Precios de alimentos (ODEPA)</h1>
+    <div class="section-sub">Precios agropecuarios de referencia a nivel nacional.</div>
+    
+    <div class="card-box">
+      <div class="card-box-title">Precios al Consumidor</div>
+      <div class="card-box-text">
+        Fuente de datos de precios agropecuarios de ODEPA, actualizada al
+        17-07-2026.
+      </div>
+      <a class="odepa-link" href="https://datos.odepa.gob.cl/dataset/d4646b7f-0d2e-4567-b6fa-932b1a6bb3f3/resource/9f885df4-afeb-4b75-8bab-9334f79db00f/download/precio_consumidor_2026.csv" target="_blank" rel="noopener">Ver datos completos ↗</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    Fuentes: <a href="https://mindicador.cl" target="_blank">mindicador.cl</a> (Banco Central de Chile),
+    <a href="https://api.cmfchile.cl" target="_blank">CMF Bancos</a>,
+    <a href="https://www.sii.cl" target="_blank">SII</a> (tabla de Impuesto Único),
+    <a href="https://www.spensiones.cl" target="_blank">Superintendencia de Pensiones</a> (topes y comisiones AFP) y
+    <a href="https://datos.odepa.gob.cl" target="_blank">ODEPA</a>.
+    Un desarrollo de <a href="https://www.palanka.lat" target="_blank">Palanka</a> — Finanzas personales para
+    chilenos reales. Información con fines educativos, no constituye asesoría legal, tributaria ni financiera
+    personalizada.
+  </div>
+
+</div>
+
+<script>
+const TRAMOS_IMPUESTO_UTM = [[0, 13.5, 0, 0], [13.5, 30, 0.04, 0.54], [30, 50, 0.08, 1.74], [50, 70, 0.135, 4.49], [70, 90, 0.23, 11.14], [90, 120, 0.304, 17.8], [120, 150, 0.35, 23.32], [150, null, 0.4, 30.82]];
+const TOPE_IMPONIBLE_UF = 90.0;
+const TOPE_CESANTIA_UF = 135.2;
+const RETENCION_BOLETA_PCT = 15.25;
+const COTIZACION_AFP_PCT = 10.0;
+const COTIZACION_SALUD_PCT = 7.0;
+const CESANTIA_TRABAJADOR_PCT = 0.6;
+
+function clp(n) {
+  return '$' + Math.round(n).toLocaleString('es-CL');
+}
+
+function cambiarTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  document.querySelectorAll('.tab-panel').forEach(function(p) {
+    p.classList.toggle('active', p.id === 'panel-' + tab);
+  });
+}
+
+function impuestoUnico(baseTributableClp, utm) {
+  if (!utm) return 0;
+  const baseUtm = baseTributableClp / utm;
+  for (const [desde, hasta, factor, rebajaUtm] of TRAMOS_IMPUESTO_UTM) {
+    if (hasta === null || baseUtm <= hasta) {
+      if (baseUtm <= desde && factor === 0) return 0;
+      const impuestoUtm = (baseUtm * factor) - rebajaUtm;
+      return Math.max(0, impuestoUtm * utm);
+    }
+  }
+  return 0;
+}
+
+function calcularDependiente() {
+  const bruto = parseFloat(document.getElementById('dep-bruto').value);
+  const comisionAfp = parseFloat(document.getElementById('dep-afp').value);
+  const uf = parseFloat(document.getElementById('dep-uf').value);
+  const utm = parseFloat(document.getElementById('dep-utm').value);
+  const indefinido = document.getElementById('dep-indefinido').checked;
+  const resultadoBox = document.getElementById('dep-resultado');
+
+  if (!bruto || bruto <= 0 || !uf || !utm) {
+    resultadoBox.classList.remove('show');
+    return;
+  }
+
+  const topeImponible = TOPE_IMPONIBLE_UF * uf;
+  const topeCesantia = TOPE_CESANTIA_UF * uf;
+
+  const imponibleAfpSalud = Math.min(bruto, topeImponible);
+  const imponibleCesantia = Math.min(bruto, topeCesantia);
+
+  const afp = imponibleAfpSalud * ((COTIZACION_AFP_PCT + comisionAfp) / 100);
+  const salud = imponibleAfpSalud * (COTIZACION_SALUD_PCT / 100);
+  const cesantia = indefinido ? imponibleCesantia * (CESANTIA_TRABAJADOR_PCT / 100) : 0;
+
+  const baseTributable = bruto - afp - salud - cesantia;
+  const impuesto = impuestoUnico(baseTributable, utm);
+
+  const liquido = bruto - afp - salud - cesantia - impuesto;
+
+  document.getElementById('dep-liquido').textContent = clp(liquido);
+  document.getElementById('dep-afp-val').textContent = clp(afp);
+  document.getElementById('dep-salud-val').textContent = clp(salud);
+  document.getElementById('dep-cesantia-val').textContent = clp(cesantia);
+  document.getElementById('dep-impuesto-val').textContent = clp(impuesto);
+  resultadoBox.classList.add('show');
+}
+
+function calcularBoleta() {
+  const bruto = parseFloat(document.getElementById('bol-bruto').value);
+  const resultadoBox = document.getElementById('bol-resultado');
+  if (!bruto || bruto <= 0) {
+    resultadoBox.classList.remove('show');
+    return;
+  }
+  const retencion = bruto * (RETENCION_BOLETA_PCT / 100);
+  const liquido = bruto - retencion;
+  document.getElementById('bol-liquido').textContent = clp(liquido);
+  document.getElementById('bol-retencion-val').textContent = clp(retencion);
+  resultadoBox.classList.add('show');
+}
+
+function calcularArriendoVsCompra() {
+  const precioUf = parseFloat(document.getElementById('avc-precio').value);
+  const piePct = parseFloat(document.getElementById('avc-pie').value);
+  const tasaAnual = parseFloat(document.getElementById('avc-tasa').value);
+  const anios = parseFloat(document.getElementById('avc-plazo').value);
+  const gastos = parseFloat(document.getElementById('avc-gastos').value) || 0;
+  const arriendo = parseFloat(document.getElementById('avc-arriendo').value);
+  const reajusteAnual = parseFloat(document.getElementById('avc-reajuste').value) / 100;
+  const rentAlt = parseFloat(document.getElementById('avc-rentabilidad').value) / 100;
+  const uf = parseFloat(document.getElementById('avc-uf').value);
+  const resultadoBox = document.getElementById('avc-resultado');
+
+  if (!precioUf || !piePct || !tasaAnual || !anios || !arriendo || !uf) {
+    resultadoBox.classList.remove('show');
+    return;
+  }
+
+  const pieUf = precioUf * (piePct / 100);
+  const montoFinanciadoUf = precioUf - pieUf;
+  const n = anios * 12;
+  const iMensual = (tasaAnual / 100) / 12;
+
+  let dividendoUf;
+  if (iMensual === 0) {
+    dividendoUf = montoFinanciadoUf / n;
+  } else {
+    dividendoUf = montoFinanciadoUf * (iMensual * Math.pow(1 + iMensual, n)) / (Math.pow(1 + iMensual, n) - 1);
+  }
+  const dividendoClpHoy = dividendoUf * uf;
+
+  const flujoComprar = dividendoClpHoy + gastos;
+  const flujoArrendar = arriendo;
+
+  // Patrimonio comprando: valor de la propiedad al final (en UF, convertida a CLP proyectado)
+  // menos saldo insoluto del crédito (0, porque a los N años del plazo completo la deuda está pagada).
+  const ufProyectada = uf * Math.pow(1 + reajusteAnual, anios);
+  const patrimonioComprar = precioUf * ufProyectada; // deuda = 0 al término del plazo
+
+  // Patrimonio arrendando: el pie se invierte desde el día 1, y cada mes se invierte la diferencia
+  // de flujo a favor del arriendo (si la hay), ambos a la rentabilidad alternativa.
+  const pieClpHoy = pieUf * uf;
+  const iMensualAlt = rentAlt / 12;
+  const diferenciaMensual = flujoComprar - flujoArrendar;
+
+  let valorInvertido = pieClpHoy;
+  for (let mes = 0; mes < n; mes++) {
+    valorInvertido = valorInvertido * (1 + iMensualAlt);
+    if (diferenciaMensual > 0) {
+      valorInvertido += diferenciaMensual;
+    }
+  }
+  const patrimonioArrendar = valorInvertido;
+
+  document.getElementById('avc-dividendo').textContent = clp(dividendoClpHoy) + '/mes';
+  document.getElementById('avc-flujo-comprar').textContent = clp(flujoComprar) + '/mes';
+  document.getElementById('avc-flujo-arrendar').textContent = clp(flujoArrendar) + '/mes';
+  document.getElementById('avc-patrimonio-comprar').textContent = clp(patrimonioComprar);
+  document.getElementById('avc-patrimonio-arrendar').textContent = clp(patrimonioArrendar);
+  resultadoBox.classList.add('show');
+}
+
+function calcularDCA() {
+  const aporte = parseFloat(document.getElementById('dca-aporte').value);
+  const tasaAnual = parseFloat(document.getElementById('dca-tasa').value);
+  const anios = parseFloat(document.getElementById('dca-anios').value);
+  const resultadoBox = document.getElementById('dca-resultado');
+
+  if (!aporte || aporte <= 0 || !anios || anios <= 0) {
+    resultadoBox.classList.remove('show');
+    return;
+  }
+
+  const n = anios * 12;
+  const iMensual = (tasaAnual || 0) / 100 / 12;
+  let valorFinal;
+  if (iMensual === 0) {
+    valorFinal = aporte * n;
+  } else {
+    valorFinal = aporte * ((Math.pow(1 + iMensual, n) - 1) / iMensual);
+  }
+  const totalAportado = aporte * n;
+  const ganancia = valorFinal - totalAportado;
+
+  document.getElementById('dca-final').textContent = clp(valorFinal);
+  document.getElementById('dca-aportado').textContent = clp(totalAportado);
+  document.getElementById('dca-ganancia').textContent = clp(ganancia);
+  resultadoBox.classList.add('show');
+}
+</script>
+
+</body>
+</html>
