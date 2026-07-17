@@ -133,7 +133,6 @@ KANASTA_PALANKA_INFO = [
 ]
 
 kanasta_costo_alimentos = kanasta.get("costo_alimentos")
-kanasta_costo_region = kanasta.get("costo_por_region", {})
 kanasta_productos_con_precio = kanasta.get("productos_con_precio", 0)
 kanasta_productos_totales = kanasta.get("productos_totales", len(KANASTA_PALANKA_INFO))
 
@@ -181,31 +180,17 @@ kanasta_otros_html = f"""
 kanasta_semanal_val = fmt(kanasta_semanal_total, "Pesos") if kanasta_semanal_total else "—"
 kanasta_semanal_sub = (
     f"Alimentos {fmt(kanasta_costo_alimentos, 'Pesos')} + bencina {fmt(kanasta_bencina.get('costo_semana', 0), 'Pesos')} + "
-    f"aseo {fmt(kanasta_otros.get('costo_semana', 0), 'Pesos')}"
+    f"aseo {fmt(kanasta_otros.get('costo_semana', 0), 'Pesos')} + transporte {fmt(kanasta_transporte.get('costo_semana', 0), 'Pesos')}"
     if kanasta_semanal_total
     else "Aún sin datos suficientes de ODEPA"
 )
 
 kanasta_mensual_val = fmt(kanasta_mensual_total, "Pesos") if kanasta_mensual_total else "—"
 kanasta_mensual_sub = (
-    "Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares + transporte público"
+    "Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares"
     if kanasta_mensual_total
     else "Aún sin datos suficientes de ODEPA"
 )
-
-if kanasta_costo_region:
-    filas_region = sorted(kanasta_costo_region.items(), key=lambda kv: kv[0])
-    kanasta_region_html = "".join(
-        f"""
-        <tr>
-          <td>{region}</td>
-          <td>{fmt(info['monto'], 'Pesos')}</td>
-          <td>{info['productos_con_precio']}/{info['productos_totales']}</td>
-        </tr>"""
-        for region, info in filas_region
-    )
-else:
-    kanasta_region_html = '<tr><td colspan="3" class="empty">Sin datos por región disponibles todavía — revisa la conexión con ODEPA</td></tr>'
 
 
 def _kanasta_chart_js(canvas_id, historial):
@@ -262,16 +247,36 @@ kanasta_semanal_chart_html, kanasta_semanal_chart_js = _kanasta_chart_js("chartK
 kanasta_mensual_chart_html, kanasta_mensual_chart_js = _kanasta_chart_js("chartKanastaMensual", kanasta_mensual_historial)
 kanasta_chart_js = kanasta_semanal_chart_js + "\n" + kanasta_mensual_chart_js
 
-# Tabla de desglose por categoría de la Kanasta Mensual
+# Desglose por categoría de la Kanasta Mensual — tarjetas con barra de
+# proporción en vez de una tabla plana, para que destaque el peso relativo
+# de cada categoría dentro del total.
 if kanasta_mensual_total:
     kanasta_semanal_mensualizado = round((kanasta_semanal_total or 0) * 4.33)
-    kanasta_categorias_html = f"""
-        <tr><td>Kanasta Semanal (alimentos + bencina + aseo) x 4,33</td><td>{fmt(kanasta_semanal_mensualizado, 'Pesos')}</td></tr>
-        <tr><td>Cuentas básicas (luz + agua + gas)</td><td>{fmt(kanasta_cuentas.get('total_mes', 0), 'Pesos')}</td></tr>
-        <tr><td>Internet y celulares</td><td>{fmt(kanasta_internet.get('total_mes', 0), 'Pesos')}</td></tr>
-        <tr><td>Transporte público</td><td>{fmt(kanasta_transporte.get('costo_mes', 0), 'Pesos')}</td></tr>"""
+    categorias = [
+        ("Kanasta Semanal", "Alimentos + bencina + aseo del hogar + transporte público, x 4,33 semanas", kanasta_semanal_mensualizado),
+        ("Cuentas básicas", "Luz + agua + gas", kanasta_cuentas.get("total_mes", 0)),
+        ("Internet y celulares", "Wifi hogar + 3 planes celular", kanasta_internet.get("total_mes", 0)),
+    ]
+    filas = ""
+    for nombre, detalle, monto in categorias:
+        pct = round((monto / kanasta_mensual_total) * 100) if kanasta_mensual_total else 0
+        filas += f"""
+      <div class="cat-row">
+        <div class="cat-row-top">
+          <div>
+            <div class="cat-label">{nombre}</div>
+            <div class="cat-detalle">{detalle}</div>
+          </div>
+          <div class="cat-amount-wrap">
+            <div class="cat-amount">{fmt(monto, 'Pesos')}</div>
+            <div class="cat-pct">{pct}%</div>
+          </div>
+        </div>
+        <div class="cat-bar"><div class="cat-bar-fill" style="width:{pct}%;"></div></div>
+      </div>"""
+    kanasta_categorias_html = f'<div class="kanasta-categorias">{filas}\n    </div>'
 else:
-    kanasta_categorias_html = '<tr><td colspan="2" class="empty">Sin datos suficientes todavía</td></tr>'
+    kanasta_categorias_html = '<div class="kanasta-chart-empty">Sin datos suficientes todavía</div>'
 
 # ---------------------------------------------------------------------------
 # Opciones de AFP para el <select>
@@ -458,17 +463,23 @@ HTML = f"""<!DOCTYPE html>
     font-size:12.5px; color:var(--muted); text-align:center; padding:24px 8px;
     display:flex; align-items:center; justify-content:center; height:100%;
   }}
-  .kanasta-region-table{{width:100%; border-collapse:collapse; font-size:13px; min-width:420px;}}
-  .kanasta-region-table th{{
-    text-align:center; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--muted); border-bottom:1px solid var(--line); padding:8px 10px;
-  }}
-  .kanasta-region-table td{{padding:8px 10px; border-bottom:1px solid var(--line); text-align:center;}}
-  .kanasta-region-table td.empty{{color:var(--muted);}}
   @media (max-width: 720px){{
     .kanasta-box{{grid-template-columns:1fr;}}
     .kanasta-col + .kanasta-col{{border-left:none; border-top:1px solid var(--line);}}
   }}
+
+  .kanasta-categorias{{display:flex; flex-direction:column; gap:14px; margin-top:14px;}}
+  .cat-row{{
+    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+  }}
+  .cat-row-top{{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:12px;}}
+  .cat-label{{font-size:15px; font-weight:700; color:var(--text);}}
+  .cat-detalle{{font-size:11.5px; color:var(--muted); margin-top:3px;}}
+  .cat-amount-wrap{{text-align:right; flex-shrink:0;}}
+  .cat-amount{{font-size:20px; font-weight:800; color:var(--amber); font-variant-numeric:tabular-nums; white-space:nowrap;}}
+  .cat-pct{{font-size:11px; color:var(--muted); margin-top:2px;}}
+  .cat-bar{{height:8px; border-radius:4px; background:var(--bg); overflow:hidden;}}
+  .cat-bar-fill{{height:100%; border-radius:4px; background:linear-gradient(90deg, #b9793a, #dfa25b, #f0c98a);}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
 </head>
@@ -852,14 +863,6 @@ HTML = f"""<!DOCTYPE html>
         <div class="kanasta-chart-wrap">{kanasta_semanal_chart_html}</div>
       </div>
     </div>
-
-    <div class="subhead-box">Detalle por región (solo alimentos)</div>
-    <div class="table-scroll">
-      <table class="kanasta-region-table">
-        <thead><tr><th>Región</th><th>Costo semanal</th><th>Productos con precio</th></tr></thead>
-        <tbody>{kanasta_region_html}</tbody>
-      </table>
-    </div>
   </section>
 
   <section id="kanasta-mensual" class="section">
@@ -868,8 +871,8 @@ HTML = f"""<!DOCTYPE html>
     <div class="section-sub">
       Cuánto necesita al mes la misma familia de referencia (2 adultos + 2 niños) para cubrir lo básico,
       sin contar arriendo/dividendo ni colegio. Es la Kanasta Semanal llevada a base mensual (x 4,33 semanas),
-      más cuentas básicas (luz, agua y gas), internet y celulares, y transporte público — todos estos
-      últimos son valores de referencia fijos, actualizados a mano, no en vivo.
+      más cuentas básicas (luz, agua y gas) e internet y celulares — estos dos últimos son valores de
+      referencia fijos, actualizados a mano, no en vivo.
     </div>
 
     <div class="kanasta-box">
@@ -886,12 +889,7 @@ HTML = f"""<!DOCTYPE html>
     </div>
 
     <div class="subhead-box">Desglose por categoría</div>
-    <div class="table-scroll">
-      <table class="kanasta-region-table">
-        <thead><tr><th>Categoría</th><th>Monto mensual</th></tr></thead>
-        <tbody>{kanasta_categorias_html}</tbody>
-      </table>
-    </div>
+    {kanasta_categorias_html}
   </section>
 
   <div class="footer">
