@@ -192,7 +192,7 @@
     </div>
   </div>
   <div class="brand-tagline"><span class="dash"></span>Finanzas personales para chilenos reales<span class="dash"></span></div>
-  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 18:42.</div>
+  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 22:10.</div>
 
   <section id="resumen" class="section">
     <h1>Indicadores del día</h1>
@@ -553,16 +553,17 @@
     </div>
   </section>
 
-  <section id="alimentos" class="section">
+  <section id="kanasta-semanal" class="section">
     <div class="subhead-box">Kanasta Palanka</div>
-    <h1>Kanasta Palanka</h1>
+    <h1>Kanasta Semanal</h1>
     <div class="section-sub">
-      La Kanasta Palanka es nuestra propia referencia de gasto en alimentos — no es la canasta básica
-      oficial de Chile. Estimamos lo que consumiría en una semana una familia de 2 adultos y 2 niños,
-      con 13 productos típicos de la mesa chilena (detalle abajo). Los precios
-      vienen de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">datos abiertos de ODEPA</a>
-      (Oficina de Estudios y Políticas Agrarias) a nivel de consumidor, best effort según disponibilidad
-      del dato. El costo se expresa en base semanal, pero los precios que lo componen se actualizan a diario.
+      Nuestra propia referencia de gasto semanal — no es la canasta básica oficial de Chile. Estimamos lo
+      que gasta en una semana una familia de 2 adultos y 2 niños en tres cosas: alimentos (13
+      productos, precios de <a href="https://datos.odepa.gob.cl" target="_blank" rel="noopener">ODEPA</a>
+      en vivo), bencina (24 litros/semana a un precio de referencia
+      fijo, ya que este sitio no tiene acceso en vivo al precio de la CNE) y productos de aseo del hogar
+      (precios promediados en 4 cadenas de supermercado, actualizados a mano). El costo se expresa en base
+      semanal; los precios de alimentos se actualizan a diario, el resto se revisa periódicamente.
       
       <div class="kanasta-productos-grid">
       <div class="kanasta-producto-chip"><span class="nombre">Pan (Marraqueta)</span><span class="cantidad">4 kg</span></div>
@@ -579,14 +580,25 @@
       <div class="kanasta-producto-chip"><span class="nombre">Legumbres (porotos)</span><span class="cantidad">1 kg</span></div>
       <div class="kanasta-producto-chip"><span class="nombre">Fruta de estación</span><span class="cantidad">4 kg</span></div>
       </div>
+      
+      <div class="kanasta-productos-grid">
+      <div class="kanasta-producto-chip"><span class="nombre">Papel higiénico Confort Elite (4 rollos)</span><span class="cantidad">$3.833/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Detergente Omo polvo (2,7 kg)</span><span class="cantidad">$4.479/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Lavaloza (750 ml)</span><span class="cantidad">$813/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Cloro Clorinda gel (1 L)</span><span class="cantidad">$685/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Jabón líquido Ballerina</span><span class="cantidad">$593/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Pasta de dientes Colgate Triple Acción</span><span class="cantidad">$2.435/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Shampoo Familand</span><span class="cantidad">$1.120/sem</span></div>
+      <div class="kanasta-producto-chip"><span class="nombre">Bolsas de basura Virutex negra (10 un)</span><span class="cantidad">$639/sem</span></div>
+      </div>
     </div>
 
     <div class="kanasta-box">
       <div class="kanasta-col kanasta-hoy">
         <div class="kanasta-col-title">Costo hoy</div>
-        <div class="kanasta-hoy-val">$86.250</div>
-        <div class="kanasta-hoy-sub">9/13 productos con precio disponible</div>
-        <div class="kanasta-hoy-nota">Promedio nacional semanal</div>
+        <div class="kanasta-hoy-val">$129.047</div>
+        <div class="kanasta-hoy-sub">Alimentos $86.250 + bencina $28.200 + aseo $14.597</div>
+        <div class="kanasta-hoy-nota">Total semanal</div>
       </div>
       <div class="kanasta-col kanasta-grafico">
         <div class="kanasta-col-title">Seguimiento</div>
@@ -594,7 +606,7 @@
       </div>
     </div>
 
-    <div class="subhead-box">Detalle por región</div>
+    <div class="subhead-box">Detalle por región (solo alimentos)</div>
     <div class="table-scroll">
       <table class="kanasta-region-table">
         <thead><tr><th>Región</th><th>Costo semanal</th><th>Productos con precio</th></tr></thead>
@@ -639,6 +651,42 @@
           <td>$85.500</td>
           <td>9/13</td>
         </tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="kanasta-mensual" class="section">
+    <div class="subhead-box">Kanasta Palanka</div>
+    <h1>Kanasta Mensual</h1>
+    <div class="section-sub">
+      Cuánto necesita al mes la misma familia de referencia (2 adultos + 2 niños) para cubrir lo básico,
+      sin contar arriendo/dividendo ni colegio. Es la Kanasta Semanal llevada a base mensual (x 4,33 semanas),
+      más cuentas básicas (luz, agua y gas), internet y celulares, y transporte público — todos estos
+      últimos son valores de referencia fijos, actualizados a mano, no en vivo.
+    </div>
+
+    <div class="kanasta-box">
+      <div class="kanasta-col kanasta-hoy">
+        <div class="kanasta-col-title">Costo hoy</div>
+        <div class="kanasta-hoy-val">$765.667</div>
+        <div class="kanasta-hoy-sub">Kanasta Semanal x 4,33 + cuentas básicas + internet/celulares + transporte público</div>
+        <div class="kanasta-hoy-nota">Total mensual</div>
+      </div>
+      <div class="kanasta-col kanasta-grafico">
+        <div class="kanasta-col-title">Seguimiento</div>
+        <div class="kanasta-chart-wrap"><div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div></div>
+      </div>
+    </div>
+
+    <div class="subhead-box">Desglose por categoría</div>
+    <div class="table-scroll">
+      <table class="kanasta-region-table">
+        <thead><tr><th>Categoría</th><th>Monto mensual</th></tr></thead>
+        <tbody>
+        <tr><td>Kanasta Semanal (alimentos + bencina + aseo) x 4,33</td><td>$558.774</td></tr>
+        <tr><td>Cuentas básicas (luz + agua + gas)</td><td>$123.969</td></tr>
+        <tr><td>Internet y celulares</td><td>$48.500</td></tr>
+        <tr><td>Transporte público</td><td>$34.424</td></tr></tbody>
       </table>
     </div>
   </section>
@@ -1027,6 +1075,7 @@ function calcularAPV() {
   document.getElementById('apv-nota-regimen').textContent = notaRegimen;
   resultadoBox.classList.add('show');
 }
+
 
 
 </script>

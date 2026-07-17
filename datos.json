@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-17T18:42:46.989356+00:00",
+  "generado": "2026-07-17T22:10:28.469004+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,13 +114,13 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
+      "Biobío": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -134,6 +134,16 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Los Lagos": {
         "monto": 74700,
         "productos_con_precio": 9,
@@ -143,26 +153,111 @@
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
       }
     },
-    "costo_nacional": 86250,
+    "costo_alimentos": 86250,
     "productos_con_precio": 9,
     "productos_totales": 13,
-    "historial": [
-      {
-        "fecha": "2026-07-17",
-        "valor": 86250
-      }
-    ]
+    "bencina": {
+      "litros_semana": 24.0,
+      "precio_referencia": 1175.0,
+      "costo_semana": 28200
+    },
+    "supermercado_otros": {
+      "items": [
+        {
+          "clave": "papel_higienico",
+          "nombre": "Papel higiénico Confort Elite (4 rollos)",
+          "precio_promedio": 3833,
+          "duracion_semanas": 1,
+          "costo_semana": 3833
+        },
+        {
+          "clave": "detergente",
+          "nombre": "Detergente Omo polvo (2,7 kg)",
+          "precio_promedio": 8958,
+          "duracion_semanas": 2,
+          "costo_semana": 4479
+        },
+        {
+          "clave": "lavaloza",
+          "nombre": "Lavaloza (750 ml)",
+          "precio_promedio": 2440,
+          "duracion_semanas": 3,
+          "costo_semana": 813
+        },
+        {
+          "clave": "cloro",
+          "nombre": "Cloro Clorinda gel (1 L)",
+          "precio_promedio": 2055,
+          "duracion_semanas": 3,
+          "costo_semana": 685
+        },
+        {
+          "clave": "jabon",
+          "nombre": "Jabón líquido Ballerina",
+          "precio_promedio": 1778,
+          "duracion_semanas": 3,
+          "costo_semana": 593
+        },
+        {
+          "clave": "pasta_dientes",
+          "nombre": "Pasta de dientes Colgate Triple Acción",
+          "precio_promedio": 2435,
+          "duracion_semanas": 1,
+          "costo_semana": 2435
+        },
+        {
+          "clave": "shampoo",
+          "nombre": "Shampoo Familand",
+          "precio_promedio": 2240,
+          "duracion_semanas": 2,
+          "costo_semana": 1120
+        },
+        {
+          "clave": "bolsas_basura",
+          "nombre": "Bolsas de basura Virutex negra (10 un)",
+          "precio_promedio": 1278,
+          "duracion_semanas": 2,
+          "costo_semana": 639
+        }
+      ],
+      "costo_semana": 14597
+    },
+    "semanal": {
+      "costo_total": 129047,
+      "historial": [
+        {
+          "fecha": "2026-07-17",
+          "valor": 129047
+        }
+      ]
+    },
+    "cuentas_basicas": {
+      "luz_mes": 59219,
+      "agua_mes": 28000,
+      "gas_mes": 36750,
+      "total_mes": 123969
+    },
+    "internet_celular": {
+      "wifi_mes": 17000,
+      "celular_mes": 10500,
+      "cantidad_planes": 3,
+      "total_mes": 48500
+    },
+    "transporte_publico": {
+      "tarifa": 795,
+      "pasajes_semana": 10,
+      "costo_mes": 34424
+    },
+    "mensual": {
+      "costo_total": 765667,
+      "historial": [
+        {
+          "fecha": "2026-07-17",
+          "valor": 765667
+        }
+      ]
+    }
   }
 }
