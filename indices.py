@@ -210,14 +210,20 @@ def _buscar_dataset_odepa(termino):
     return resultados[0].get("id") or resultados[0].get("name")
 
 
-def _resource_csv_mas_reciente(dataset_id):
+def _recursos_csv_recientes(dataset_id, maximo=4):
+    """Devuelve hasta `maximo` URLs de recursos CSV del dataset, del más
+    reciente al más antiguo. Antes solo se usaba el más reciente, pero el
+    reporte semanal de ODEPA no siempre cubre las mismas regiones cada
+    semana (mercados que no reportaron ese período) — usar varios recursos
+    recientes y fusionarlos (ver get_kanasta_palanka_precios) da más
+    cobertura regional sin inventar ningún precio."""
     pkg = http_get_json(f"{ODEPA_BASE}/package_show?id={dataset_id}", reintentos=2)
     recursos = pkg.get("result", {}).get("resources", [])
     recursos_csv = [r for r in recursos if str(r.get("format", "")).lower() == "csv"]
     if not recursos_csv:
-        return None
+        return []
     recursos_csv.sort(key=lambda r: r.get("last_modified") or r.get("created") or "", reverse=True)
-    return recursos_csv[0].get("url")
+    return [r.get("url") for r in recursos_csv[:maximo] if r.get("url")]
 
 
 # Codificación oficial de regiones (INE) — varios datasets de ODEPA traen el
@@ -295,9 +301,16 @@ def get_kanasta_palanka_precios():
     cada producto de la Kanasta Palanka. Devuelve un dict
     clave_producto -> {region: precio_unitario} | None.
 
-    Igual que get_datos_odepa(), esto no se pudo probar contra la API real
-    desde este entorno — revisar una vez desplegado y ajustar el parseo de
-    columnas en _parsear_precios_por_region si hace falta."""
+    Fusiona los últimos recursos CSV disponibles del dataset (no solo el
+    más reciente) para cubrir más regiones: se recorren de más antiguo a
+    más nuevo, y cada uno pisa al anterior, así cada región queda con el
+    precio más reciente disponible para ella, aunque no haya reportado en
+    el archivo de esta semana. Esto no inventa ningún dato — solo evita
+    perder una región que sí reportó precio hace poco.
+
+    Igual que el resto de esta sección, esto no se pudo probar contra la
+    API real desde este entorno — revisar una vez desplegado y ajustar el
+    parseo de columnas en _parsear_precios_por_region si hace falta."""
     resultado = {}
     for clave, nombre, _cantidad, _unidad in KANASTA_PALANKA:
         try:
@@ -305,12 +318,17 @@ def get_kanasta_palanka_precios():
             if not dataset_id:
                 resultado[clave] = None
                 continue
-            url_csv = _resource_csv_mas_reciente(dataset_id)
-            if not url_csv:
+            urls_csv = _recursos_csv_recientes(dataset_id, maximo=4)
+            if not urls_csv:
                 resultado[clave] = None
                 continue
-            crudo = http_get(url_csv, reintentos=2)
-            precios_region = _parsear_precios_por_region(crudo)
+            precios_region = {}
+            for url_csv in reversed(urls_csv):  # más antiguo -> más nuevo
+                try:
+                    crudo = http_get(url_csv, reintentos=2)
+                    precios_region.update(_parsear_precios_por_region(crudo))
+                except Exception as e:
+                    print(f"  aviso Kanasta Palanka ({nombre}, recurso {url_csv}): {e}")
             resultado[clave] = precios_region or None
         except Exception as e:
             print(f"  aviso Kanasta Palanka ({nombre}): {e}")
