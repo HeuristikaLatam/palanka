@@ -220,7 +220,7 @@
     </div>
   </div>
   <div class="brand-tagline"><span class="dash"></span>Finanzas personales para chilenos reales<span class="dash"></span></div>
-  <div class="update-note">La información que estás viendo fue cargada el 17-07-2026 a las 23:40.</div>
+  <div class="update-note">La información que estás viendo fue cargada el 18-07-2026 a las 11:34.</div>
 
   <section id="resumen" class="section">
     <h1>Indicadores del día</h1>
@@ -229,7 +229,7 @@
     <div class="kpi">
       <div class="kpi-label">UF</div>
       <div class="kpi-val">$40.844,79</div>
-      <div class="kpi-fecha">17-07-2026</div>
+      <div class="kpi-fecha">18-07-2026</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">Dólar obs.</div>
@@ -663,7 +663,7 @@
       </div>
       <div class="kanasta-col kanasta-grafico">
         <div class="kanasta-col-title">Seguimiento</div>
-        <div class="kanasta-chart-wrap"><div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div></div>
+        <div class="kanasta-chart-wrap"><canvas id="chartKanastaSemanal"></canvas></div>
       </div>
     </div>
   </section>
@@ -687,7 +687,7 @@
       </div>
       <div class="kanasta-col kanasta-grafico">
         <div class="kanasta-col-title">Seguimiento</div>
-        <div class="kanasta-chart-wrap"><div class="kanasta-chart-empty">Con un solo registro todavía no hay curva que mostrar — vuelve en unos días para ver la tendencia.</div></div>
+        <div class="kanasta-chart-wrap"><canvas id="chartKanastaMensual"></canvas></div>
       </div>
     </div>
 
@@ -1184,7 +1184,85 @@ function reiniciarDiagnostico() {
 mostrarPreguntaDiagnostico();
 
 
+    (function() {
+      new Chart(document.getElementById('chartKanastaSemanal'), {
+        type: 'line',
+        data: {
+          labels: ["17-07-2026", "18-07-2026"],
+          datasets: [{
+            data: [136997, 136997],
+            borderColor: '#dfa25b',
+            backgroundColor: '#dfa25b22',
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#dfa25b',
+            tension: 0.25,
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1c2838',
+              borderColor: '#34465d',
+              borderWidth: 1,
+              titleColor: '#dfa25b',
+              bodyColor: '#f4f6f8',
+              padding: 10,
+              displayColors: false,
+            },
+          },
+          scales: {
+            x: { ticks: { color: '#9fb0c3', font: { size: 10 }, maxRotation: 0 }, grid: { display: false } },
+            y: { ticks: { color: '#9fb0c3', font: { size: 10 } }, grid: { color: '#34465d' } }
+          }
+        }
+      });
+    })();
 
+    (function() {
+      new Chart(document.getElementById('chartKanastaMensual'), {
+        type: 'line',
+        data: {
+          labels: ["17-07-2026", "18-07-2026"],
+          datasets: [{
+            data: [765666, 765666],
+            borderColor: '#dfa25b',
+            backgroundColor: '#dfa25b22',
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#dfa25b',
+            tension: 0.25,
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1c2838',
+              borderColor: '#34465d',
+              borderWidth: 1,
+              titleColor: '#dfa25b',
+              bodyColor: '#f4f6f8',
+              padding: 10,
+              displayColors: false,
+            },
+          },
+          scales: {
+            x: { ticks: { color: '#9fb0c3', font: { size: 10 }, maxRotation: 0 }, grid: { display: false } },
+            y: { ticks: { color: '#9fb0c3', font: { size: 10 } }, grid: { color: '#34465d' } }
+          }
+        }
+      });
+    })();
 </script>
 
 </body>
