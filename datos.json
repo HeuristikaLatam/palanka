@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-19T22:38:44.618083+00:00",
+  "generado": "2026-07-20T00:18:40.151864+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,18 +119,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
+      "Ñuble": {
         "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -139,13 +129,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Coquimbo": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -238,6 +238,10 @@
         {
           "fecha": "2026-07-19",
           "valor": 136997
+        },
+        {
+          "fecha": "2026-07-20",
+          "valor": 136997
         }
       ]
     },
@@ -271,6 +275,10 @@
         },
         {
           "fecha": "2026-07-19",
+          "valor": 765666
+        },
+        {
+          "fecha": "2026-07-20",
           "valor": 765666
         }
       ]
