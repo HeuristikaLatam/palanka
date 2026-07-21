@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-20T23:36:04.517874+00:00",
+  "generado": "2026-07-21T00:18:06.491627+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,22 +119,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -144,8 +139,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Biobío": {
         "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -242,6 +242,10 @@
         {
           "fecha": "2026-07-20",
           "valor": 136997
+        },
+        {
+          "fecha": "2026-07-21",
+          "valor": 136997
         }
       ]
     },
@@ -279,6 +283,10 @@
         },
         {
           "fecha": "2026-07-20",
+          "valor": 765666
+        },
+        {
+          "fecha": "2026-07-21",
           "valor": 765666
         }
       ]
