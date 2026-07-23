@@ -1,17 +1,17 @@
 {
-  "generado": "2026-07-22T23:34:54.799783+00:00",
+  "generado": "2026-07-23T13:17:04.375941+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
       "valor": 40844.79,
-      "fecha": "2026-07-22T04:00:00.000Z"
+      "fecha": "2026-07-23T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 932.84,
-      "fecha": "2026-07-22T04:00:00.000Z"
+      "valor": 936.39,
+      "fecha": "2026-07-23T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -26,12 +26,7 @@
       "fecha": "2026-05-01T04:00:00.000Z"
     }
   },
-  "tasa_hipotecaria": {
-    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
-    "unidad": "Porcentaje",
-    "valor": 4.26,
-    "fecha": "2026-07-15"
-  },
+  "tasa_hipotecaria": null,
   "kanasta_palanka": {
     "productos": [
       {
@@ -114,7 +109,7 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,28 +124,28 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Los Lagos": {
         "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -250,6 +245,10 @@
         {
           "fecha": "2026-07-22",
           "valor": 136997
+        },
+        {
+          "fecha": "2026-07-23",
+          "valor": 136997
         }
       ]
     },
@@ -295,6 +294,10 @@
         },
         {
           "fecha": "2026-07-22",
+          "valor": 765666
+        },
+        {
+          "fecha": "2026-07-23",
           "valor": 765666
         }
       ]
