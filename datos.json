@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-26T07:16:14.546416+00:00",
+  "generado": "2026-07-26T11:51:06.978275+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,17 +119,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -144,7 +144,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
+      "Coquimbo": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
