@@ -1,5 +1,5 @@
 {
-  "generado": "2026-07-27T23:44:20.335468+00:00",
+  "generado": "2026-07-28T00:16:07.577946+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,28 +114,18 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Coquimbo": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,7 +139,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -270,6 +270,10 @@
         {
           "fecha": "2026-07-27",
           "valor": 136618
+        },
+        {
+          "fecha": "2026-07-28",
+          "valor": 136618
         }
       ]
     },
@@ -335,6 +339,10 @@
         },
         {
           "fecha": "2026-07-27",
+          "valor": 764025
+        },
+        {
+          "fecha": "2026-07-28",
           "valor": 764025
         }
       ]
