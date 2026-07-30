@@ -1,17 +1,17 @@
 {
-  "generado": "2026-07-30T00:16:45.275059+00:00",
+  "generado": "2026-07-30T13:20:37.504050+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
       "valor": 40844.79,
-      "fecha": "2026-07-29T04:00:00.000Z"
+      "fecha": "2026-07-30T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 936.16,
-      "fecha": "2026-07-29T04:00:00.000Z"
+      "valor": 935.57,
+      "fecha": "2026-07-30T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -119,7 +119,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,8 +129,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -139,13 +139,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
