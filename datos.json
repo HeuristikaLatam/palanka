@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-01T11:50:55.475189+00:00",
+  "generado": "2026-08-01T12:19:10.196481+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,12 +114,7 @@
       }
     ],
     "costo_por_region": {
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,13 +124,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Los Lagos": {
         "monto": 66900,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,13 +144,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Coquimbo": {
+        "monto": 84600,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 84600,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
