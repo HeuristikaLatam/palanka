@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-01T23:30:40.120153+00:00",
+  "generado": "2026-08-02T06:49:27.769986+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
       "valor": 40844.79,
-      "fecha": "2026-08-01T04:00:00.000Z"
+      "fecha": "2026-08-02T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 922.21,
-      "fecha": "2026-07-01T04:00:00.000Z"
+      "valor": 927.35,
+      "fecha": "2026-07-02T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -26,7 +26,12 @@
       "fecha": "2026-06-01T04:00:00.000Z"
     }
   },
-  "tasa_hipotecaria": null,
+  "tasa_hipotecaria": {
+    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
+    "unidad": "Porcentaje",
+    "valor": 4.26,
+    "fecha": "2026-07-15"
+  },
   "kanasta_palanka": {
     "productos": [
       {
@@ -108,9 +113,50 @@
         "unidad": "kg"
       }
     ],
-    "costo_por_region": {},
-    "costo_alimentos": null,
-    "productos_con_precio": 0,
+    "costo_por_region": {
+      "Los Lagos": {
+        "monto": 66900,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 84600,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      }
+    },
+    "costo_alimentos": 84784,
+    "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
       "litros_semana": 24.0,
@@ -179,7 +225,7 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": null,
+      "costo_total": 135531,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -244,6 +290,10 @@
         {
           "fecha": "2026-08-01",
           "valor": 135531
+        },
+        {
+          "fecha": "2026-08-02",
+          "valor": 135531
         }
       ]
     },
@@ -265,7 +315,7 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": null,
+      "costo_total": 759318,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -329,6 +379,10 @@
         },
         {
           "fecha": "2026-08-01",
+          "valor": 759318
+        },
+        {
+          "fecha": "2026-08-02",
           "valor": 759318
         }
       ]
