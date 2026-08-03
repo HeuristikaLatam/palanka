@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-02T23:17:59.769324+00:00",
+  "generado": "2026-08-03T08:54:14.893554+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
       "valor": 40844.79,
-      "fecha": "2026-08-02T04:00:00.000Z"
+      "fecha": "2026-08-03T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 927.35,
-      "fecha": "2026-07-02T04:00:00.000Z"
+      "valor": 928.42,
+      "fecha": "2026-08-03T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,28 +114,8 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
-        "monto": 84600,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,7 +129,27 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Coquimbo": {
+        "monto": 84600,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -294,6 +294,10 @@
         {
           "fecha": "2026-08-02",
           "valor": 135531
+        },
+        {
+          "fecha": "2026-08-03",
+          "valor": 135531
         }
       ]
     },
@@ -383,6 +387,10 @@
         },
         {
           "fecha": "2026-08-02",
+          "valor": 759318
+        },
+        {
+          "fecha": "2026-08-03",
           "valor": 759318
         }
       ]
