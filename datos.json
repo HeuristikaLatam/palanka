@@ -1,11 +1,11 @@
 {
-  "generado": "2026-08-08T22:03:05.198680+00:00",
+  "generado": "2026-08-09T10:05:12.544445+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
       "valor": 40844.79,
-      "fecha": "2026-08-08T04:00:00.000Z"
+      "fecha": "2026-08-09T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,12 +114,22 @@
       }
     ],
     "costo_por_region": {
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Los Lagos": {
         "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -134,22 +144,12 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Coquimbo": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -318,6 +318,10 @@
         {
           "fecha": "2026-08-08",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-09",
+          "valor": 137143
         }
       ]
     },
@@ -431,6 +435,10 @@
         },
         {
           "fecha": "2026-08-08",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-09",
           "valor": 766298
         }
       ]
