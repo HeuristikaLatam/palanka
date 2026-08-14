@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-13T23:25:50.237892+00:00",
+  "generado": "2026-08-14T09:01:52.049351+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40850.06,
-      "fecha": "2026-08-13T04:00:00.000Z"
+      "valor": 40851.38,
+      "fecha": "2026-08-14T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 912,
-      "fecha": "2026-08-13T04:00:00.000Z"
+      "valor": 913.2,
+      "fecha": "2026-08-14T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -29,8 +29,8 @@
   "tasa_hipotecaria": {
     "nombre": "Tasa hipotecaria promedio referencial (TIP)",
     "unidad": "Porcentaje",
-    "valor": 4.26,
-    "fecha": "2026-07-15"
+    "valor": 4.3,
+    "fecha": "2026-08-14"
   },
   "kanasta_palanka": {
     "productos": [
@@ -114,12 +114,17 @@
       }
     ],
     "costo_por_region": {
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Biobío": {
         "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,7 +134,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,13 +144,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Metropolitana": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -338,6 +338,10 @@
         {
           "fecha": "2026-08-13",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-14",
+          "valor": 137143
         }
       ]
     },
@@ -471,6 +475,10 @@
         },
         {
           "fecha": "2026-08-13",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-14",
           "valor": 766298
         }
       ]
