@@ -1,11 +1,11 @@
 {
-  "generado": "2026-08-14T21:23:37.416615+00:00",
+  "generado": "2026-08-15T08:19:29.689373+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40851.38,
-      "fecha": "2026-08-14T04:00:00.000Z"
+      "valor": 40852.69,
+      "fecha": "2026-08-15T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,22 +114,17 @@
       }
     ],
     "costo_por_region": {
-      "Ñuble": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Los Lagos": {
         "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -144,12 +139,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -342,6 +342,10 @@
         {
           "fecha": "2026-08-14",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-15",
+          "valor": 137143
         }
       ]
     },
@@ -479,6 +483,10 @@
         },
         {
           "fecha": "2026-08-14",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-15",
           "valor": 766298
         }
       ]
