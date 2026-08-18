@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-17T21:24:14.382657+00:00",
+  "generado": "2026-08-18T08:27:34.505263+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40855.33,
-      "fecha": "2026-08-17T04:00:00.000Z"
+      "valor": 40856.64,
+      "fecha": "2026-08-18T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 913.15,
-      "fecha": "2026-08-17T04:00:00.000Z"
+      "valor": 914.19,
+      "fecha": "2026-08-18T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,16 +114,6 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
@@ -134,22 +124,32 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Los Lagos": {
         "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -354,6 +354,10 @@
         {
           "fecha": "2026-08-17",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-18",
+          "valor": 137143
         }
       ]
     },
@@ -503,6 +507,10 @@
         },
         {
           "fecha": "2026-08-17",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-18",
           "valor": 766298
         }
       ]
