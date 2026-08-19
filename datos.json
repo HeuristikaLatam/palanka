@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-18T21:22:43.448243+00:00",
+  "generado": "2026-08-19T08:28:08.252558+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40856.64,
-      "fecha": "2026-08-18T04:00:00.000Z"
+      "valor": 40857.96,
+      "fecha": "2026-08-19T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 914.19,
-      "fecha": "2026-08-18T04:00:00.000Z"
+      "valor": 922.12,
+      "fecha": "2026-08-19T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,12 +114,12 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,18 +129,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Maule": {
         "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -358,6 +358,10 @@
         {
           "fecha": "2026-08-18",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-19",
+          "valor": 137143
         }
       ]
     },
@@ -511,6 +515,10 @@
         },
         {
           "fecha": "2026-08-18",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-19",
           "valor": 766298
         }
       ]
