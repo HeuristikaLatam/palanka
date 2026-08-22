@@ -1,11 +1,11 @@
 {
-  "generado": "2026-08-21T21:22:32.118621+00:00",
+  "generado": "2026-08-22T08:21:11.326762+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40860.6,
-      "fecha": "2026-08-21T04:00:00.000Z"
+      "valor": 40861.91,
+      "fecha": "2026-08-22T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,31 +114,6 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
@@ -151,6 +126,31 @@
       },
       "Biobío": {
         "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -370,6 +370,10 @@
         {
           "fecha": "2026-08-21",
           "valor": 137668
+        },
+        {
+          "fecha": "2026-08-22",
+          "valor": 137668
         }
       ]
     },
@@ -535,6 +539,10 @@
         },
         {
           "fecha": "2026-08-21",
+          "valor": 768571
+        },
+        {
+          "fecha": "2026-08-22",
           "valor": 768571
         }
       ]
