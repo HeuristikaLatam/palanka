@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-23T21:20:06.144525+00:00",
+  "generado": "2026-08-24T08:39:46.618995+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40863.23,
-      "fecha": "2026-08-23T04:00:00.000Z"
+      "valor": 40864.55,
+      "fecha": "2026-08-24T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 923.23,
-      "fecha": "2026-08-21T04:00:00.000Z"
+      "valor": 918.17,
+      "fecha": "2026-08-24T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,13 +114,13 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Coquimbo": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -378,6 +378,10 @@
         {
           "fecha": "2026-08-23",
           "valor": 137668
+        },
+        {
+          "fecha": "2026-08-24",
+          "valor": 137668
         }
       ]
     },
@@ -551,6 +555,10 @@
         },
         {
           "fecha": "2026-08-23",
+          "valor": 768571
+        },
+        {
+          "fecha": "2026-08-24",
           "valor": 768571
         }
       ]
