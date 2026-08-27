@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-27T00:27:43.190108+00:00",
+  "generado": "2026-08-27T18:42:32.309791+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40867.18,
-      "fecha": "2026-08-26T04:00:00.000Z"
+      "valor": 40868.5,
+      "fecha": "2026-08-27T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 911.43,
-      "fecha": "2026-08-26T04:00:00.000Z"
+      "valor": 918.42,
+      "fecha": "2026-08-27T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,7 +114,12 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -124,22 +129,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Biobío": {
         "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -149,7 +149,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
