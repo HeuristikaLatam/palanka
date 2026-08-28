@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-28T05:07:06.579228+00:00",
+  "generado": "2026-08-28T19:50:06.072929+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -22,8 +22,8 @@
     "tasa_desempleo": {
       "nombre": "Tasa de desempleo",
       "unidad": "Porcentaje",
-      "valor": 9.44,
-      "fecha": "2026-06-01T04:00:00.000Z"
+      "valor": 9.53,
+      "fecha": "2026-07-01T04:00:00.000Z"
     }
   },
   "tasa_hipotecaria": {
@@ -114,17 +114,22 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
-        "monto": 89700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -134,28 +139,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
     },
-    "costo_alimentos": 86921,
+    "costo_alimentos": 86396,
     "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
@@ -225,7 +225,7 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": 137668,
+      "costo_total": 137143,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -397,7 +397,7 @@
         },
         {
           "fecha": "2026-08-28",
-          "valor": 137668
+          "valor": 137143
         }
       ]
     },
@@ -419,7 +419,7 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": 768571,
+      "costo_total": 766298,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -591,7 +591,7 @@
         },
         {
           "fecha": "2026-08-28",
-          "valor": 768571
+          "valor": 766298
         }
       ]
     }
