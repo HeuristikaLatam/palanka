@@ -1,5 +1,5 @@
 {
-  "generado": "2026-08-28T20:38:53.602666+00:00",
+  "generado": "2026-08-29T02:38:30.889202+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,12 +114,12 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,13 +129,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Coquimbo": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,7 +144,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -398,6 +398,10 @@
         {
           "fecha": "2026-08-28",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-29",
+          "valor": 137143
         }
       ]
     },
@@ -591,6 +595,10 @@
         },
         {
           "fecha": "2026-08-28",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-29",
           "valor": 766298
         }
       ]
