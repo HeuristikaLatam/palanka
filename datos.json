@@ -1,11 +1,11 @@
 {
-  "generado": "2026-08-29T23:00:23.114888+00:00",
+  "generado": "2026-08-30T13:28:24.789426+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40871.14,
-      "fecha": "2026-08-29T04:00:00.000Z"
+      "valor": 40872.45,
+      "fecha": "2026-08-30T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,17 +114,12 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -134,8 +129,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,12 +139,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 89700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -402,6 +402,10 @@
         {
           "fecha": "2026-08-29",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-30",
+          "valor": 137143
         }
       ]
     },
@@ -599,6 +603,10 @@
         },
         {
           "fecha": "2026-08-29",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-30",
           "valor": 766298
         }
       ]
