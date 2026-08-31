@@ -1,17 +1,17 @@
 {
-  "generado": "2026-08-30T23:09:33.425654+00:00",
+  "generado": "2026-08-31T15:56:50.540174+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40872.45,
-      "fecha": "2026-08-30T04:00:00.000Z"
+      "valor": 40873.77,
+      "fecha": "2026-08-31T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 925.25,
-      "fecha": "2026-08-28T04:00:00.000Z"
+      "valor": 929.18,
+      "fecha": "2026-08-31T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,7 +114,27 @@
       }
     ],
     "costo_por_region": {
-      "Arica y Parinacota": {
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -124,33 +144,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Metropolitana": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -406,6 +406,10 @@
         {
           "fecha": "2026-08-30",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-08-31",
+          "valor": 137143
         }
       ]
     },
@@ -607,6 +611,10 @@
         },
         {
           "fecha": "2026-08-30",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-08-31",
           "valor": 766298
         }
       ]
