@@ -1,23 +1,23 @@
 {
-  "generado": "2026-09-01T00:23:29.749753+00:00",
+  "generado": "2026-09-01T22:13:28.296216+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40873.77,
-      "fecha": "2026-08-31T04:00:00.000Z"
+      "valor": 40875.09,
+      "fecha": "2026-09-01T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 929.18,
-      "fecha": "2026-08-31T04:00:00.000Z"
+      "valor": 933.4,
+      "fecha": "2026-09-01T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
       "unidad": "Pesos",
-      "valor": 71649,
-      "fecha": "2026-08-01T04:00:00.000Z"
+      "valor": 71721,
+      "fecha": "2026-09-01T04:00:00.000Z"
     },
     "tasa_desempleo": {
       "nombre": "Tasa de desempleo",
@@ -114,17 +114,22 @@
       }
     ],
     "costo_por_region": {
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -134,8 +139,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,13 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
