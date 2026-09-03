@@ -1,17 +1,17 @@
 {
-  "generado": "2026-09-02T22:59:59.078122+00:00",
+  "generado": "2026-09-03T12:25:42.108672+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40876.41,
-      "fecha": "2026-09-02T04:00:00.000Z"
+      "valor": 40877.73,
+      "fecha": "2026-09-03T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 936.86,
-      "fecha": "2026-09-02T04:00:00.000Z"
+      "valor": 936.32,
+      "fecha": "2026-09-03T04:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,18 +114,23 @@
       }
     ],
     "costo_por_region": {
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Maule": {
         "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -136,11 +141,6 @@
       },
       "Biobío": {
         "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -418,6 +418,10 @@
         {
           "fecha": "2026-09-02",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-09-03",
+          "valor": 137143
         }
       ]
     },
@@ -631,6 +635,10 @@
         },
         {
           "fecha": "2026-09-02",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-09-03",
           "valor": 766298
         }
       ]
