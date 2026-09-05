@@ -1,11 +1,11 @@
 {
-  "generado": "2026-09-04T22:47:43.174453+00:00",
+  "generado": "2026-09-05T11:32:00.944299+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40879.04,
-      "fecha": "2026-09-04T04:00:00.000Z"
+      "valor": 40880.36,
+      "fecha": "2026-09-05T04:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,16 +114,6 @@
       }
     ],
     "costo_por_region": {
-      "Maule": {
-        "monto": 86700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
@@ -139,18 +129,28 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 46500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Maule": {
+        "monto": 86700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Coquimbo": {
         "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 46500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -426,6 +426,10 @@
         {
           "fecha": "2026-09-04",
           "valor": 133247
+        },
+        {
+          "fecha": "2026-09-05",
+          "valor": 133247
         }
       ]
     },
@@ -647,6 +651,10 @@
         },
         {
           "fecha": "2026-09-04",
+          "valor": 749429
+        },
+        {
+          "fecha": "2026-09-05",
           "valor": 749429
         }
       ]
