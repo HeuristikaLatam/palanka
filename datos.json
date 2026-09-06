@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-06T12:04:10.908779+00:00",
+  "generado": "2026-09-06T12:34:58.996419+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -26,7 +26,12 @@
       "fecha": "2026-07-01T04:00:00.000Z"
     }
   },
-  "tasa_hipotecaria": null,
+  "tasa_hipotecaria": {
+    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
+    "unidad": "Porcentaje",
+    "valor": 4.3,
+    "fecha": "2026-08-14"
+  },
   "kanasta_palanka": {
     "productos": [
       {
@@ -108,9 +113,50 @@
         "unidad": "kg"
       }
     ],
-    "costo_por_region": {},
-    "costo_alimentos": null,
-    "productos_con_precio": 0,
+    "costo_por_region": {
+      "Biobío": {
+        "monto": 46500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 86700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 86700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      }
+    },
+    "costo_alimentos": 82500,
+    "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
       "litros_semana": 24.0,
@@ -179,7 +225,7 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": null,
+      "costo_total": 133247,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -384,6 +430,10 @@
         {
           "fecha": "2026-09-05",
           "valor": 133247
+        },
+        {
+          "fecha": "2026-09-06",
+          "valor": 133247
         }
       ]
     },
@@ -405,7 +455,7 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": null,
+      "costo_total": 749429,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -609,6 +659,10 @@
         },
         {
           "fecha": "2026-09-05",
+          "valor": 749429
+        },
+        {
+          "fecha": "2026-09-06",
           "valor": 749429
         }
       ]
