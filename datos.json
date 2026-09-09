@@ -1,17 +1,17 @@
 {
-  "generado": "2026-09-08T23:12:22.637941+00:00",
+  "generado": "2026-09-09T12:38:20.430993+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40884.32,
-      "fecha": "2026-09-08T03:00:00.000Z"
+      "valor": 40885.63,
+      "fecha": "2026-09-09T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 933.82,
-      "fecha": "2026-09-08T03:00:00.000Z"
+      "valor": 926.94,
+      "fecha": "2026-09-09T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -119,13 +119,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
+      "Maule": {
         "monto": 86700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 86700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -134,23 +134,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Valparaíso": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 86700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Arica y Parinacota": {
         "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -442,6 +442,10 @@
         {
           "fecha": "2026-09-08",
           "valor": 133247
+        },
+        {
+          "fecha": "2026-09-09",
+          "valor": 133247
         }
       ]
     },
@@ -679,6 +683,10 @@
         },
         {
           "fecha": "2026-09-08",
+          "valor": 749429
+        },
+        {
+          "fecha": "2026-09-09",
           "valor": 749429
         }
       ]
