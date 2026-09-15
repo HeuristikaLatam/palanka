@@ -1,17 +1,17 @@
 {
-  "generado": "2026-09-14T23:42:44.817805+00:00",
+  "generado": "2026-09-15T13:11:17.524262+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40926.41,
-      "fecha": "2026-09-14T03:00:00.000Z"
+      "valor": 40934.58,
+      "fecha": "2026-09-15T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 940.91,
-      "fecha": "2026-09-14T03:00:00.000Z"
+      "valor": 957.53,
+      "fecha": "2026-09-15T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -29,8 +29,8 @@
   "tasa_hipotecaria": {
     "nombre": "Tasa hipotecaria promedio referencial (TIP)",
     "unidad": "Porcentaje",
-    "valor": 4.3,
-    "fecha": "2026-08-14"
+    "valor": 4.34,
+    "fecha": "2026-09-15"
   },
   "kanasta_palanka": {
     "productos": [
@@ -114,8 +114,8 @@
       }
     ],
     "costo_por_region": {
-      "Biobío": {
-        "monto": 86670,
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -134,23 +134,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -466,6 +466,10 @@
         {
           "fecha": "2026-09-14",
           "valor": 137143
+        },
+        {
+          "fecha": "2026-09-15",
+          "valor": 137143
         }
       ]
     },
@@ -727,6 +731,10 @@
         },
         {
           "fecha": "2026-09-14",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-09-15",
           "valor": 766298
         }
       ]
