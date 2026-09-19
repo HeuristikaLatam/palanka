@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-19T12:53:24.684697+00:00",
+  "generado": "2026-09-19T21:57:12.069642+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -26,7 +26,12 @@
       "fecha": "2026-07-01T04:00:00.000Z"
     }
   },
-  "tasa_hipotecaria": null,
+  "tasa_hipotecaria": {
+    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
+    "unidad": "Porcentaje",
+    "valor": 4.34,
+    "fecha": "2026-09-15"
+  },
   "kanasta_palanka": {
     "productos": [
       {
@@ -114,8 +119,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -129,23 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Los Lagos": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 85500,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
