@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-19T12:12:37.804156+00:00",
+  "generado": "2026-09-19T12:53:24.684697+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -26,12 +26,7 @@
       "fecha": "2026-07-01T04:00:00.000Z"
     }
   },
-  "tasa_hipotecaria": {
-    "nombre": "Tasa hipotecaria promedio referencial (TIP)",
-    "unidad": "Porcentaje",
-    "valor": 4.34,
-    "fecha": "2026-09-15"
-  },
+  "tasa_hipotecaria": null,
   "kanasta_palanka": {
     "productos": [
       {
@@ -114,18 +109,13 @@
       }
     ],
     "costo_por_region": {
-      "Arica y Parinacota": {
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 85500,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -134,7 +124,12 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -144,13 +139,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Los Lagos": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
