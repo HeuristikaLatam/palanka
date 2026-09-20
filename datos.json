@@ -1,11 +1,11 @@
 {
-  "generado": "2026-09-19T22:40:35.621277+00:00",
+  "generado": "2026-09-20T12:48:31.261027+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 40967.24,
-      "fecha": "2026-09-19T03:00:00.000Z"
+      "valor": 40975.41,
+      "fecha": "2026-09-20T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -114,11 +114,6 @@
       }
     ],
     "costo_por_region": {
-      "Los Lagos": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Biobío": {
         "monto": 86670,
         "productos_con_precio": 9,
@@ -129,7 +124,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,12 +134,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Los Lagos": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -486,6 +486,10 @@
         {
           "fecha": "2026-09-19",
           "valor": 138493
+        },
+        {
+          "fecha": "2026-09-20",
+          "valor": 138493
         }
       ]
     },
@@ -767,6 +771,10 @@
         },
         {
           "fecha": "2026-09-19",
+          "valor": 772144
+        },
+        {
+          "fecha": "2026-09-20",
           "valor": 772144
         }
       ]
