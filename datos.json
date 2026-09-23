@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-23T14:05:32.972493+00:00",
+  "generado": "2026-09-23T22:35:14.519091+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,17 +114,7 @@
       }
     ],
     "costo_por_region": {
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
+      "Los Lagos": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -134,13 +124,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 85500,
+      "Coquimbo": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,7 +139,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
