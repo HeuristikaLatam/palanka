@@ -1,17 +1,17 @@
 {
-  "generado": "2026-09-27T23:39:18.420556+00:00",
+  "generado": "2026-09-28T16:19:42.873553+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41032.64,
-      "fecha": "2026-09-27T03:00:00.000Z"
+      "valor": 41040.82,
+      "fecha": "2026-09-28T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 965.71,
-      "fecha": "2026-09-25T03:00:00.000Z"
+      "valor": 964.1,
+      "fecha": "2026-09-28T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,33 +114,13 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 95700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -151,6 +131,26 @@
       },
       "Los Lagos": {
         "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -518,6 +518,10 @@
         {
           "fecha": "2026-09-27",
           "valor": 138418
+        },
+        {
+          "fecha": "2026-09-28",
+          "valor": 138418
         }
       ]
     },
@@ -831,6 +835,10 @@
         },
         {
           "fecha": "2026-09-27",
+          "valor": 771819
+        },
+        {
+          "fecha": "2026-09-28",
           "valor": 771819
         }
       ]
