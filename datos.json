@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-28T17:18:02.437093+00:00",
+  "generado": "2026-09-29T00:04:54.562544+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,13 +119,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
+      "Arica y Parinacota": {
+        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 95700,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -134,7 +134,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -144,8 +144,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -522,6 +522,10 @@
         {
           "fecha": "2026-09-28",
           "valor": 138418
+        },
+        {
+          "fecha": "2026-09-29",
+          "valor": 138418
         }
       ]
     },
@@ -839,6 +843,10 @@
         },
         {
           "fecha": "2026-09-28",
+          "valor": 771819
+        },
+        {
+          "fecha": "2026-09-29",
           "valor": 771819
         }
       ]
