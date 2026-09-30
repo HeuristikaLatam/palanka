@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-29T23:18:32.607457+00:00",
+  "generado": "2026-09-30T00:05:52.254267+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,12 +114,7 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,18 +124,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Arica y Parinacota": {
         "monto": 95700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Maule": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -526,6 +526,10 @@
         {
           "fecha": "2026-09-29",
           "valor": 138418
+        },
+        {
+          "fecha": "2026-09-30",
+          "valor": 138418
         }
       ]
     },
@@ -847,6 +851,10 @@
         },
         {
           "fecha": "2026-09-29",
+          "valor": 771819
+        },
+        {
+          "fecha": "2026-09-30",
           "valor": 771819
         }
       ]
