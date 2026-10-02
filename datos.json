@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-01T23:36:00.081747+00:00",
+  "generado": "2026-10-02T00:32:17.686498+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,8 +114,33 @@
       }
     ],
     "costo_por_region": {
+      "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 95700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Valparaíso": {
         "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -126,31 +151,6 @@
       },
       "Metropolitana": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Maule": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -534,6 +534,10 @@
         {
           "fecha": "2026-10-01",
           "valor": 138418
+        },
+        {
+          "fecha": "2026-10-02",
+          "valor": 138418
         }
       ]
     },
@@ -863,6 +867,10 @@
         },
         {
           "fecha": "2026-10-01",
+          "valor": 771819
+        },
+        {
+          "fecha": "2026-10-02",
           "valor": 771819
         }
       ]
