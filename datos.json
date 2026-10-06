@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-05T17:45:46.645991+00:00",
+  "generado": "2026-10-06T01:03:57.584745+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,6 +119,21 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Coquimbo": {
+        "monto": 95700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Ñuble": {
         "monto": 103500,
         "productos_con_precio": 9,
@@ -134,23 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Arica y Parinacota": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
-        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -550,6 +550,10 @@
         {
           "fecha": "2026-10-05",
           "valor": 140668
+        },
+        {
+          "fecha": "2026-10-06",
+          "valor": 140668
         }
       ]
     },
@@ -895,6 +899,10 @@
         },
         {
           "fecha": "2026-10-05",
+          "valor": 781561
+        },
+        {
+          "fecha": "2026-10-06",
           "valor": 781561
         }
       ]
