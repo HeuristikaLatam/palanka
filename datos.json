@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-07T00:23:31.995970+00:00",
+  "generado": "2026-10-07T14:58:47.228906+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41106.35,
-      "fecha": "2026-10-06T03:00:00.000Z"
+      "valor": 41114.54,
+      "fecha": "2026-10-07T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 977.25,
-      "fecha": "2026-10-06T03:00:00.000Z"
+      "valor": 967.79,
+      "fecha": "2026-10-07T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,12 +114,22 @@
       }
     ],
     "costo_por_region": {
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Maule": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -129,7 +139,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,18 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 95700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
