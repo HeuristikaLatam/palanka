@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-09T00:05:06.359058+00:00",
+  "generado": "2026-10-09T14:51:58.765591+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41122.74,
-      "fecha": "2026-10-08T03:00:00.000Z"
+      "valor": 41130.94,
+      "fecha": "2026-10-09T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 979.85,
-      "fecha": "2026-10-08T03:00:00.000Z"
+      "valor": 981.61,
+      "fecha": "2026-10-09T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,28 +114,18 @@
       }
     ],
     "costo_por_region": {
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 103500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Maule": {
-        "monto": 89700,
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,18 +134,28 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
       }
     },
-    "costo_alimentos": 89921,
+    "costo_alimentos": 88496,
     "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
@@ -225,7 +225,7 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": 140668,
+      "costo_total": 139243,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -565,7 +565,7 @@
         },
         {
           "fecha": "2026-10-09",
-          "valor": 140668
+          "valor": 139243
         }
       ]
     },
@@ -587,7 +587,7 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": 781561,
+      "costo_total": 775391,
       "historial": [
         {
           "fecha": "2026-07-17",
@@ -927,7 +927,7 @@
         },
         {
           "fecha": "2026-10-09",
-          "valor": 781561
+          "valor": 775391
         }
       ]
     }
