@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-11T14:33:00.450624+00:00",
+  "generado": "2026-10-11T15:18:02.045764+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,17 +119,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
+      "Los Lagos": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,18 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
+      "Maule": {
         "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
