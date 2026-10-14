@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-13T02:26:12.562983+00:00",
+  "generado": "2026-10-14T13:33:02.058506+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41146.83,
-      "fecha": "2026-10-12T03:00:00.000Z"
+      "valor": 41157.43,
+      "fecha": "2026-10-14T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 981.61,
-      "fecha": "2026-10-09T03:00:00.000Z"
+      "valor": 980.79,
+      "fecha": "2026-10-14T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,13 +114,13 @@
       }
     ],
     "costo_por_region": {
-      "Ñuble": {
-        "monto": 85500,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -129,13 +129,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 95700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,7 +144,12 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
+      "Coquimbo": {
+        "monto": 95700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -582,6 +582,10 @@
         {
           "fecha": "2026-10-13",
           "valor": 139243
+        },
+        {
+          "fecha": "2026-10-14",
+          "valor": 139243
         }
       ]
     },
@@ -959,6 +963,10 @@
         },
         {
           "fecha": "2026-10-13",
+          "valor": 775391
+        },
+        {
+          "fecha": "2026-10-14",
           "valor": 775391
         }
       ]
