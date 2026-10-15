@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-15T22:48:28.999603+00:00",
+  "generado": "2026-10-15T23:33:53.308188+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,18 +119,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 95700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -145,6 +135,16 @@
         "productos_totales": 13
       },
       "Maule": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
