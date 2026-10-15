@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-14T22:52:48.727229+00:00",
+  "generado": "2026-10-15T22:48:28.999603+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41157.43,
-      "fecha": "2026-10-14T03:00:00.000Z"
+      "valor": 41162.73,
+      "fecha": "2026-10-15T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 980.79,
-      "fecha": "2026-10-14T03:00:00.000Z"
+      "valor": 987.03,
+      "fecha": "2026-10-15T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -29,8 +29,8 @@
   "tasa_hipotecaria": {
     "nombre": "Tasa hipotecaria promedio referencial (TIP)",
     "unidad": "Porcentaje",
-    "valor": 4.34,
-    "fecha": "2026-09-15"
+    "valor": 4.32,
+    "fecha": "2026-10-15"
   },
   "kanasta_palanka": {
     "productos": [
@@ -119,8 +119,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -129,7 +129,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,18 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Maule": {
         "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -228,10 +228,6 @@
       "costo_total": 139243,
       "historial": [
         {
-          "fecha": "2026-07-17",
-          "valor": 136997
-        },
-        {
           "fecha": "2026-07-18",
           "valor": 136997
         },
@@ -585,6 +581,10 @@
         },
         {
           "fecha": "2026-10-14",
+          "valor": 139243
+        },
+        {
+          "fecha": "2026-10-15",
           "valor": 139243
         }
       ]
@@ -610,10 +610,6 @@
       "costo_total": 775391,
       "historial": [
         {
-          "fecha": "2026-07-17",
-          "valor": 765666
-        },
-        {
           "fecha": "2026-07-18",
           "valor": 765666
         },
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-10-14",
+          "valor": 775391
+        },
+        {
+          "fecha": "2026-10-15",
           "valor": 775391
         }
       ]
