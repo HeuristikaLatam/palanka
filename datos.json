@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-20T00:08:18.192407+00:00",
+  "generado": "2026-10-20T14:05:25.359916+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41183.94,
-      "fecha": "2026-10-19T03:00:00.000Z"
+      "valor": 41189.24,
+      "fecha": "2026-10-20T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 981.65,
-      "fecha": "2026-10-19T03:00:00.000Z"
+      "valor": 981.86,
+      "fecha": "2026-10-20T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,18 +114,18 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
-        "monto": 95700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 103500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -139,18 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 103500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
+      "Metropolitana": {
         "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
