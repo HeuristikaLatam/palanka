@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-19T23:14:24.701941+00:00",
+  "generado": "2026-10-20T00:08:18.192407+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,16 +119,6 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 103500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
@@ -139,8 +129,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Biobío": {
+        "monto": 86670,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Maule": {
         "monto": 98700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 103500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Arica y Parinacota": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -228,10 +228,6 @@
       "costo_total": 141793,
       "historial": [
         {
-          "fecha": "2026-07-22",
-          "valor": 136997
-        },
-        {
           "fecha": "2026-07-23",
           "valor": 136997
         },
@@ -585,6 +581,10 @@
         },
         {
           "fecha": "2026-10-19",
+          "valor": 141793
+        },
+        {
+          "fecha": "2026-10-20",
           "valor": 141793
         }
       ]
@@ -610,10 +610,6 @@
       "costo_total": 786433,
       "historial": [
         {
-          "fecha": "2026-07-22",
-          "valor": 765666
-        },
-        {
           "fecha": "2026-07-23",
           "valor": 765666
         },
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-10-19",
+          "valor": 786433
+        },
+        {
+          "fecha": "2026-10-20",
           "valor": 786433
         }
       ]
