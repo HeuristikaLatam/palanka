@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-20T23:45:48.081235+00:00",
+  "generado": "2026-10-21T13:24:03.567583+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41189.24,
-      "fecha": "2026-10-20T03:00:00.000Z"
+      "valor": 41194.55,
+      "fecha": "2026-10-21T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 981.86,
-      "fecha": "2026-10-20T03:00:00.000Z"
+      "valor": 978.56,
+      "fecha": "2026-10-21T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,16 +114,6 @@
       }
     ],
     "costo_por_region": {
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Ñuble": {
         "monto": 103500,
         "productos_con_precio": 9,
@@ -131,11 +121,6 @@
       },
       "Arica y Parinacota": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Coquimbo": {
-        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +134,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Maule": {
         "monto": 98700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -228,10 +228,6 @@
       "costo_total": 141793,
       "historial": [
         {
-          "fecha": "2026-07-23",
-          "valor": 136997
-        },
-        {
           "fecha": "2026-07-24",
           "valor": 136618
         },
@@ -585,6 +581,10 @@
         },
         {
           "fecha": "2026-10-20",
+          "valor": 141793
+        },
+        {
+          "fecha": "2026-10-21",
           "valor": 141793
         }
       ]
@@ -610,10 +610,6 @@
       "costo_total": 786433,
       "historial": [
         {
-          "fecha": "2026-07-23",
-          "valor": 765666
-        },
-        {
           "fecha": "2026-07-24",
           "valor": 764025
         },
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-10-20",
+          "valor": 786433
+        },
+        {
+          "fecha": "2026-10-21",
           "valor": 786433
         }
       ]
