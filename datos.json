@@ -1,17 +1,17 @@
 {
-  "generado": "2026-10-22T23:54:35.492257+00:00",
+  "generado": "2026-10-23T13:01:56.051312+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41199.85,
-      "fecha": "2026-10-22T03:00:00.000Z"
+      "valor": 41205.16,
+      "fecha": "2026-10-23T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 976.82,
-      "fecha": "2026-10-22T03:00:00.000Z"
+      "valor": 986.58,
+      "fecha": "2026-10-23T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -115,6 +115,31 @@
     ],
     "costo_por_region": {
       "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Ñuble": {
+        "monto": 85500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
         "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -124,38 +149,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Maule": {
-        "monto": 98700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 103500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
     },
-    "costo_alimentos": 91046,
+    "costo_alimentos": 87525,
     "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
@@ -225,12 +225,8 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": 141793,
+      "costo_total": 138272,
       "historial": [
-        {
-          "fecha": "2026-07-25",
-          "valor": 136618
-        },
         {
           "fecha": "2026-07-26",
           "valor": 136618
@@ -586,6 +582,10 @@
         {
           "fecha": "2026-10-22",
           "valor": 141793
+        },
+        {
+          "fecha": "2026-10-23",
+          "valor": 138272
         }
       ]
     },
@@ -607,12 +607,8 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": 786433,
+      "costo_total": 771187,
       "historial": [
-        {
-          "fecha": "2026-07-25",
-          "valor": 764025
-        },
         {
           "fecha": "2026-07-26",
           "valor": 764025
@@ -968,6 +964,10 @@
         {
           "fecha": "2026-10-22",
           "valor": 786433
+        },
+        {
+          "fecha": "2026-10-23",
+          "valor": 771187
         }
       ]
     }
