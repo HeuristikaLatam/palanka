@@ -1,11 +1,11 @@
 {
-  "generado": "2026-10-23T23:46:32.413791+00:00",
+  "generado": "2026-10-24T12:25:07.937833+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41205.16,
-      "fecha": "2026-10-23T03:00:00.000Z"
+      "valor": 41210.47,
+      "fecha": "2026-10-24T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
@@ -119,8 +119,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 95700,
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -129,7 +129,7 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,13 +139,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
+      "Arica y Parinacota": {
+        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
-        "monto": 89700,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -227,10 +227,6 @@
     "semanal": {
       "costo_total": 138272,
       "historial": [
-        {
-          "fecha": "2026-07-26",
-          "valor": 136618
-        },
         {
           "fecha": "2026-07-27",
           "valor": 136618
@@ -586,6 +582,10 @@
         {
           "fecha": "2026-10-23",
           "valor": 138272
+        },
+        {
+          "fecha": "2026-10-24",
+          "valor": 138272
         }
       ]
     },
@@ -609,10 +609,6 @@
     "mensual": {
       "costo_total": 771187,
       "historial": [
-        {
-          "fecha": "2026-07-26",
-          "valor": 764025
-        },
         {
           "fecha": "2026-07-27",
           "valor": 764025
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-10-23",
+          "valor": 771187
+        },
+        {
+          "fecha": "2026-10-24",
           "valor": 771187
         }
       ]
