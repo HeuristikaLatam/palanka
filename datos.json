@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-24T12:25:07.937833+00:00",
+  "generado": "2026-10-24T13:05:06.839239+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,8 +114,8 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -129,18 +129,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Coquimbo": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 95700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 85500,
+      "Arica y Parinacota": {
+        "monto": 95700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
