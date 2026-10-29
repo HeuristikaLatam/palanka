@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-29T15:50:15.581873+00:00",
+  "generado": "2026-10-29T23:44:21.928711+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -22,8 +22,8 @@
     "tasa_desempleo": {
       "nombre": "Tasa de desempleo",
       "unidad": "Porcentaje",
-      "valor": 9.64,
-      "fecha": "2026-08-01T04:00:00.000Z"
+      "valor": 9.8,
+      "fecha": "2026-09-01T04:00:00.000Z"
     }
   },
   "tasa_hipotecaria": {
@@ -114,8 +114,8 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -139,17 +139,17 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Biobío": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
+      "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
