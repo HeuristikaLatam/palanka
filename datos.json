@@ -1,23 +1,23 @@
 {
-  "generado": "2026-10-31T23:57:53.390751+00:00",
+  "generado": "2026-11-01T14:40:10.401122+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41247.63,
-      "fecha": "2026-10-31T03:00:00.000Z"
+      "valor": 41252.94,
+      "fecha": "2026-11-01T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 993.22,
-      "fecha": "2026-10-30T03:00:00.000Z"
+      "valor": 972.6,
+      "fecha": "2026-10-01T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
       "unidad": "Pesos",
-      "valor": 72151,
-      "fecha": "2026-10-01T03:00:00.000Z"
+      "valor": 72440,
+      "fecha": "2026-11-01T03:00:00.000Z"
     },
     "tasa_desempleo": {
       "nombre": "Tasa de desempleo",
@@ -119,23 +119,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Biobío": {
         "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Coquimbo": {
-        "monto": 89700,
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
+      "Ñuble": {
+        "monto": 103500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -144,13 +139,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Ñuble": {
-        "monto": 103500,
+      "Valparaíso": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -227,10 +227,6 @@
     "semanal": {
       "costo_total": 136393,
       "historial": [
-        {
-          "fecha": "2026-08-02",
-          "valor": 135531
-        },
         {
           "fecha": "2026-08-03",
           "valor": 135531
@@ -586,6 +582,10 @@
         {
           "fecha": "2026-10-31",
           "valor": 136393
+        },
+        {
+          "fecha": "2026-11-01",
+          "valor": 136393
         }
       ]
     },
@@ -609,10 +609,6 @@
     "mensual": {
       "costo_total": 763051,
       "historial": [
-        {
-          "fecha": "2026-08-02",
-          "valor": 759318
-        },
         {
           "fecha": "2026-08-03",
           "valor": 759318
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-10-31",
+          "valor": 763051
+        },
+        {
+          "fecha": "2026-11-01",
           "valor": 763051
         }
       ]
