@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-05T17:04:52.069786+00:00",
+  "generado": "2026-11-06T00:38:41.187286+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,22 +114,7 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Metropolitana": {
-        "monto": 65700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,18 +124,33 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
+      "Metropolitana": {
+        "monto": 65700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
       "Ñuble": {
         "monto": 103500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -228,10 +228,6 @@
       "costo_total": 136393,
       "historial": [
         {
-          "fecha": "2026-08-07",
-          "valor": 137143
-        },
-        {
           "fecha": "2026-08-08",
           "valor": 137143
         },
@@ -585,6 +581,10 @@
         },
         {
           "fecha": "2026-11-05",
+          "valor": 136393
+        },
+        {
+          "fecha": "2026-11-06",
           "valor": 136393
         }
       ]
@@ -610,10 +610,6 @@
       "costo_total": 763051,
       "historial": [
         {
-          "fecha": "2026-08-07",
-          "valor": 766298
-        },
-        {
           "fecha": "2026-08-08",
           "valor": 766298
         },
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-11-05",
+          "valor": 763051
+        },
+        {
+          "fecha": "2026-11-06",
           "valor": 763051
         }
       ]
