@@ -1,17 +1,17 @@
 {
-  "generado": "2026-11-09T00:30:46.057472+00:00",
+  "generado": "2026-11-10T02:29:49.016857+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41290.15,
-      "fecha": "2026-11-08T03:00:00.000Z"
+      "valor": 41295.46,
+      "fecha": "2026-11-09T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 970.94,
-      "fecha": "2026-11-06T03:00:00.000Z"
+      "valor": 979.88,
+      "fecha": "2026-11-09T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,22 +114,17 @@
       }
     ],
     "costo_por_region": {
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Coquimbo": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Arica y Parinacota": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -139,8 +134,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
+      "Valparaíso": {
         "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Maule": {
+        "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,8 +149,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Maule": {
-        "monto": 85500,
+      "Los Lagos": {
+        "monto": 74700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
@@ -228,10 +228,6 @@
       "costo_total": 137143,
       "historial": [
         {
-          "fecha": "2026-08-11",
-          "valor": 137143
-        },
-        {
           "fecha": "2026-08-12",
           "valor": 137143
         },
@@ -585,6 +581,10 @@
         },
         {
           "fecha": "2026-11-09",
+          "valor": 137143
+        },
+        {
+          "fecha": "2026-11-10",
           "valor": 137143
         }
       ]
@@ -610,10 +610,6 @@
       "costo_total": 766298,
       "historial": [
         {
-          "fecha": "2026-08-11",
-          "valor": 766298
-        },
-        {
           "fecha": "2026-08-12",
           "valor": 766298
         },
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-11-09",
+          "valor": 766298
+        },
+        {
+          "fecha": "2026-11-10",
           "valor": 766298
         }
       ]
