@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-14T23:31:55.654635+00:00",
+  "generado": "2026-11-15T00:44:20.159836+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -114,6 +114,11 @@
       }
     ],
     "costo_por_region": {
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Metropolitana": {
         "monto": 89700,
         "productos_con_precio": 9,
@@ -124,23 +129,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
+      "Valparaíso": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
       "Coquimbo": {
         "monto": 86700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Ñuble": {
         "monto": 65700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Valparaíso": {
-        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -227,10 +227,6 @@
     "semanal": {
       "costo_total": 134293,
       "historial": [
-        {
-          "fecha": "2026-08-16",
-          "valor": 137143
-        },
         {
           "fecha": "2026-08-17",
           "valor": 137143
@@ -586,6 +582,10 @@
         {
           "fecha": "2026-11-14",
           "valor": 134293
+        },
+        {
+          "fecha": "2026-11-15",
+          "valor": 134293
         }
       ]
     },
@@ -609,10 +609,6 @@
     "mensual": {
       "costo_total": 753958,
       "historial": [
-        {
-          "fecha": "2026-08-16",
-          "valor": 766298
-        },
         {
           "fecha": "2026-08-17",
           "valor": 766298
@@ -967,6 +963,10 @@
         },
         {
           "fecha": "2026-11-14",
+          "valor": 753958
+        },
+        {
+          "fecha": "2026-11-15",
           "valor": 753958
         }
       ]
