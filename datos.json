@@ -1,17 +1,17 @@
 {
-  "generado": "2026-11-20T02:01:54.446120+00:00",
+  "generado": "2026-11-20T16:34:16.590633+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
       "unidad": "Pesos",
-      "valor": 41364.17,
-      "fecha": "2026-11-19T03:00:00.000Z"
+      "valor": 41371.05,
+      "fecha": "2026-11-20T03:00:00.000Z"
     },
     "dolar": {
       "nombre": "Dólar observado",
       "unidad": "Pesos",
-      "valor": 1002.07,
-      "fecha": "2026-11-19T03:00:00.000Z"
+      "valor": 1008.79,
+      "fecha": "2026-11-20T03:00:00.000Z"
     },
     "utm": {
       "nombre": "Unidad Tributaria Mensual (UTM)",
@@ -114,7 +114,12 @@
       }
     ],
     "costo_por_region": {
-      "Coquimbo": {
+      "Ñuble": {
+        "monto": 103500,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Biobío": {
         "monto": 86700,
         "productos_con_precio": 9,
         "productos_totales": 13
@@ -124,23 +129,8 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
+      "Metropolitana": {
         "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Biobío": {
-        "monto": 86670,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Arica y Parinacota": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
-      "Ñuble": {
-        "monto": 65700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -149,13 +139,23 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Arica y Parinacota": {
+        "monto": 89700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Coquimbo": {
+        "monto": 86700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
     },
-    "costo_alimentos": 83546,
+    "costo_alimentos": 88275,
     "productos_con_precio": 9,
     "productos_totales": 13,
     "bencina": {
@@ -225,7 +225,7 @@
       "costo_semana": 14597
     },
     "semanal": {
-      "costo_total": 134293,
+      "costo_total": 139022,
       "historial": [
         {
           "fecha": "2026-08-22",
@@ -585,7 +585,7 @@
         },
         {
           "fecha": "2026-11-20",
-          "valor": 134293
+          "valor": 139022
         }
       ]
     },
@@ -607,7 +607,7 @@
       "costo_semana": 7950
     },
     "mensual": {
-      "costo_total": 753958,
+      "costo_total": 774434,
       "historial": [
         {
           "fecha": "2026-08-22",
@@ -967,7 +967,7 @@
         },
         {
           "fecha": "2026-11-20",
-          "valor": 753958
+          "valor": 774434
         }
       ]
     }
