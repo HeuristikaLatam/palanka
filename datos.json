@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-20T01:32:20.399357+00:00",
+  "generado": "2026-11-20T02:01:54.446120+00:00",
   "macro": {
     "uf": {
       "nombre": "Unidad de fomento (UF)",
@@ -119,13 +119,18 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Metropolitana": {
+      "Los Lagos": {
+        "monto": 74700,
+        "productos_con_precio": 9,
+        "productos_totales": 13
+      },
+      "Valparaíso": {
         "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Los Lagos": {
-        "monto": 74700,
+      "Biobío": {
+        "monto": 86670,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
@@ -139,18 +144,13 @@
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Valparaíso": {
-        "monto": 89700,
-        "productos_con_precio": 9,
-        "productos_totales": 13
-      },
       "Maule": {
         "monto": 85500,
         "productos_con_precio": 9,
         "productos_totales": 13
       },
-      "Biobío": {
-        "monto": 86670,
+      "Metropolitana": {
+        "monto": 89700,
         "productos_con_precio": 9,
         "productos_totales": 13
       }
